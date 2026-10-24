@@ -368,110 +368,203 @@
     </div>
   </div>
 
-  <!-- Drink Customization Bottom Sheet Modal -->
+  <!-- Drink Customization Bottom Sheet Modal (Pixel-Perfect from Stitch Screenshot) -->
   <div id="customize-modal" class="fixed inset-0 z-50 bg-slate-950/60 backdrop-blur-sm hidden flex-col justify-end transition-opacity">
-    <div class="w-full max-w-md mx-auto bg-surface-card rounded-t-[28px] max-h-[90vh] flex flex-col shadow-2xl animate-[slideUp_0.25s_ease-out]">
+    <div class="w-full max-w-md mx-auto bg-surface-card rounded-t-[28px] max-h-[92vh] flex flex-col shadow-2xl animate-[slideUp_0.25s_ease-out]">
+      
+      <!-- Drag Handle -->
+      <div class="w-12 h-1.5 bg-slate-300 rounded-full mx-auto my-2 shrink-0"></div>
+
       <!-- Header -->
-      <div class="p-4 border-b border-border-subtle flex items-center justify-between">
+      <div class="px-4 pb-3 flex items-center justify-between border-b border-border-subtle shrink-0">
         <div class="flex items-center gap-2">
-          <span class="material-symbols-outlined text-primary text-[22px]">tune</span>
-          <h3 class="font-headline font-bold text-base text-on-surface">Kustomisasi Menu</h3>
+          <span class="material-symbols-outlined text-primary text-[20px]">tune</span>
+          <h3 class="font-headline font-bold text-base text-on-surface">Kustomisasi Minuman</h3>
         </div>
-        <button onclick="closeCustomizeModal()" class="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-slate-500 hover:text-slate-800">
-          <span class="material-symbols-outlined text-[18px]">close</span>
+        <button type="button" onclick="closeCustomizeModal()" class="w-7 h-7 rounded-full bg-slate-100 flex items-center justify-center text-slate-500 hover:text-slate-800">
+          <span class="material-symbols-outlined text-[16px]">close</span>
         </button>
       </div>
 
       <!-- Body -->
       <div class="p-4 overflow-y-auto space-y-4 flex-1">
-        <!-- Item Info Preview -->
-        <div class="flex gap-3 bg-slate-50 p-3 rounded-2xl border border-border-subtle">
-          <img id="modal-item-img" src="" alt="Item" class="w-20 h-20 rounded-xl object-cover shrink-0"/>
-          <div class="flex-1">
-            <span id="modal-item-category" class="text-[10px] font-bold text-primary uppercase tracking-wider block">COFFEE</span>
-            <h4 id="modal-item-name" class="font-headline font-bold text-base text-on-surface">Americano</h4>
-            <p id="modal-item-desc" class="text-xs text-text-muted line-clamp-2 mt-0.5">Espresso ganda murni...</p>
-            <span id="modal-item-price" class="font-headline font-bold text-primary text-sm mt-1 block">Rp 15.000</span>
+        
+        <!-- 1. Product Summary Card -->
+        <div class="bg-white rounded-2xl p-3 border border-border-subtle flex gap-3 shadow-xs">
+          <img id="modal-item-img" src="" alt="Item" class="w-20 h-20 rounded-xl object-cover shrink-0 bg-slate-100"/>
+          <div class="flex-1 min-w-0">
+            <span id="modal-item-tag" class="inline-block px-2 py-0.5 rounded-full bg-blue-50 text-blue-700 font-bold text-[10px] uppercase tracking-wider mb-1">
+              COFFEE • FAVORIT
+            </span>
+            <h4 id="modal-item-name" class="font-headline font-bold text-sm text-on-surface truncate">Kopi Susu Aren</h4>
+            <p id="modal-item-desc" class="text-[11px] text-text-muted line-clamp-1 mt-0.5">Gula aren organik asli dengan susu segar lembut.</p>
+            <span id="modal-item-price" class="font-headline font-bold text-primary text-sm mt-1 block">Rp 23.000</span>
           </div>
         </div>
 
-        <!-- Temperature Selection (Drink Only) -->
+        <!-- 2. Pilihan Suhu (Temperature) -->
         <div id="temperature-section">
-          <label class="font-headline font-bold text-xs text-on-surface mb-2 block">Pilihan Suhu (Temperature)</label>
-          <div class="grid grid-cols-2 gap-2">
-            <button type="button" onclick="selectTemp('Ice')" id="temp-ice" class="py-2.5 px-3 rounded-xl border-2 font-headline font-semibold text-xs flex items-center justify-center gap-1.5 transition-all border-primary bg-accent-light text-primary">
-              <span class="material-symbols-outlined text-[18px]">ac_unit</span>
-              <span>Ice (Dingin)</span>
+          <div class="flex items-center justify-between mb-2">
+            <div class="flex items-center gap-1.5">
+              <span class="font-headline font-bold text-xs text-on-surface">Pilihan Suhu</span>
+              <span class="px-2 py-0.5 rounded-full bg-primary text-white font-bold text-[9px] uppercase tracking-wider">Wajib</span>
+            </div>
+            <span class="text-[11px] text-text-muted">Pilih 1</span>
+          </div>
+          <div class="grid grid-cols-2 gap-2.5">
+            <button type="button" onclick="selectTemp('Ice')" id="temp-ice" class="py-2.5 px-3.5 rounded-2xl border-2 font-headline font-bold text-xs flex items-center justify-between transition-all bg-primary border-primary text-white shadow-sm">
+              <div class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-[18px]">ac_unit</span>
+                <span>Ice</span>
+              </div>
+              <span id="temp-ice-icon" class="material-symbols-outlined text-[18px]">check_circle</span>
             </button>
-            <button type="button" onclick="selectTemp('Hot')" id="temp-hot" class="py-2.5 px-3 rounded-xl border-2 font-headline font-semibold text-xs flex items-center justify-center gap-1.5 transition-all border-border-subtle bg-white text-text-muted">
-              <span class="material-symbols-outlined text-[18px]">local_fire_department</span>
-              <span>Hot (Hangat)</span>
+            <button type="button" onclick="selectTemp('Hot')" id="temp-hot" class="py-2.5 px-3.5 rounded-2xl border font-headline font-semibold text-xs flex items-center justify-between transition-all border-border-subtle bg-white text-slate-700 hover:bg-slate-50">
+              <div class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-[18px] text-amber-600">local_fire_department</span>
+                <span>Hot</span>
+              </div>
+              <span id="temp-hot-icon" class="material-symbols-outlined text-[18px] text-slate-300">radio_button_unchecked</span>
             </button>
           </div>
         </div>
 
-        <!-- Sugar Level Selection (Drink Only) -->
+        <!-- 3. Tingkat Gula (Sugar Level) -->
         <div id="sugar-section">
-          <label class="font-headline font-bold text-xs text-on-surface mb-2 block">Tingkat Manis (Sugar Level)</label>
-          <div class="grid grid-cols-3 gap-2">
-            <button type="button" onclick="selectSugar('Normal Sugar (100%)')" id="sugar-100" class="py-2 px-2 rounded-xl border text-center font-semibold text-xs transition-all border-primary bg-accent-light text-primary">
-              Normal (100%)
-            </button>
-            <button type="button" onclick="selectSugar('Less Sugar (50%)')" id="sugar-50" class="py-2 px-2 rounded-xl border text-center font-semibold text-xs transition-all border-border-subtle bg-white text-text-muted">
-              Less (50%)
-            </button>
-            <button type="button" onclick="selectSugar('No Sugar (0%)')" id="sugar-0" class="py-2 px-2 rounded-xl border text-center font-semibold text-xs transition-all border-border-subtle bg-white text-text-muted">
-              No Sugar (0%)
-            </button>
+          <div class="flex items-center justify-between mb-2">
+            <div class="flex items-center gap-1.5">
+              <span class="font-headline font-bold text-xs text-on-surface">Tingkat Gula</span>
+              <span class="px-2 py-0.5 rounded-full bg-slate-100 text-slate-600 font-semibold text-[9px]">Pilih 1</span>
+            </div>
+            <span class="text-[11px] text-text-muted">Resep Aren</span>
           </div>
-        </div>
-
-        <!-- Add-ons Selection -->
-        <div>
-          <label class="font-headline font-bold text-xs text-on-surface mb-2 block">Tambahan (Add-ons)</label>
           <div class="space-y-2">
-            <label class="flex items-center justify-between p-2.5 rounded-xl border border-border-subtle bg-white cursor-pointer active:bg-slate-50">
-              <div class="flex items-center gap-2">
-                <input type="checkbox" id="addon-espresso" onchange="calcModalTotal()" value="5000" class="w-4 h-4 rounded text-primary focus:ring-primary"/>
-                <span class="text-xs font-medium text-on-surface">Espresso Shot Tambahan</span>
+            <!-- Option 1: Normal 100% -->
+            <div onclick="selectSugar('Normal (100%)')" id="sugar-card-100" class="p-3 rounded-2xl border-2 border-primary bg-blue-50/40 flex items-center justify-between cursor-pointer transition-all">
+              <div class="flex items-center gap-2.5">
+                <span id="sugar-radio-100" class="material-symbols-outlined text-primary text-[20px]">radio_button_checked</span>
+                <div>
+                  <span class="font-headline font-bold text-xs text-on-surface block leading-tight">Normal (100%)</span>
+                  <span class="text-[10px] text-text-muted">Resep standar barista DORE</span>
+                </div>
               </div>
-              <span class="text-xs font-bold text-primary">+Rp 5.000</span>
-            </label>
-            <label class="flex items-center justify-between p-2.5 rounded-xl border border-border-subtle bg-white cursor-pointer active:bg-slate-50">
-              <div class="flex items-center gap-2">
-                <input type="checkbox" id="addon-syrup" onchange="calcModalTotal()" value="5000" class="w-4 h-4 rounded text-primary focus:ring-primary"/>
-                <span class="text-xs font-medium text-on-surface">Extra Syrup (Vanilla / Caramel)</span>
+              <span class="px-2 py-0.5 rounded-full border border-primary text-primary font-bold text-[10px] bg-white">Rekomendasi</span>
+            </div>
+
+            <!-- Option 2: Less Sugar 50% -->
+            <div onclick="selectSugar('Less Sugar (50%)')" id="sugar-card-50" class="p-3 rounded-2xl border border-border-subtle bg-white hover:bg-slate-50 flex items-center justify-between cursor-pointer transition-all">
+              <div class="flex items-center gap-2.5">
+                <span id="sugar-radio-50" class="material-symbols-outlined text-slate-300 text-[20px]">radio_button_unchecked</span>
+                <div>
+                  <span class="font-headline font-bold text-xs text-on-surface block leading-tight">Less Sugar (50%)</span>
+                  <span class="text-[10px] text-text-muted">Rasa kopi lebih dominan</span>
+                </div>
               </div>
-              <span class="text-xs font-bold text-primary">+Rp 5.000</span>
-            </label>
+              <span class="text-[11px] text-text-muted font-medium">Gratis</span>
+            </div>
+
+            <!-- Option 3: No Sugar 0% -->
+            <div onclick="selectSugar('No Sugar (0%)')" id="sugar-card-0" class="p-3 rounded-2xl border border-border-subtle bg-white hover:bg-slate-50 flex items-center justify-between cursor-pointer transition-all">
+              <div class="flex items-center gap-2.5">
+                <span id="sugar-radio-0" class="material-symbols-outlined text-slate-300 text-[20px]">radio_button_unchecked</span>
+                <div>
+                  <span class="font-headline font-bold text-xs text-on-surface block leading-tight">No Sugar (0%)</span>
+                  <span class="text-[10px] text-text-muted">Tanpa sirup gula aren</span>
+                </div>
+              </div>
+              <span class="text-[11px] text-text-muted font-medium">Gratis</span>
+            </div>
           </div>
         </div>
 
-        <!-- Barista Notes -->
+        <!-- 4. Tambahan (Add-ons) -->
         <div>
-          <label class="font-headline font-bold text-xs text-on-surface mb-2 block">Catatan Pesanan (Notes)</label>
-          <textarea id="modal-item-notes" rows="2" placeholder="Contoh: Sedotan kertas, jangan terlalu manis, dipisah sausnya..." class="w-full text-xs p-3 rounded-xl border border-border-subtle focus:outline-none focus:border-primary resize-none"></textarea>
-        </div>
+          <div class="flex items-center justify-between mb-2">
+            <div class="flex items-center gap-1.5">
+              <span class="font-headline font-bold text-xs text-on-surface">Tambahan (Add-ons)</span>
+              <span class="px-2 py-0.5 rounded-full bg-slate-100 text-slate-600 font-semibold text-[9px]">Opsional</span>
+            </div>
+            <span class="text-[11px] text-text-muted">Bisa pilih &gt; 1</span>
+          </div>
 
-        <!-- Quantity Selector -->
-        <div class="flex items-center justify-between pt-2">
-          <span class="font-headline font-bold text-xs text-on-surface">Jumlah Pesanan</span>
-          <div class="flex items-center gap-3 bg-slate-100 px-3 py-1.5 rounded-xl">
-            <button onclick="changeModalQty(-1)" class="w-6 h-6 rounded-lg bg-white flex items-center justify-center font-bold text-slate-700 shadow-sm">-</button>
-            <span id="modal-qty" class="font-headline font-bold text-sm w-4 text-center">1</span>
-            <button onclick="changeModalQty(1)" class="w-6 h-6 rounded-lg bg-white flex items-center justify-center font-bold text-slate-700 shadow-sm">+</button>
+          <div class="space-y-2">
+            <!-- Addon 1: Extra Espresso Shot -->
+            <label id="addon-card-espresso" class="p-3 rounded-2xl border-2 border-primary bg-blue-50/40 flex items-center justify-between cursor-pointer transition-all">
+              <div class="flex items-center gap-2.5">
+                <input type="checkbox" id="addon-espresso" onchange="calcModalTotal()" checked class="w-4 h-4 rounded text-primary focus:ring-primary accent-primary"/>
+                <div>
+                  <span class="font-headline font-bold text-xs text-on-surface block leading-tight">+ Extra Espresso Shot</span>
+                  <span class="text-[10px] text-text-muted">Ekstra kafein & rasa pekat</span>
+                </div>
+              </div>
+              <span class="font-headline font-bold text-primary text-xs">+Rp 5.000</span>
+            </label>
+
+            <!-- Addon 2: Extra Gula Aren Syrup -->
+            <label id="addon-card-syrup" class="p-3 rounded-2xl border border-border-subtle bg-white hover:bg-slate-50 flex items-center justify-between cursor-pointer transition-all">
+              <div class="flex items-center gap-2.5">
+                <input type="checkbox" id="addon-syrup" onchange="calcModalTotal()" class="w-4 h-4 rounded text-primary focus:ring-primary accent-primary"/>
+                <div>
+                  <span class="font-headline font-bold text-xs text-on-surface block leading-tight">+ Extra Gula Aren Syrup</span>
+                  <span class="text-[10px] text-text-muted">Ekstra legit manis alami</span>
+                </div>
+              </div>
+              <span class="font-headline font-bold text-primary text-xs">+Rp 5.000</span>
+            </label>
+
+            <!-- Addon 3: Ganti Oat Milk -->
+            <label id="addon-card-oatmilk" class="p-3 rounded-2xl border border-border-subtle bg-white hover:bg-slate-50 flex items-center justify-between cursor-pointer transition-all">
+              <div class="flex items-center gap-2.5">
+                <input type="checkbox" id="addon-oatmilk" onchange="calcModalTotal()" class="w-4 h-4 rounded text-primary focus:ring-primary accent-primary"/>
+                <div>
+                  <span class="font-headline font-bold text-xs text-on-surface block leading-tight">Ganti Oat Milk (Plant-based)</span>
+                  <span class="text-[10px] text-text-muted">Oatside creamy barista blend</span>
+                </div>
+              </div>
+              <span class="font-headline font-bold text-primary text-xs">+Rp 8.000</span>
+            </label>
           </div>
         </div>
+
+        <!-- 5. Catatan Pesanan -->
+        <div>
+          <div class="flex items-center justify-between mb-1.5">
+            <div class="flex items-center gap-1 text-on-surface">
+              <span class="material-symbols-outlined text-[16px]">edit_note</span>
+              <span class="font-headline font-bold text-xs">Catatan Pesanan</span>
+            </div>
+            <span class="text-[10px] text-text-muted" id="notes-char-count">0/100</span>
+          </div>
+          <textarea id="modal-item-notes" maxlength="100" oninput="updateNotesCount(this.value)" rows="2" placeholder="Contoh: Sedotan kertas, es sedikit, sajikan duluan..." class="w-full text-xs p-3 rounded-xl border border-border-subtle focus:outline-none focus:border-primary resize-none placeholder:text-slate-400"></textarea>
+        </div>
+
+        <!-- 6. Subtotal Breakdown Strip -->
+        <div class="bg-blue-50/70 border border-blue-100 rounded-xl p-3 flex items-center justify-between text-xs">
+          <div class="flex items-center gap-2 text-slate-700">
+            <span class="material-symbols-outlined text-primary text-[18px]">calculate</span>
+            <span id="subtotal-calc-text" class="text-[11px] text-slate-600">Subtotal item: Rp 23.000 + Rp 5.000 (Tambahan)</span>
+          </div>
+          <span id="subtotal-calc-price" class="font-headline font-bold text-primary text-xs">Rp 28.000</span>
+        </div>
+
       </div>
 
-      <!-- Footer Button -->
-      <div class="p-4 border-t border-border-subtle bg-slate-50">
-        <button onclick="confirmAddToCart()" class="w-full py-3.5 rounded-xl bg-primary text-white font-headline font-bold text-sm shadow-md active:scale-98 transition-all flex items-center justify-center gap-2">
-          <span>Tambahkan ke Pesanan</span>
-          <span class="opacity-80">|</span>
-          <span id="modal-btn-price">Rp 0</span>
+      <!-- 7. Sticky Bottom Action Bar -->
+      <div class="p-4 border-t border-border-subtle bg-white flex items-center gap-3 shrink-0">
+        <div class="flex items-center gap-3 bg-slate-100 px-3 py-2 rounded-2xl shrink-0">
+          <button type="button" onclick="changeModalQty(-1)" class="w-6 h-6 rounded-lg bg-white flex items-center justify-center font-bold text-slate-700 shadow-sm active:scale-90 transition-transform">-</button>
+          <span id="modal-qty" class="font-headline font-bold text-sm w-4 text-center">1</span>
+          <button type="button" onclick="changeModalQty(1)" class="w-6 h-6 rounded-lg bg-white flex items-center justify-center font-bold text-slate-700 shadow-sm active:scale-90 transition-transform">+</button>
+        </div>
+
+        <button type="button" onclick="confirmAddToCart()" class="flex-1 py-3 px-4 rounded-2xl bg-primary text-white font-headline font-bold text-xs shadow-md active:scale-98 transition-all flex items-center justify-center gap-2">
+          <span class="material-symbols-outlined text-[18px]">shopping_bag</span>
+          <span id="modal-btn-cta">Tambahkan ke Pesanan - Rp 28.000</span>
         </button>
       </div>
+
+    </div>
+  </div>
     </div>
   </div>
 
@@ -677,27 +770,34 @@
       renderProducts();
     }
 
-    // Customization Modal Logic
+    // Customization Modal Logic (Matching Stitch Screenshot)
     function openCustomizeModal(productId) {
       const item = allProducts.find(p => p.id === productId);
       if (!item) return;
 
       currentCustomizingItem = item;
       selectedTemp = 'Ice';
-      selectedSugar = 'Normal Sugar (100%)';
+      selectedSugar = 'Normal (100%)';
       currentQty = 1;
 
       document.getElementById('modal-item-img').src = item.image;
       document.getElementById('modal-item-name').innerText = item.name;
       document.getElementById('modal-item-desc').innerText = item.description || '';
-      document.getElementById('modal-item-category').innerText = item.category.toUpperCase();
+      
+      const tagText = `${item.category.toUpperCase()}${item.badge ? ' • ' + item.badge.toUpperCase() : ''}`;
+      document.getElementById('modal-item-tag').innerText = tagText;
       document.getElementById('modal-item-price').innerText = formatRupiah(item.price);
-      document.getElementById('modal-item-notes').value = '';
+      
+      const notesEl = document.getElementById('modal-item-notes');
+      notesEl.value = '';
+      document.getElementById('notes-char-count').innerText = '0/100';
       document.getElementById('modal-qty').innerText = '1';
 
-      // Reset checkboxes
-      document.getElementById('addon-espresso').checked = false;
+      // Set default add-ons: Espresso checked by default for coffee drinks (as in screenshot)
+      const isCoffee = item.category === 'coffee';
+      document.getElementById('addon-espresso').checked = isCoffee;
       document.getElementById('addon-syrup').checked = false;
+      document.getElementById('addon-oatmilk').checked = false;
 
       // Hide temp & sugar for non-drinks
       const isDrink = item.isDrink !== false && item.category !== 'snack' && item.category !== 'food';
@@ -705,7 +805,7 @@
       document.getElementById('sugar-section').style.display = isDrink ? 'block' : 'none';
 
       selectTemp('Ice');
-      selectSugar('Normal Sugar (100%)');
+      selectSugar('Normal (100%)');
       calcModalTotal();
 
       const modal = document.getElementById('customize-modal');
@@ -723,25 +823,53 @@
       selectedTemp = temp;
       const iceBtn = document.getElementById('temp-ice');
       const hotBtn = document.getElementById('temp-hot');
+      const iceIcon = document.getElementById('temp-ice-icon');
+      const hotIcon = document.getElementById('temp-hot-icon');
+
       if (temp === 'Ice') {
-        iceBtn.className = 'py-2.5 px-3 rounded-xl border-2 font-headline font-semibold text-xs flex items-center justify-center gap-1.5 transition-all border-primary bg-accent-light text-primary';
-        hotBtn.className = 'py-2.5 px-3 rounded-xl border-2 font-headline font-semibold text-xs flex items-center justify-center gap-1.5 transition-all border-border-subtle bg-white text-text-muted';
+        iceBtn.className = 'py-2.5 px-3.5 rounded-2xl border-2 font-headline font-bold text-xs flex items-center justify-between transition-all bg-primary border-primary text-white shadow-sm';
+        iceIcon.innerText = 'check_circle';
+        iceIcon.className = 'material-symbols-outlined text-[18px] text-white';
+
+        hotBtn.className = 'py-2.5 px-3.5 rounded-2xl border font-headline font-semibold text-xs flex items-center justify-between transition-all border-border-subtle bg-white text-slate-700 hover:bg-slate-50';
+        hotIcon.innerText = 'radio_button_unchecked';
+        hotIcon.className = 'material-symbols-outlined text-[18px] text-slate-300';
       } else {
-        hotBtn.className = 'py-2.5 px-3 rounded-xl border-2 font-headline font-semibold text-xs flex items-center justify-center gap-1.5 transition-all border-primary bg-accent-light text-primary';
-        iceBtn.className = 'py-2.5 px-3 rounded-xl border-2 font-headline font-semibold text-xs flex items-center justify-center gap-1.5 transition-all border-border-subtle bg-white text-text-muted';
+        hotBtn.className = 'py-2.5 px-3.5 rounded-2xl border-2 font-headline font-bold text-xs flex items-center justify-between transition-all bg-primary border-primary text-white shadow-sm';
+        hotIcon.innerText = 'check_circle';
+        hotIcon.className = 'material-symbols-outlined text-[18px] text-white';
+
+        iceBtn.className = 'py-2.5 px-3.5 rounded-2xl border font-headline font-semibold text-xs flex items-center justify-between transition-all border-border-subtle bg-white text-slate-700 hover:bg-slate-50';
+        iceIcon.innerText = 'radio_button_unchecked';
+        iceIcon.className = 'material-symbols-outlined text-[18px] text-slate-300';
       }
     }
 
     function selectSugar(sugar) {
       selectedSugar = sugar;
-      ['100', '50', '0'].forEach(lvl => {
-        const btn = document.getElementById('sugar-' + lvl);
-        if (sugar.includes(lvl + '%')) {
-          btn.className = 'py-2 px-2 rounded-xl border text-center font-semibold text-xs transition-all border-primary bg-accent-light text-primary';
+      const cards = [
+        { id: '100', name: 'Normal (100%)' },
+        { id: '50', name: 'Less Sugar (50%)' },
+        { id: '0', name: 'No Sugar (0%)' }
+      ];
+
+      cards.forEach(c => {
+        const cardEl = document.getElementById('sugar-card-' + c.id);
+        const radioEl = document.getElementById('sugar-radio-' + c.id);
+        if (c.name === sugar) {
+          cardEl.className = 'p-3 rounded-2xl border-2 border-primary bg-blue-50/40 flex items-center justify-between cursor-pointer transition-all shadow-xs';
+          radioEl.innerText = 'radio_button_checked';
+          radioEl.className = 'material-symbols-outlined text-primary text-[20px]';
         } else {
-          btn.className = 'py-2 px-2 rounded-xl border text-center font-semibold text-xs transition-all border-border-subtle bg-white text-text-muted';
+          cardEl.className = 'p-3 rounded-2xl border border-border-subtle bg-white hover:bg-slate-50 flex items-center justify-between cursor-pointer transition-all';
+          radioEl.innerText = 'radio_button_unchecked';
+          radioEl.className = 'material-symbols-outlined text-slate-300 text-[20px]';
         }
       });
+    }
+
+    function updateNotesCount(val) {
+      document.getElementById('notes-char-count').innerText = `${val.length}/100`;
     }
 
     function changeModalQty(delta) {
@@ -753,11 +881,41 @@
     function calcModalTotal() {
       if (!currentCustomizingItem) return;
       let addonSum = 0;
-      if (document.getElementById('addon-espresso').checked) addonSum += 5000;
-      if (document.getElementById('addon-syrup').checked) addonSum += 5000;
+      
+      const espChecked = document.getElementById('addon-espresso').checked;
+      const syrChecked = document.getElementById('addon-syrup').checked;
+      const oatChecked = document.getElementById('addon-oatmilk').checked;
 
-      const total = (currentCustomizingItem.price + addonSum) * currentQty;
-      document.getElementById('modal-btn-price').innerText = formatRupiah(total);
+      // Update card border styles according to checked state
+      updateAddonCardStyle('addon-card-espresso', espChecked);
+      updateAddonCardStyle('addon-card-syrup', syrChecked);
+      updateAddonCardStyle('addon-card-oatmilk', oatChecked);
+
+      if (espChecked) addonSum += 5000;
+      if (syrChecked) addonSum += 5000;
+      if (oatChecked) addonSum += 8000;
+
+      const oneItemTotal = currentCustomizingItem.price + addonSum;
+      const grandTotal = oneItemTotal * currentQty;
+
+      // Subtotal strip
+      const stripText = addonSum > 0 
+        ? `Subtotal item: ${formatRupiah(currentCustomizingItem.price)} + ${formatRupiah(addonSum)} (Tambahan)`
+        : `Subtotal item: ${formatRupiah(currentCustomizingItem.price)}`;
+      
+      document.getElementById('subtotal-calc-text').innerText = stripText;
+      document.getElementById('subtotal-calc-price').innerText = formatRupiah(oneItemTotal);
+      document.getElementById('modal-btn-cta').innerText = `Tambahkan ke Pesanan - ${formatRupiah(grandTotal)}`;
+    }
+
+    function updateAddonCardStyle(cardId, isChecked) {
+      const el = document.getElementById(cardId);
+      if (!el) return;
+      if (isChecked) {
+        el.className = 'p-3 rounded-2xl border-2 border-primary bg-blue-50/40 flex items-center justify-between cursor-pointer transition-all shadow-xs';
+      } else {
+        el.className = 'p-3 rounded-2xl border border-border-subtle bg-white hover:bg-slate-50 flex items-center justify-between cursor-pointer transition-all';
+      }
     }
 
     function confirmAddToCart() {
@@ -766,12 +924,16 @@
       const addons = [];
       let addonsTotal = 0;
       if (document.getElementById('addon-espresso').checked) {
-        addons.push('Espresso Shot (+5k)');
+        addons.push('Extra Espresso Shot (+5k)');
         addonsTotal += 5000;
       }
       if (document.getElementById('addon-syrup').checked) {
-        addons.push('Extra Syrup (+5k)');
+        addons.push('Extra Gula Aren Syrup (+5k)');
         addonsTotal += 5000;
+      }
+      if (document.getElementById('addon-oatmilk').checked) {
+        addons.push('Ganti Oat Milk (+8k)');
+        addonsTotal += 8000;
       }
 
       const notes = document.getElementById('modal-item-notes').value.trim();
