@@ -190,9 +190,9 @@
     </div>
   </div>
 
-  <!-- Bantuan & Kritik Saran Modal -->
+  <!-- Bantuan & Layanan Meja Modal (Updated with WiFi, About Cafe & Service Animation) -->
   <div id="help-modal" class="fixed inset-0 z-50 bg-slate-950/60 backdrop-blur-sm hidden flex-col justify-end transition-opacity">
-    <div class="w-full max-w-md mx-auto bg-surface-card rounded-t-[28px] max-h-[90vh] flex flex-col shadow-2xl animate-[slideUp_0.25s_ease-out]">
+    <div class="w-full max-w-md mx-auto bg-surface-card rounded-t-[28px] max-h-[92vh] flex flex-col shadow-2xl animate-[slideUp_0.25s_ease-out]">
       <!-- Header -->
       <div class="p-4 border-b border-border-subtle flex items-center justify-between">
         <div class="flex items-center gap-2">
@@ -211,58 +211,119 @@
 
       <!-- Body -->
       <div class="p-4 overflow-y-auto space-y-4 flex-1">
+
+        <!-- Live Alert Notification Banner (Animated when service requested) -->
+        <div id="service-alert-banner" class="hidden p-3.5 rounded-2xl bg-emerald-50 border border-emerald-200 text-emerald-900 text-xs items-center gap-3 animate-[fadeIn_0.3s_ease-out] shadow-sm">
+          <div class="w-7 h-7 rounded-full bg-emerald-100 flex items-center justify-center shrink-0">
+            <span class="material-symbols-outlined text-[18px] text-emerald-600 animate-spin">progress_activity</span>
+          </div>
+          <p class="leading-snug flex-1">
+            Permintaan <strong id="service-request-name" class="font-bold text-emerald-950">Panggil Pelayan</strong> telah diteruskan ke kasir & barista. Staf sedang menuju <span id="service-table-label" class="font-bold underline">Meja 04</span>!
+          </p>
+        </div>
         
-        <!-- Section 1: Layanan Cepat Meja -->
+        <!-- SECTION 1: LAYANAN CEPAT MEJA (4 Cards 2x2 Grid) -->
         <div>
-          <span class="text-[11px] font-bold text-text-muted uppercase tracking-wider block mb-2">Panggil Pelayan / Layanan Meja</span>
-          <div class="grid grid-cols-2 gap-2">
-            <button onclick="requestTableService('Panggil Pelayan')" class="p-3 bg-slate-50 hover:bg-blue-50 border border-border-subtle rounded-xl flex items-center gap-2.5 text-left active:scale-95 transition-all">
-              <span class="w-8 h-8 rounded-lg bg-blue-100 text-primary flex items-center justify-center shrink-0">
-                <span class="material-symbols-outlined text-[18px]">person</span>
-              </span>
+          <span class="text-[11px] font-bold text-text-muted uppercase tracking-wider block mb-2.5">Layanan Cepat Meja</span>
+          <div class="grid grid-cols-2 gap-2.5" id="service-cards-grid">
+            
+            <!-- Card 1: Panggil Pelayan -->
+            <button type="button" onclick="requestTableService('Panggil Pelayan', this)" class="service-card p-3.5 bg-white border-2 border-primary rounded-2xl flex flex-col justify-between text-left active:scale-[0.97] transition-all shadow-sm group">
+              <div class="w-10 h-10 rounded-xl bg-primary text-white flex items-center justify-center mb-2.5 shadow-sm group-hover:scale-105 transition-transform">
+                <span class="material-symbols-outlined text-[20px] animate-pulse">notifications_active</span>
+              </div>
               <div>
                 <span class="font-headline font-bold text-xs text-on-surface block leading-tight">Panggil Pelayan</span>
-                <span class="text-[10px] text-text-muted">Bantuan ke meja</span>
+                <span class="text-[10px] text-text-muted mt-0.5 block">Staf datang ke meja</span>
               </div>
             </button>
 
-            <button onclick="requestTableService('Minta Bill / Tagihan')" class="p-3 bg-slate-50 hover:bg-blue-50 border border-border-subtle rounded-xl flex items-center gap-2.5 text-left active:scale-95 transition-all">
-              <span class="w-8 h-8 rounded-lg bg-emerald-100 text-emerald-800 flex items-center justify-center shrink-0">
-                <span class="material-symbols-outlined text-[18px]">receipt</span>
-              </span>
+            <!-- Card 2: Minta Tagihan / Bill -->
+            <button type="button" onclick="requestTableService('Minta Tagihan / Bill', this)" class="service-card p-3.5 bg-white border border-border-subtle hover:border-amber-300 rounded-2xl flex flex-col justify-between text-left active:scale-[0.97] transition-all shadow-sm group">
+              <div class="w-10 h-10 rounded-xl bg-amber-50 text-amber-800 flex items-center justify-center mb-2.5 group-hover:scale-105 transition-transform">
+                <span class="material-symbols-outlined text-[20px]">receipt_long</span>
+              </div>
               <div>
-                <span class="font-headline font-bold text-xs text-on-surface block leading-tight">Minta Bill</span>
-                <span class="text-[10px] text-text-muted">Cetak tagihan</span>
+                <span class="font-headline font-bold text-xs text-on-surface block leading-tight">Minta Tagihan / Bill</span>
+                <span class="text-[10px] text-text-muted mt-0.5 block">Bawakan struk ke meja</span>
               </div>
             </button>
 
-            <button onclick="requestTableService('Minta Alat Makan / Sedotan / Tisu')" class="p-3 bg-slate-50 hover:bg-blue-50 border border-border-subtle rounded-xl flex items-center gap-2.5 text-left active:scale-95 transition-all">
-              <span class="w-8 h-8 rounded-lg bg-amber-100 text-amber-800 flex items-center justify-center shrink-0">
-                <span class="material-symbols-outlined text-[18px]">restaurant</span>
-              </span>
+            <!-- Card 3: Sendok / Sedotan -->
+            <button type="button" onclick="requestTableService('Sendok / Sedotan', this)" class="service-card p-3.5 bg-white border border-border-subtle hover:border-purple-300 rounded-2xl flex flex-col justify-between text-left active:scale-[0.97] transition-all shadow-sm group">
+              <div class="w-10 h-10 rounded-xl bg-purple-50 text-purple-700 flex items-center justify-center mb-2.5 group-hover:scale-105 transition-transform">
+                <span class="material-symbols-outlined text-[20px]">restaurant</span>
+              </div>
               <div>
-                <span class="font-headline font-bold text-xs text-on-surface block leading-tight">Tisu / Sedotan</span>
-                <span class="text-[10px] text-text-muted">Alat makan</span>
+                <span class="font-headline font-bold text-xs text-on-surface block leading-tight">Sendok / Sedotan</span>
+                <span class="text-[10px] text-text-muted mt-0.5 block">Minta alat makan ekstra</span>
               </div>
             </button>
 
-            <button onclick="requestTableService('Minta Air Putih / Es Kosong')" class="p-3 bg-slate-50 hover:bg-blue-50 border border-border-subtle rounded-xl flex items-center gap-2.5 text-left active:scale-95 transition-all">
-              <span class="w-8 h-8 rounded-lg bg-sky-100 text-sky-800 flex items-center justify-center shrink-0">
-                <span class="material-symbols-outlined text-[18px]">water_drop</span>
-              </span>
+            <!-- Card 4: Air Putih / Es -->
+            <button type="button" onclick="requestTableService('Air Putih / Es', this)" class="service-card p-3.5 bg-white border border-border-subtle hover:border-sky-300 rounded-2xl flex flex-col justify-between text-left active:scale-[0.97] transition-all shadow-sm group">
+              <div class="w-10 h-10 rounded-xl bg-sky-50 text-sky-700 flex items-center justify-center mb-2.5 group-hover:scale-105 transition-transform">
+                <span class="material-symbols-outlined text-[20px]">water_drop</span>
+              </div>
               <div>
                 <span class="font-headline font-bold text-xs text-on-surface block leading-tight">Air Putih / Es</span>
-                <span class="text-[10px] text-text-muted">Refill air</span>
+                <span class="text-[10px] text-text-muted mt-0.5 block">Refill air atau es batu</span>
               </div>
+            </button>
+
+          </div>
+        </div>
+
+        <!-- SECTION 2: WIFI PENGUNJUNG DORE -->
+        <div class="bg-white rounded-2xl border border-border-subtle p-4 shadow-sm">
+          <div class="flex items-center justify-between mb-2">
+            <div class="flex items-center gap-2">
+              <span class="material-symbols-outlined text-primary text-[20px]">wifi</span>
+              <div>
+                <h4 class="font-headline font-bold text-xs text-on-surface leading-tight">WiFi Pengunjung DORE</h4>
+                <p class="text-[10px] text-text-muted mt-0.5">Koneksi internet cepat untuk santai & kerja</p>
+              </div>
+            </div>
+            <span class="px-2.5 py-0.5 rounded-full bg-emerald-50 text-emerald-700 font-bold text-[10px] border border-emerald-200">
+              Gratis
+            </span>
+          </div>
+
+          <div class="mt-3 p-3 bg-slate-50 border border-slate-200 rounded-xl flex items-center justify-between">
+            <div class="font-mono text-xs">
+              <div class="text-text-muted text-[10px]">SSID: <strong class="text-slate-800">DORE_Guest</strong></div>
+              <div class="text-slate-700 mt-0.5 font-bold">Pass: <span id="wifi-pass-text" class="text-primary font-bold">dorecoffee2026</span></div>
+            </div>
+            <button onclick="copyWifiPassword()" id="btn-copy-wifi" class="px-3 py-1.5 bg-white border border-border-subtle rounded-lg text-slate-700 font-headline font-bold text-[11px] shadow-sm hover:bg-slate-100 active:scale-95 transition-all flex items-center gap-1.5">
+              <span class="material-symbols-outlined text-[15px]">content_copy</span>
+              <span id="copy-btn-label">Salin</span>
             </button>
           </div>
         </div>
 
-        <!-- Section 2: Form Kritik & Saran -->
-        <div class="border-t border-border-subtle pt-4">
+        <!-- SECTION 3: TENTANG DORE COFFEE & PASTRY -->
+        <div class="bg-white rounded-2xl border border-border-subtle p-4 shadow-sm space-y-2">
+          <h4 class="font-headline font-bold text-xs text-on-surface">Tentang DORE Coffee & Pastry</h4>
+          <p class="text-[11px] text-text-muted leading-relaxed">
+            Kami memanggang biji kopi artisan pilihan dan membuat pastry segar setiap pagi. Jika ada masukan rasa atau preferensi seduhan, beri tahu barista kami.
+          </p>
+          <div class="flex items-center justify-between pt-2 border-t border-slate-100 text-[10px] font-semibold text-text-muted">
+            <span class="flex items-center gap-1">
+              <span class="material-symbols-outlined text-[14px] text-slate-400">schedule</span>
+              Buka Setiap Hari: 08:00 - 22:00
+            </span>
+            <span class="text-emerald-700 font-bold flex items-center gap-1">
+              <span class="material-symbols-outlined text-[14px]">verified</span>
+              100% Halal Certified
+            </span>
+          </div>
+        </div>
+
+        <!-- SECTION 4: FORM KRITIK & SARAN -->
+        <div class="bg-white rounded-2xl border border-border-subtle p-4 shadow-sm">
           <div class="flex items-center justify-between mb-2">
             <span class="text-[11px] font-bold text-text-muted uppercase tracking-wider">Kritik, Saran & Ulasan</span>
-            <span class="text-[10px] text-primary font-semibold">DORE Coffee</span>
+            <span class="text-[10px] text-primary font-bold">Masukan Pelanggan</span>
           </div>
 
           <!-- Star Rating -->
@@ -1014,17 +1075,46 @@
       openHelpModal();
     }
 
-    async function requestTableService(serviceType) {
+    function copyWifiPassword() {
+      const pass = 'dorecoffee2026';
+      navigator.clipboard.writeText(pass).then(() => {
+        const btn = document.getElementById('btn-copy-wifi');
+        const label = document.getElementById('copy-btn-label');
+        btn.className = 'px-3 py-1.5 bg-emerald-50 border border-emerald-300 rounded-lg text-emerald-800 font-headline font-bold text-[11px] shadow-sm flex items-center gap-1.5';
+        label.innerText = 'Tersalin! ✓';
+        setTimeout(() => {
+          btn.className = 'px-3 py-1.5 bg-white border border-border-subtle rounded-lg text-slate-700 font-headline font-bold text-[11px] shadow-sm hover:bg-slate-100 active:scale-95 transition-all flex items-center gap-1.5';
+          label.innerText = 'Salin';
+        }, 2500);
+      }).catch(() => {
+        alert('Password WiFi: dorecoffee2026');
+      });
+    }
+
+    async function requestTableService(serviceType, btnEl = null) {
+      // Highlight clicked card
+      if (btnEl) {
+        document.querySelectorAll('.service-card').forEach(c => {
+          c.className = 'service-card p-3.5 bg-white border border-border-subtle rounded-2xl flex flex-col justify-between text-left active:scale-[0.97] transition-all shadow-sm group';
+        });
+        btnEl.className = 'service-card p-3.5 bg-blue-50/40 border-2 border-primary rounded-2xl flex flex-col justify-between text-left active:scale-[0.97] transition-all shadow-sm group';
+      }
+
+      // Show top animated confirmation banner
+      const banner = document.getElementById('service-alert-banner');
+      document.getElementById('service-request-name').innerText = serviceType;
+      document.getElementById('service-table-label').innerText = 'Meja ' + currentTable;
+      banner.classList.remove('hidden');
+      banner.classList.add('flex');
+
       try {
         await fetch('/api/call-waiter', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ table: currentTable, serviceType: serviceType })
         });
-        alert(`✅ Permintaan "${serviceType}" untuk Meja ${currentTable} telah dikirim ke kasir & barista!`);
-        closeHelpModal();
       } catch (e) {
-        alert('Gagal mengirim panggilan: ' + e.message);
+        console.warn('Call waiter error:', e);
       }
     }
 
