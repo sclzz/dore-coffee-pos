@@ -1,0 +1,5 @@
+node_modules/
+stitch_extracted/
+*.zip
+.DS_Store
+Thumbs.db

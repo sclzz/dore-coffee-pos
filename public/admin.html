@@ -1,0 +1,1034 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Kasir & Kitchen POS — DORE Coffee & Pastry</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            primary: '#1E3A8A',
+            'primary-dark': '#00236f',
+            'secondary-accent': '#3B82F6',
+            'accent-light': '#DBEAFE',
+            'bg-canvas': '#F8FAFC',
+            'surface-card': '#FFFFFF',
+            'on-surface': '#0F172A',
+            'text-muted': '#64748B',
+            'border-subtle': '#E2E8F0',
+            'status-ready': '#10B981',
+            'status-pending': '#F59E0B',
+            'status-processing': '#2563EB'
+          },
+          fontFamily: {
+            headline: ['Plus Jakarta Sans', 'sans-serif'],
+            body: ['Inter', 'sans-serif']
+          }
+        }
+      }
+    };
+  </script>
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    h1, h2, h3, h4, .font-headline { font-family: 'Plus Jakarta Sans', sans-serif; }
+    @media print {
+      body * { visibility: hidden; }
+      #printable-receipt, #printable-receipt * { visibility: visible; }
+      #printable-receipt { position: absolute; left: 0; top: 0; width: 100%; }
+    }
+  </style>
+</head>
+<body class="bg-bg-canvas text-on-surface antialiased min-h-screen flex">
+
+  <!-- Left Sidebar Navigation -->
+  <aside class="w-64 bg-surface-card border-r border-border-subtle flex flex-col justify-between shrink-0 h-screen sticky top-0 shadow-sm z-20">
+    <div class="flex flex-col">
+      <!-- Brand Logo Header -->
+      <div class="h-16 px-5 border-b border-border-subtle flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-primary flex items-center justify-center text-white font-headline font-bold text-lg shadow-sm">
+          D
+        </div>
+        <div>
+          <span class="font-headline font-bold text-primary tracking-tight leading-none block text-base">DORE</span>
+          <span class="text-[10px] text-text-muted tracking-widest font-semibold uppercase block">Coffee & Pastry</span>
+        </div>
+      </div>
+
+      <!-- Navigation Links -->
+      <nav class="p-3 space-y-1">
+        <button onclick="switchTab('pos')" id="tab-btn-pos" class="w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl font-headline font-semibold text-xs transition-colors bg-primary text-white shadow-sm">
+          <span class="material-symbols-outlined text-[20px]">point_of_sale</span>
+          <span>POS & Live Kitchen</span>
+        </button>
+        <button onclick="switchTab('tables')" id="tab-btn-tables" class="w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl font-headline font-semibold text-xs transition-colors text-text-muted hover:bg-slate-100 hover:text-on-surface">
+          <span class="material-symbols-outlined text-[20px]">qr_code_2</span>
+          <span>Manajemen Meja & QR</span>
+        </button>
+        <button onclick="switchTab('menu')" id="tab-btn-menu" class="w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl font-headline font-semibold text-xs transition-colors text-text-muted hover:bg-slate-100 hover:text-on-surface">
+          <span class="material-symbols-outlined text-[20px]">restaurant_menu</span>
+          <span>Manajemen Menu</span>
+        </button>
+        <button onclick="switchTab('reports')" id="tab-btn-reports" class="w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl font-headline font-semibold text-xs transition-colors text-text-muted hover:bg-slate-100 hover:text-on-surface">
+          <span class="material-symbols-outlined text-[20px]">monitoring</span>
+          <span>Laporan Penjualan</span>
+        </button>
+      </nav>
+    </div>
+
+    <!-- User / Session Footer -->
+    <div class="p-4 border-t border-border-subtle bg-slate-50">
+      <div class="flex items-center justify-between mb-2">
+        <span class="text-[10px] uppercase tracking-wider font-bold text-text-muted">Terminal Kasir</span>
+        <span class="inline-flex items-center gap-1 text-[10px] text-status-ready font-semibold">
+          <span class="w-1.5 h-1.5 rounded-full bg-status-ready animate-pulse"></span>
+          Live Sync
+        </span>
+      </div>
+      <div class="flex items-center gap-2.5">
+        <div class="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center font-bold text-xs">
+          S
+        </div>
+        <div class="flex-1 min-w-0">
+          <span class="font-headline font-bold text-xs text-on-surface truncate block">Siti (Kasir DORE)</span>
+          <span class="text-[11px] text-text-muted block">Shift Pagi</span>
+        </div>
+        <a href="/login.html" title="Logout" class="text-slate-400 hover:text-red-600">
+          <span class="material-symbols-outlined text-[18px]">logout</span>
+        </a>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Main View Container -->
+  <div class="flex-1 flex flex-col min-w-0 h-screen overflow-y-auto">
+
+    <!-- Top Action Header Bar -->
+    <header class="h-16 bg-surface-card border-b border-border-subtle px-6 flex items-center justify-between sticky top-0 z-10 shadow-sm">
+      <div class="flex items-center gap-3">
+        <div class="flex items-center gap-1.5 px-3 py-1 bg-accent-light text-primary rounded-full text-xs font-semibold">
+          <span class="material-symbols-outlined text-[16px]">table_restaurant</span>
+          <span>Meja Terisi: <strong id="top-occupied-count">0</strong></span>
+        </div>
+        <div class="flex items-center gap-1.5 px-3 py-1 bg-amber-50 text-amber-800 rounded-full text-xs font-semibold">
+          <span class="material-symbols-outlined text-[16px]">notifications_active</span>
+          <span>Pesanan Baru: <strong id="top-pending-count">0</strong></span>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-4">
+        <!-- Audio alert toggle -->
+        <button onclick="testSound()" title="Coba Bunyi Notifikasi" class="text-xs text-text-muted hover:text-primary flex items-center gap-1 bg-slate-100 px-2.5 py-1 rounded-lg">
+          <span class="material-symbols-outlined text-[16px]">volume_up</span>
+          <span>Audio Alert</span>
+        </button>
+
+        <a href="/" target="_blank" class="flex items-center gap-1.5 text-xs font-headline font-semibold text-primary bg-accent-light px-3 py-1.5 rounded-xl border border-blue-200 hover:bg-blue-100 transition-colors">
+          <span class="material-symbols-outlined text-[16px]">open_in_new</span>
+          <span>Buka Menu Meja (Customer)</span>
+        </a>
+      </div>
+    </header>
+
+    <!-- Realtime Alert Banner Container -->
+    <div id="admin-toast-container" class="fixed top-20 right-6 z-50 flex flex-col gap-2 max-w-sm pointer-events-none"></div>
+
+    <!-- CONTENT TABS -->
+
+    <!-- TAB 1: POS & LIVE KITCHEN -->
+    <div id="view-pos" class="p-6 flex-1 flex flex-col gap-6">
+      
+      <!-- Dual Panel Grid -->
+      <div class="grid grid-cols-12 gap-6 flex-1 items-start">
+        
+        <!-- LEFT PANEL: Live Table Orders Feed (Kitchen & Barista) -->
+        <div class="col-span-12 lg:col-span-6 flex flex-col gap-4">
+          <div class="bg-surface-card rounded-2xl border border-border-subtle p-4 shadow-sm flex items-center justify-between">
+            <div class="flex items-center gap-2">
+              <span class="material-symbols-outlined text-primary text-[22px]">soup_kitchen</span>
+              <div>
+                <h3 class="font-headline font-bold text-base text-on-surface">Pesanan Meja Masuk</h3>
+                <span class="text-xs text-text-muted">Pantau antrean pesanan dari meja pelanggan secara real-time</span>
+              </div>
+            </div>
+
+            <!-- Filter Status Pills -->
+            <div class="flex bg-slate-100 p-1 rounded-xl text-xs font-semibold text-slate-600">
+              <button onclick="filterOrders('all')" id="order-filter-all" class="px-2.5 py-1 rounded-lg bg-white text-primary shadow-sm font-bold">Semua</button>
+              <button onclick="filterOrders('pending')" id="order-filter-pending" class="px-2.5 py-1 rounded-lg hover:text-on-surface">Baru</button>
+              <button onclick="filterOrders('processing')" id="order-filter-processing" class="px-2.5 py-1 rounded-lg hover:text-on-surface">Proses</button>
+            </div>
+          </div>
+
+          <!-- Orders Feed Container -->
+          <div class="space-y-3" id="live-orders-container">
+            <!-- Order cards injected by JS -->
+          </div>
+        </div>
+
+        <!-- RIGHT PANEL: Walk-in POS Register (Kasir Langsung) -->
+        <div class="col-span-12 lg:col-span-6 flex flex-col gap-4">
+          <div class="bg-surface-card rounded-2xl border border-border-subtle p-4 shadow-sm">
+            <div class="flex items-center justify-between mb-3">
+              <div class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-primary text-[22px]">point_of_sale</span>
+                <h3 class="font-headline font-bold text-base text-on-surface">Kasir Langsung (Walk-In)</h3>
+              </div>
+              <div class="flex gap-2">
+                <select id="pos-table-select" class="text-xs bg-slate-100 border border-slate-200 rounded-xl px-2.5 py-1.5 font-semibold text-slate-700">
+                  <option value="Take Away">Take Away (Bungkus)</option>
+                  <option value="01">Meja 01</option>
+                  <option value="02">Meja 02</option>
+                  <option value="03">Meja 03</option>
+                  <option value="04">Meja 04</option>
+                  <option value="05">Meja 05</option>
+                  <option value="06">Meja 06</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Search in POS -->
+            <div class="relative mb-3">
+              <span class="material-symbols-outlined absolute left-3 top-2.5 text-text-muted text-[18px]">search</span>
+              <input type="text" id="pos-search" oninput="renderPosCatalog()" placeholder="Cari menu untuk kasir..." class="w-full text-xs pl-9 pr-3 py-2 bg-slate-50 border border-border-subtle rounded-xl focus:outline-none focus:border-primary"/>
+            </div>
+
+            <!-- Category Filter -->
+            <div class="flex gap-1.5 overflow-x-auto pb-2 mb-3 no-scrollbar" id="pos-category-pills">
+              <!-- Injected by JS -->
+            </div>
+
+            <!-- Compact POS Grid -->
+            <div class="grid grid-cols-3 gap-2.5 max-h-72 overflow-y-auto p-1" id="pos-products-grid">
+              <!-- Injected by JS -->
+            </div>
+          </div>
+
+          <!-- POS Cart & Checkout Box -->
+          <div class="bg-surface-card rounded-2xl border border-border-subtle p-4 shadow-sm flex flex-col justify-between">
+            <h4 class="font-headline font-bold text-xs uppercase tracking-wider text-text-muted mb-2">Keranjang Kasir</h4>
+            
+            <div class="space-y-2 max-h-48 overflow-y-auto mb-3 divide-y divide-slate-100" id="pos-cart-items">
+              <p class="text-xs text-center text-text-muted py-4">Belum ada item dipilih.</p>
+            </div>
+
+            <div class="pt-3 border-t border-slate-200 space-y-2">
+              <div class="flex justify-between items-center text-xs">
+                <span class="text-text-muted">Total Tagihan</span>
+                <span class="font-headline font-bold text-primary text-base" id="pos-cart-total">Rp 0</span>
+              </div>
+
+              <div class="grid grid-cols-2 gap-2 pt-1">
+                <button onclick="openPaymentModal(null, 'cash')" class="py-2.5 rounded-xl bg-status-ready text-white font-headline font-bold text-xs shadow-sm hover:opacity-95 flex items-center justify-center gap-1.5">
+                  <span class="material-symbols-outlined text-[18px]">payments</span>
+                  <span>Bayar Tunai</span>
+                </button>
+                <button onclick="openPaymentModal(null, 'qris')" class="py-2.5 rounded-xl bg-primary text-white font-headline font-bold text-xs shadow-sm hover:opacity-95 flex items-center justify-center gap-1.5">
+                  <span class="material-symbols-outlined text-[18px]">qr_code_scanner</span>
+                  <span>Bayar QRIS</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- TAB 2: MANAJEMEN MEJA & QR -->
+    <div id="view-tables" class="p-6 flex-1 hidden flex-col gap-6">
+      <div class="flex items-center justify-between">
+        <div>
+          <h2 class="font-headline font-bold text-xl text-on-surface">Manajemen Meja & QR Code</h2>
+          <p class="text-xs text-text-muted mt-0.5">Generate dan cetak kartu QR Code untuk ditempel di meja kafe DORE.</p>
+        </div>
+        <button onclick="window.print()" class="px-4 py-2 bg-primary text-white rounded-xl font-headline font-bold text-xs shadow-sm flex items-center gap-1.5">
+          <span class="material-symbols-outlined text-[18px]">print</span>
+          <span>Print Semua Kartu Meja</span>
+        </button>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4" id="table-cards-grid">
+        <!-- Tables 01 - 12 injected by JS -->
+      </div>
+    </div>
+
+    <!-- TAB 3: MANAJEMEN MENU -->
+    <div id="view-menu" class="p-6 flex-1 hidden flex-col gap-6">
+      <div class="flex items-center justify-between">
+        <div>
+          <h2 class="font-headline font-bold text-xl text-on-surface">Daftar Menu DORE Coffee & Pastry</h2>
+          <p class="text-xs text-text-muted mt-0.5">Daftar harga dan produk aktif yang tampil di layar pelanggan.</p>
+        </div>
+        <span class="text-xs bg-accent-light text-primary px-3 py-1.5 rounded-full font-bold" id="admin-menu-count">41 Produk</span>
+      </div>
+
+      <div class="bg-surface-card rounded-2xl border border-border-subtle overflow-hidden shadow-sm">
+        <table class="w-full text-left text-xs">
+          <thead class="bg-slate-50 border-b border-border-subtle text-slate-500 font-headline font-bold uppercase tracking-wider">
+            <tr>
+              <th class="p-3.5">ID</th>
+              <th class="p-3.5">Foto</th>
+              <th class="p-3.5">Nama Menu</th>
+              <th class="p-3.5">Kategori</th>
+              <th class="p-3.5">Harga</th>
+              <th class="p-3.5">Status</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-border-subtle" id="admin-menu-table">
+            <!-- Injected by JS -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- TAB 4: LAPORAN PENJUALAN -->
+    <div id="view-reports" class="p-6 flex-1 hidden flex-col gap-6">
+      <div>
+        <h2 class="font-headline font-bold text-xl text-on-surface">Laporan Penjualan Hari Ini</h2>
+        <p class="text-xs text-text-muted mt-0.5">Ringkasan performa dan transaksi DORE Coffee & Pastry.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-4" id="report-stats">
+        <div class="bg-white p-4 rounded-2xl border border-border-subtle shadow-sm">
+          <span class="text-xs text-text-muted block">Total Pendapatan</span>
+          <span class="font-headline font-bold text-2xl text-primary mt-1 block" id="rep-revenue">Rp 0</span>
+        </div>
+        <div class="bg-white p-4 rounded-2xl border border-border-subtle shadow-sm">
+          <span class="text-xs text-text-muted block">Total Transaksi</span>
+          <span class="font-headline font-bold text-2xl text-slate-800 mt-1 block" id="rep-orders">0</span>
+        </div>
+        <div class="bg-white p-4 rounded-2xl border border-border-subtle shadow-sm">
+          <span class="text-xs text-text-muted block">Pesanan Terbayar</span>
+          <span class="font-headline font-bold text-2xl text-status-ready mt-1 block" id="rep-paid">0</span>
+        </div>
+        <div class="bg-white p-4 rounded-2xl border border-border-subtle shadow-sm">
+          <span class="text-xs text-text-muted block">Menunggu Proses</span>
+          <span class="font-headline font-bold text-2xl text-amber-500 mt-1 block" id="rep-pending">0</span>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-2xl border border-border-subtle p-5 shadow-sm">
+        <h3 class="font-headline font-bold text-base text-on-surface mb-3">Menu Paling Laris (Top 5)</h3>
+        <div class="space-y-2.5" id="rep-popular-list">
+          <!-- Injected by JS -->
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- PAYMENT & RECEIPT MODAL -->
+  <div id="payment-modal" class="fixed inset-0 z-50 bg-slate-950/60 backdrop-blur-sm hidden items-center justify-center p-4">
+    <div class="w-full max-w-md bg-white rounded-2xl shadow-2xl overflow-hidden flex flex-col animate-[scale_0.2s]">
+      <!-- Modal Header -->
+      <div class="p-4 border-b border-border-subtle flex items-center justify-between">
+        <div class="flex items-center gap-2">
+          <span class="material-symbols-outlined text-primary text-[22px]">receipt_long</span>
+          <h3 class="font-headline font-bold text-base text-on-surface">Proses Pembayaran</h3>
+        </div>
+        <button onclick="closePaymentModal()" class="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-slate-500">
+          <span class="material-symbols-outlined text-[18px]">close</span>
+        </button>
+      </div>
+
+      <!-- Modal Body -->
+      <div class="p-5 space-y-4">
+        <!-- Order Header Info -->
+        <div class="bg-slate-50 p-3 rounded-xl border border-border-subtle flex justify-between items-center text-xs">
+          <div>
+            <span class="font-bold text-slate-800" id="pay-order-id">#DOR-XXX</span>
+            <span class="text-text-muted block mt-0.5" id="pay-customer">Meja -- • Tamu</span>
+          </div>
+          <div class="text-right">
+            <span class="text-text-muted block text-[11px]">Total Tagihan</span>
+            <span class="font-headline font-bold text-base text-primary" id="pay-total-bill">Rp 0</span>
+          </div>
+        </div>
+
+        <!-- Payment Method Tabs -->
+        <div class="grid grid-cols-2 gap-2">
+          <button type="button" onclick="switchPayTab('cash')" id="btn-pay-tab-cash" class="py-2.5 rounded-xl border-2 font-headline font-bold text-xs flex items-center justify-center gap-1.5 border-primary bg-accent-light text-primary">
+            <span class="material-symbols-outlined text-[18px]">payments</span>
+            <span>Uang Tunai (Cash)</span>
+          </button>
+          <button type="button" onclick="switchPayTab('qris')" id="btn-pay-tab-qris" class="py-2.5 rounded-xl border-2 font-headline font-bold text-xs flex items-center justify-center gap-1.5 border-border-subtle bg-white text-text-muted">
+            <span class="material-symbols-outlined text-[18px]">qr_code_scanner</span>
+            <span>QRIS</span>
+          </button>
+        </div>
+
+        <!-- CASH SECTION -->
+        <div id="section-cash" class="space-y-3">
+          <div>
+            <label class="text-xs font-semibold text-slate-700 mb-1 block">Uang Diterima dari Pelanggan</label>
+            <input type="number" id="cash-input" oninput="calcChange()" placeholder="Contoh: 50000" class="w-full text-base font-bold font-headline h-11 px-3 rounded-xl border border-border-subtle focus:outline-none focus:border-primary text-slate-800"/>
+          </div>
+
+          <!-- Quick Cash Buttons -->
+          <div class="grid grid-cols-4 gap-1.5 text-xs font-semibold">
+            <button onclick="setCashFast('exact')" class="py-1.5 bg-slate-100 hover:bg-slate-200 rounded-lg text-slate-700">Uang Pas</button>
+            <button onclick="setCashFast(20000)" class="py-1.5 bg-slate-100 hover:bg-slate-200 rounded-lg text-slate-700">20.000</button>
+            <button onclick="setCashFast(50000)" class="py-1.5 bg-slate-100 hover:bg-slate-200 rounded-lg text-slate-700">50.000</button>
+            <button onclick="setCashFast(100000)" class="py-1.5 bg-slate-100 hover:bg-slate-200 rounded-lg text-slate-700">100.000</button>
+          </div>
+
+          <!-- Change Calculator -->
+          <div class="p-3 rounded-xl bg-slate-50 border border-border-subtle flex justify-between items-center text-xs">
+            <span class="text-text-muted">Kembalian</span>
+            <span class="font-headline font-bold text-base text-status-ready" id="pay-change">Rp 0</span>
+          </div>
+        </div>
+
+        <!-- QRIS SECTION -->
+        <div id="section-qris" class="hidden text-center space-y-2 py-2">
+          <div class="w-44 h-44 mx-auto p-2 bg-white border border-border-subtle rounded-xl shadow-sm flex items-center justify-center">
+            <!-- Simulated QRIS Code SVG -->
+            <img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=DORE-COFFEE-QRIS-MOCKUP" alt="QRIS" class="w-full h-full object-contain"/>
+          </div>
+          <span class="font-headline font-bold text-xs text-slate-800 block">Scan QRIS DORE COFFEE</span>
+          <span class="text-[11px] text-text-muted block">Mendukung GoPay, OVO, Dana, BCA, Mandiri, ShopeePay</span>
+        </div>
+
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="p-4 border-t border-border-subtle bg-slate-50 flex gap-2">
+        <button onclick="confirmPaymentAndPrint()" class="flex-1 py-3 rounded-xl bg-primary text-white font-headline font-bold text-xs shadow-md active:scale-98 transition-all flex items-center justify-center gap-1.5">
+          <span class="material-symbols-outlined text-[18px]">print</span>
+          <span>Selesaikan & Cetak Struk</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- PRINTABLE THERMAL RECEIPT CONTAINER (Hidden until print) -->
+  <div id="printable-receipt" class="hidden text-black font-mono text-[12px] p-4 max-w-[280px] bg-white">
+    <div class="text-center pb-2 border-b border-black">
+      <h2 class="font-bold text-base">DORE COFFEE & PASTRY</h2>
+      <p class="text-[10px]">Jl. Kopi Harapan No. 42, Jakarta</p>
+      <p class="text-[10px]">Telp: 0812-3456-7890</p>
+    </div>
+    <div class="py-2 border-b border-black text-[10px] space-y-0.5">
+      <div class="flex justify-between"><span>No Nota :</span><span id="rec-id">DOR-104</span></div>
+      <div class="flex justify-between"><span>Meja    :</span><span id="rec-table">04</span></div>
+      <div class="flex justify-between"><span>Kasir   :</span><span id="rec-cashier">Siti</span></div>
+      <div class="flex justify-between"><span>Waktu   :</span><span id="rec-time">14:30 WIB</span></div>
+    </div>
+    <div class="py-2 border-b border-black space-y-1" id="rec-items">
+      <!-- Items -->
+    </div>
+    <div class="py-2 border-b border-black space-y-0.5">
+      <div class="flex justify-between font-bold"><span>TOTAL :</span><span id="rec-total">Rp 44.000</span></div>
+      <div class="flex justify-between"><span>Metode :</span><span id="rec-method">Cash</span></div>
+      <div class="flex justify-between"><span>Bayar  :</span><span id="rec-paid">Rp 50.000</span></div>
+      <div class="flex justify-between"><span>Kembali:</span><span id="rec-change">Rp 6.000</span></div>
+    </div>
+    <div class="text-center pt-3 text-[10px]">
+      <p>Terima Kasih Atas Kunjungan Anda!</p>
+      <p>Follow IG: @dore.coffee</p>
+    </div>
+  </div>
+
+  <script>
+    // State
+    let orders = [];
+    let menuData = null;
+    let posCart = [];
+    let currentFilter = 'all';
+    let activePayOrder = null;
+    let selectedPayMethod = 'cash';
+    let posActiveCategory = 'all';
+
+    function formatRupiah(num) {
+      return 'Rp ' + Number(num || 0).toLocaleString('id-ID');
+    }
+
+    // Tab Switching
+    function switchTab(tabId) {
+      ['pos', 'tables', 'menu', 'reports'].forEach(t => {
+        const view = document.getElementById('view-' + t);
+        const btn = document.getElementById('tab-btn-' + t);
+        if (t === tabId) {
+          view.classList.remove('hidden');
+          view.classList.add('flex');
+          btn.className = 'w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl font-headline font-semibold text-xs transition-colors bg-primary text-white shadow-sm';
+        } else {
+          view.classList.add('hidden');
+          view.classList.remove('flex');
+          btn.className = 'w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl font-headline font-semibold text-xs transition-colors text-text-muted hover:bg-slate-100 hover:text-on-surface';
+        }
+      });
+
+      if (tabId === 'tables') renderTableCards();
+      if (tabId === 'menu') renderAdminMenu();
+      if (tabId === 'reports') loadReports();
+    }
+
+    // Audio Alert
+    function playBeep() {
+      try {
+        const ctx = new (window.AudioContext || window.webkitAudioContext)();
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(880, ctx.currentTime); // A5
+        gain.gain.setValueAtTime(0.3, ctx.currentTime);
+        osc.start();
+        osc.stop(ctx.currentTime + 0.25);
+      } catch (e) {
+        console.warn('Audio not allowed yet:', e);
+      }
+    }
+
+    function testSound() {
+      playBeep();
+      showAdminToast('🔔 Audio alert berfungsi dengan baik!', 'amber');
+    }
+
+    function showAdminToast(text, color = 'blue') {
+      const container = document.getElementById('admin-toast-container');
+      if (!container) return;
+      const toast = document.createElement('div');
+      const bgClass = color === 'amber' ? 'bg-amber-600 text-white' : 'bg-primary text-white';
+      toast.className = `${bgClass} p-3.5 rounded-2xl shadow-xl text-xs font-semibold flex items-center gap-2 pointer-events-auto transition-all`;
+      toast.innerHTML = `<span>${text}</span>`;
+      container.appendChild(toast);
+      setTimeout(() => {
+        toast.remove();
+      }, 6000);
+    }
+
+    // Fetch Initial Data
+    async function initData() {
+      try {
+        const [menuRes, ordersRes] = await Promise.all([
+          fetch('/api/menu'),
+          fetch('/api/orders')
+        ]);
+        menuData = await menuRes.json();
+        orders = await ordersRes.json();
+        
+        renderPosCategories();
+        renderPosCatalog();
+        renderLiveOrders();
+        updateTopCounters();
+
+        // Connect SSE for Realtime Updates
+        setupSSE();
+      } catch (err) {
+        console.error('Error init admin data:', err);
+      }
+    }
+
+    // Setup Server-Sent Events
+    function setupSSE() {
+      const evtSource = new EventSource('/api/events');
+      
+      evtSource.addEventListener('new_order', (e) => {
+        const order = JSON.parse(e.data);
+        orders.unshift(order);
+        renderLiveOrders();
+        updateTopCounters();
+        playBeep();
+      });
+
+      evtSource.addEventListener('order_updated', (e) => {
+        const updated = JSON.parse(e.data);
+        const idx = orders.findIndex(o => o.id === updated.id);
+        if (idx !== -1) orders[idx] = updated;
+        renderLiveOrders();
+        updateTopCounters();
+      });
+
+      evtSource.addEventListener('waiter_called', (e) => {
+        const alertData = JSON.parse(e.data);
+        playBeep();
+        showAdminToast(`🛎️ Panggilan dari Meja ${alertData.table}: "${alertData.serviceType}" (${alertData.timeString})`, 'amber');
+      });
+
+      evtSource.addEventListener('new_feedback', (e) => {
+        const feedback = JSON.parse(e.data);
+        showAdminToast(`💬 Feedback Baru dari ${feedback.customerName} (Meja ${feedback.table}): "${feedback.message}" ⭐${feedback.rating}/5`, 'blue');
+      });
+    }
+
+    function updateTopCounters() {
+      const pending = orders.filter(o => o.status === 'pending').length;
+      document.getElementById('top-pending-count').innerText = pending;
+
+      // Unique occupied tables
+      const activeTables = new Set(
+        orders.filter(o => o.status !== 'completed' && o.table !== '00' && o.table !== 'Take Away').map(o => o.table)
+      );
+      document.getElementById('top-occupied-count').innerText = activeTables.size;
+    }
+
+    // Render Live Orders Kanban
+    function renderLiveOrders() {
+      const container = document.getElementById('live-orders-container');
+      let filtered = orders.filter(o => o.status !== 'completed');
+
+      if (currentFilter === 'pending') filtered = filtered.filter(o => o.status === 'pending');
+      if (currentFilter === 'processing') filtered = filtered.filter(o => o.status === 'processing');
+
+      if (!filtered.length) {
+        container.innerHTML = `
+          <div class="bg-surface-card p-8 rounded-2xl border border-border-subtle text-center text-text-muted">
+            <span class="material-symbols-outlined text-[36px] text-slate-300 mb-1">done_all</span>
+            <p class="font-headline font-semibold text-xs text-slate-600">Semua pesanan sudah selesai disajikan!</p>
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = filtered.map(order => {
+        let badgeClass = 'bg-amber-100 text-amber-800';
+        let badgeLabel = 'Menunggu Konfirmasi';
+        if (order.status === 'processing') {
+          badgeClass = 'bg-blue-100 text-blue-800';
+          badgeLabel = 'Sedang Diracik';
+        } else if (order.status === 'ready') {
+          badgeClass = 'bg-emerald-100 text-emerald-800';
+          badgeLabel = 'Siap Saji';
+        }
+
+        return `
+          <div class="bg-surface-card rounded-2xl border ${order.status === 'pending' ? 'border-amber-300 ring-2 ring-amber-100' : 'border-border-subtle'} p-4 shadow-sm flex flex-col gap-3">
+            <div class="flex items-start justify-between">
+              <div class="flex items-center gap-2">
+                <span class="px-2.5 py-1 rounded-xl bg-accent-light text-primary font-headline font-bold text-xs">
+                  ${order.table === '00' || order.table === 'Take Away' ? 'Take Away' : 'Meja ' + order.table}
+                </span>
+                <span class="font-bold text-xs text-slate-800">#${order.id}</span>
+                <span class="text-xs text-text-muted">• ${order.customerName}</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="text-[11px] text-text-muted">${order.timeString || ''}</span>
+                <span class="px-2 py-0.5 rounded-full text-[10px] font-bold ${badgeClass}">
+                  ${badgeLabel}
+                </span>
+              </div>
+            </div>
+
+            <!-- Items List -->
+            <div class="space-y-1.5 py-2 border-y border-slate-100 text-xs">
+              ${(order.items || []).map(i => `
+                <div class="flex justify-between items-start">
+                  <div>
+                    <span class="font-bold text-slate-800">${i.quantity}x</span>
+                    <span class="font-semibold text-on-surface">${i.name}</span>
+                    <div class="text-[10px] text-text-muted ml-4">
+                      ${i.temperature !== '-' ? `<span>${i.temperature}</span> • ` : ''}
+                      ${i.sugar !== '-' ? `<span>${i.sugar}</span> • ` : ''}
+                      ${(i.addons || []).join(', ')}
+                    </div>
+                    ${i.notes ? `<div class="text-[10px] text-amber-700 italic ml-4">"${i.notes}"</div>` : ''}
+                  </div>
+                  <span class="font-semibold text-slate-600">${formatRupiah(i.subtotal)}</span>
+                </div>
+              `).join('')}
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="flex items-center justify-between pt-1">
+              <div>
+                <span class="text-[11px] text-text-muted">Total:</span>
+                <span class="font-headline font-bold text-sm text-primary ml-1">${formatRupiah(order.total)}</span>
+              </div>
+
+              <div class="flex items-center gap-2">
+                ${order.status === 'pending' ? `
+                  <button onclick="updateOrderStatus('${order.id}', 'processing')" class="px-3 py-1.5 rounded-xl bg-primary text-white font-headline font-bold text-xs shadow-sm hover:opacity-95">
+                    Terima & Buat
+                  </button>
+                ` : ''}
+
+                ${order.status === 'processing' ? `
+                  <button onclick="updateOrderStatus('${order.id}', 'ready')" class="px-3 py-1.5 rounded-xl bg-emerald-600 text-white font-headline font-bold text-xs shadow-sm hover:opacity-95">
+                    Tandai Siap Saji
+                  </button>
+                ` : ''}
+
+                ${order.status === 'ready' ? `
+                  <button onclick="openPaymentModal('${order.id}')" class="px-3 py-1.5 rounded-xl bg-status-ready text-white font-headline font-bold text-xs shadow-sm hover:opacity-95 flex items-center gap-1">
+                    <span class="material-symbols-outlined text-[16px]">payments</span>
+                    <span>Proses Bayar</span>
+                  </button>
+                ` : ''}
+
+                <button onclick="printOrderReceipt('${order.id}')" title="Cetak Struk" class="p-1.5 rounded-xl bg-slate-100 text-slate-600 hover:bg-slate-200">
+                  <span class="material-symbols-outlined text-[18px]">print</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function filterOrders(status) {
+      currentFilter = status;
+      ['all', 'pending', 'processing'].forEach(s => {
+        const btn = document.getElementById('order-filter-' + s);
+        if (s === status) {
+          btn.className = 'px-2.5 py-1 rounded-lg bg-white text-primary shadow-sm font-bold';
+        } else {
+          btn.className = 'px-2.5 py-1 rounded-lg hover:text-on-surface';
+        }
+      });
+      renderLiveOrders();
+    }
+
+    async function updateOrderStatus(orderId, nextStatus) {
+      try {
+        await fetch(`/api/orders/${orderId}/status`, {
+          method: 'PATCH',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ status: nextStatus })
+        });
+      } catch (err) {
+        alert('Gagal update status: ' + err.message);
+      }
+    }
+
+    // POS Walk-in Catalog
+    function renderPosCategories() {
+      const container = document.getElementById('pos-category-pills');
+      const cats = menuData ? menuData.categories : [];
+      container.innerHTML = cats.map(c => `
+        <button onclick="setPosCat('${c.id}')" class="shrink-0 px-2.5 py-1 rounded-lg text-xs font-semibold ${
+          posActiveCategory === c.id ? 'bg-primary text-white' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+        }">${c.name}</button>
+      `).join('');
+    }
+
+    function setPosCat(catId) {
+      posActiveCategory = catId;
+      renderPosCategories();
+      renderPosCatalog();
+    }
+
+    function renderPosCatalog() {
+      const grid = document.getElementById('pos-products-grid');
+      const search = (document.getElementById('pos-search').value || '').toLowerCase();
+      let products = menuData ? menuData.products : [];
+
+      let filtered = products.filter(p => {
+        const matchCat = posActiveCategory === 'all' || p.category === posActiveCategory;
+        const matchSearch = !search || p.name.toLowerCase().includes(search);
+        return matchCat && matchSearch;
+      });
+
+      grid.innerHTML = filtered.map(p => `
+        <div onclick="addPosItem(${p.id})" class="p-2 bg-slate-50 border border-border-subtle rounded-xl flex flex-col justify-between hover:border-primary cursor-pointer active:scale-95 transition-all">
+          <div>
+            <span class="text-[9px] uppercase font-bold text-text-muted block">${p.category}</span>
+            <h5 class="font-headline font-bold text-xs text-on-surface line-clamp-1">${p.name}</h5>
+          </div>
+          <span class="font-headline font-bold text-primary text-xs mt-2">${formatRupiah(p.price)}</span>
+        </div>
+      `).join('');
+    }
+
+    function addPosItem(productId) {
+      const item = menuData.products.find(p => p.id === productId);
+      if (!item) return;
+
+      const existing = posCart.find(i => i.productId === productId);
+      if (existing) {
+        existing.quantity += 1;
+      } else {
+        posCart.push({
+          productId: item.id,
+          name: item.name,
+          price: item.price,
+          quantity: 1,
+          temperature: item.isDrink !== false ? 'Ice' : '-',
+          sugar: item.isDrink !== false ? 'Normal Sugar (100%)' : '-',
+          addons: []
+        });
+      }
+      renderPosCart();
+    }
+
+    function renderPosCart() {
+      const container = document.getElementById('pos-cart-items');
+      const totalEl = document.getElementById('pos-cart-total');
+
+      if (!posCart.length) {
+        container.innerHTML = '<p class="text-xs text-center text-text-muted py-4">Belum ada item dipilih.</p>';
+        totalEl.innerText = 'Rp 0';
+        return;
+      }
+
+      container.innerHTML = posCart.map((i, idx) => `
+        <div class="flex items-center justify-between text-xs py-1">
+          <div class="flex-1">
+            <span class="font-semibold text-slate-800">${i.name}</span>
+            <span class="text-text-muted block text-[10px]">${formatRupiah(i.price)} x ${i.quantity}</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <button onclick="changePosQty(${idx}, -1)" class="w-5 h-5 rounded bg-slate-100 font-bold flex items-center justify-center">-</button>
+            <span class="font-bold w-4 text-center">${i.quantity}</span>
+            <button onclick="changePosQty(${idx}, 1)" class="w-5 h-5 rounded bg-slate-100 font-bold flex items-center justify-center">+</button>
+          </div>
+        </div>
+      `).join('');
+
+      const total = posCart.reduce((sum, i) => sum + (i.price * i.quantity), 0);
+      totalEl.innerText = formatRupiah(total);
+    }
+
+    function changePosQty(idx, delta) {
+      posCart[idx].quantity += delta;
+      if (posCart[idx].quantity <= 0) posCart.splice(idx, 1);
+      renderPosCart();
+    }
+
+    // Payment Modal Logic
+    async function openPaymentModal(orderId = null, method = 'cash') {
+      let targetOrder = null;
+      if (orderId) {
+        targetOrder = orders.find(o => o.id === orderId);
+      } else {
+        // From POS Walk-in cart!
+        if (!posCart.length) {
+          alert('Keranjang kasir kosong!');
+          return;
+        }
+        // Create order first
+        const table = document.getElementById('pos-table-select').value;
+        const total = posCart.reduce((sum, i) => sum + (i.price * i.quantity), 0);
+        const res = await fetch('/api/orders', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            table: table === 'Take Away' ? '00' : table,
+            customerName: 'Tamu Walk-in',
+            orderType: table === 'Take Away' ? 'Take Away' : 'Dine In',
+            items: posCart
+          })
+        });
+        targetOrder = await res.json();
+        posCart = [];
+        renderPosCart();
+      }
+
+      activePayOrder = targetOrder;
+      document.getElementById('pay-order-id').innerText = '#' + targetOrder.id;
+      document.getElementById('pay-customer').innerText = `${targetOrder.table === '00' ? 'Take Away' : 'Meja ' + targetOrder.table} • ${targetOrder.customerName}`;
+      document.getElementById('pay-total-bill').innerText = formatRupiah(targetOrder.total);
+      
+      document.getElementById('cash-input').value = targetOrder.total;
+      calcChange();
+      switchPayTab(method);
+
+      document.getElementById('payment-modal').classList.remove('hidden');
+      document.getElementById('payment-modal').classList.add('flex');
+    }
+
+    function closePaymentModal() {
+      document.getElementById('payment-modal').classList.add('hidden');
+      document.getElementById('payment-modal').classList.remove('flex');
+    }
+
+    function switchPayTab(method) {
+      selectedPayMethod = method;
+      const cashBtn = document.getElementById('btn-pay-tab-cash');
+      const qrisBtn = document.getElementById('btn-pay-tab-qris');
+      const cashSec = document.getElementById('section-cash');
+      const qrisSec = document.getElementById('section-qris');
+
+      if (method === 'cash') {
+        cashBtn.className = 'py-2.5 rounded-xl border-2 font-headline font-bold text-xs flex items-center justify-center gap-1.5 border-primary bg-accent-light text-primary';
+        qrisBtn.className = 'py-2.5 rounded-xl border-2 font-headline font-bold text-xs flex items-center justify-center gap-1.5 border-border-subtle bg-white text-text-muted';
+        cashSec.classList.remove('hidden');
+        qrisSec.classList.add('hidden');
+      } else {
+        qrisBtn.className = 'py-2.5 rounded-xl border-2 font-headline font-bold text-xs flex items-center justify-center gap-1.5 border-primary bg-accent-light text-primary';
+        cashBtn.className = 'py-2.5 rounded-xl border-2 font-headline font-bold text-xs flex items-center justify-center gap-1.5 border-border-subtle bg-white text-text-muted';
+        qrisSec.classList.remove('hidden');
+        cashSec.classList.add('hidden');
+      }
+    }
+
+    function setCashFast(val) {
+      if (val === 'exact') {
+        document.getElementById('cash-input').value = activePayOrder ? activePayOrder.total : 0;
+      } else {
+        document.getElementById('cash-input').value = val;
+      }
+      calcChange();
+    }
+
+    function calcChange() {
+      if (!activePayOrder) return;
+      const input = Number(document.getElementById('cash-input').value || 0);
+      const change = Math.max(0, input - activePayOrder.total);
+      document.getElementById('pay-change').innerText = formatRupiah(change);
+    }
+
+    async function confirmPaymentAndPrint() {
+      if (!activePayOrder) return;
+      const amountPaid = selectedPayMethod === 'cash' ? Number(document.getElementById('cash-input').value || activePayOrder.total) : activePayOrder.total;
+
+      try {
+        await fetch(`/api/orders/${activePayOrder.id}/pay`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            paymentMethod: selectedPayMethod === 'cash' ? 'Cash' : 'QRIS',
+            amountPaid: amountPaid
+          })
+        });
+
+        // Also mark as completed
+        await updateOrderStatus(activePayOrder.id, 'completed');
+
+        // Trigger Receipt Print
+        prepareReceiptData(activePayOrder, amountPaid);
+        closePaymentModal();
+        window.print();
+      } catch (err) {
+        alert('Gagal memproses pembayaran: ' + err.message);
+      }
+    }
+
+    function printOrderReceipt(orderId) {
+      const order = orders.find(o => o.id === orderId);
+      if (!order) return;
+      prepareReceiptData(order, order.total);
+      window.print();
+    }
+
+    function prepareReceiptData(order, amountPaid) {
+      document.getElementById('rec-id').innerText = order.id;
+      document.getElementById('rec-table').innerText = order.table;
+      document.getElementById('rec-cashier').innerText = 'Siti';
+      document.getElementById('rec-time').innerText = order.timeString || 'WIB';
+      document.getElementById('rec-total').innerText = formatRupiah(order.total);
+      document.getElementById('rec-method').innerText = order.paymentMethod || 'Cash';
+      document.getElementById('rec-paid').innerText = formatRupiah(amountPaid);
+      document.getElementById('rec-change').innerText = formatRupiah(Math.max(0, amountPaid - order.total));
+
+      const itemsEl = document.getElementById('rec-items');
+      itemsEl.innerHTML = (order.items || []).map(i => `
+        <div class="flex justify-between">
+          <span>${i.name} x${i.quantity}</span>
+          <span>${formatRupiah(i.subtotal)}</span>
+        </div>
+      `).join('');
+    }
+
+    // Table Cards & QR Generator
+    function renderTableCards() {
+      const grid = document.getElementById('table-cards-grid');
+      let html = '';
+      for (let i = 1; i <= 12; i++) {
+        const num = String(i).padStart(2, '0');
+        const orderActive = orders.find(o => o.table === num && o.status !== 'completed');
+        const qrUrl = window.location.origin + '/?table=' + num;
+        const qrImg = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(qrUrl)}`;
+
+        html += `
+          <div class="bg-white rounded-2xl border border-border-subtle p-4 shadow-sm flex flex-col items-center text-center">
+            <div class="flex items-center justify-between w-full mb-2">
+              <span class="font-headline font-bold text-sm text-primary">Meja ${num}</span>
+              <span class="px-2 py-0.5 rounded-full text-[10px] font-bold ${
+                orderActive ? 'bg-amber-100 text-amber-800' : 'bg-emerald-100 text-emerald-800'
+              }">${orderActive ? 'Terisi' : 'Kosong'}</span>
+            </div>
+
+            <!-- QR Display -->
+            <div class="w-32 h-32 p-1.5 bg-white border border-slate-200 rounded-xl mb-2">
+              <img src="${qrImg}" alt="QR Meja ${num}" class="w-full h-full object-contain"/>
+            </div>
+
+            <p class="text-[10px] text-text-muted mb-3 font-mono break-all">${qrUrl}</p>
+
+            <div class="flex gap-2 w-full">
+              <a href="/?table=${num}" target="_blank" class="flex-1 py-1.5 rounded-lg bg-slate-100 text-slate-700 font-semibold text-[11px] hover:bg-slate-200">
+                Buka Menu
+              </a>
+              <button onclick="window.open('${qrImg}', '_blank')" class="px-2.5 py-1.5 rounded-lg bg-primary text-white text-[11px] font-semibold">
+                Unduh QR
+              </button>
+            </div>
+          </div>
+        `;
+      }
+      grid.innerHTML = html;
+    }
+
+    // Admin Menu CRUD Table
+    function renderAdminMenu() {
+      const tbody = document.getElementById('admin-menu-table');
+      const products = menuData ? menuData.products : [];
+      document.getElementById('admin-menu-count').innerText = `${products.length} Produk`;
+
+      tbody.innerHTML = products.map(p => `
+        <tr class="hover:bg-slate-50">
+          <td class="p-3.5 font-bold text-slate-500">#${p.id}</td>
+          <td class="p-3.5">
+            <img src="${p.image}" alt="${p.name}" class="w-10 h-10 rounded-lg object-cover bg-slate-100"/>
+          </td>
+          <td class="p-3.5">
+            <span class="font-headline font-bold text-slate-800 block">${p.name}</span>
+            <span class="text-[11px] text-text-muted line-clamp-1">${p.description || '-'}</span>
+          </td>
+          <td class="p-3.5">
+            <span class="px-2 py-0.5 rounded-full bg-slate-100 text-slate-700 uppercase font-bold text-[10px]">${p.category}</span>
+          </td>
+          <td class="p-3.5 font-headline font-bold text-primary">${formatRupiah(p.price)}</td>
+          <td class="p-3.5">
+            <span class="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 font-bold text-[10px]">Tersedia</span>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    // Reports Tab
+    async function loadReports() {
+      try {
+        const res = await fetch('/api/reports/daily');
+        const rep = await res.json();
+
+        document.getElementById('rep-revenue').innerText = formatRupiah(rep.totalRevenue);
+        document.getElementById('rep-orders').innerText = rep.totalOrders;
+        document.getElementById('rep-paid').innerText = rep.paidCount;
+        document.getElementById('rep-pending').innerText = rep.pendingCount;
+
+        const popList = document.getElementById('rep-popular-list');
+        popList.innerHTML = (rep.popularItems || []).map((item, idx) => `
+          <div class="flex items-center justify-between p-2.5 rounded-xl bg-slate-50 border border-border-subtle text-xs">
+            <div class="flex items-center gap-2">
+              <span class="w-5 h-5 rounded-full bg-primary text-white font-bold text-[10px] flex items-center justify-center">${idx + 1}</span>
+              <span class="font-headline font-bold text-slate-800">${item.name}</span>
+            </div>
+            <span class="font-bold text-primary">${item.qty} Terjual</span>
+          </div>
+        `).join('') || '<p class="text-xs text-text-muted py-2">Belum ada data penjualan.</p>';
+      } catch (err) {
+        console.error('Error load reports:', err);
+      }
+    }
+
+    // Startup
+    initData();
+  </script>
+</body>
+</html>
