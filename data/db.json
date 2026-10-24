@@ -553,6 +553,36 @@
   ],
   "orders": [
     {
+      "id": "DOR-109",
+      "table": "04",
+      "customerName": "joko",
+      "orderType": "Dine In",
+      "items": [
+        {
+          "productId": 2,
+          "name": "Honey Americano",
+          "price": 22000,
+          "quantity": 1,
+          "temperature": "Ice",
+          "sugar": "Normal (100%)",
+          "addons": [
+            "Extra Espresso Shot (+5k)"
+          ],
+          "notes": "",
+          "subtotal": 27000
+        }
+      ],
+      "subtotal": 27000,
+      "tax": 2700,
+      "total": 29700,
+      "specialInstructions": "",
+      "status": "ready",
+      "paymentStatus": "paid",
+      "paymentMethod": "QRIS",
+      "createdAt": "2026-10-24T08:33:46.440Z",
+      "timeString": "15:33 WIB"
+    },
+    {
       "id": "DOR-108",
       "table": "04",
       "customerName": "Budi Santoso",
@@ -827,6 +857,14 @@
     }
   ],
   "feedback": [
+    {
+      "id": 1792831122815,
+      "table": "04",
+      "customerName": "lama",
+      "rating": 5,
+      "message": "hyama (via WhatsApp)",
+      "createdAt": "2026-10-24T08:38:42.815Z"
+    },
     {
       "id": 1792828585757,
       "table": "04",

@@ -37,8 +37,41 @@
     };
   </script>
   <style>
-    body { font-family: 'Inter', sans-serif; }
+    body { font-family: 'Inter', sans-serif; -webkit-tap-highlight-color: transparent; }
     h1, h2, h3, h4, .font-headline { font-family: 'Plus Jakarta Sans', sans-serif; }
+    @keyframes slideUp {
+      from { transform: translateY(100%); }
+      to { transform: translateY(0); }
+    }
+    @keyframes bellSwing {
+      0% { transform: rotate(0); }
+      15% { transform: rotate(18deg); }
+      30% { transform: rotate(-18deg); }
+      45% { transform: rotate(12deg); }
+      60% { transform: rotate(-12deg); }
+      75% { transform: rotate(6deg); }
+      90% { transform: rotate(-6deg); }
+      100% { transform: rotate(0); }
+    }
+    .animate-bell-swing {
+      animation: bellSwing 1.2s ease-in-out infinite;
+      transform-origin: top center;
+    }
+    @keyframes pulseRing {
+      0% { transform: scale(0.8); opacity: 0.8; }
+      100% { transform: scale(1.8); opacity: 0; }
+    }
+    .animate-pulse-ring {
+      animation: pulseRing 1.6s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+    }
+    @keyframes popIn {
+      0% { transform: scale(0.7); opacity: 0; }
+      70% { transform: scale(1.08); opacity: 1; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+    .animate-pop-in {
+      animation: popIn 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    }
   </style>
 </head>
 <body class="bg-bg-canvas text-on-surface antialiased min-h-screen flex flex-col pb-12">
@@ -178,20 +211,182 @@
       </div>
     </div>
 
+    <!-- Persistent Waiter Calling Banner on Tracking Page (Shown after call) -->
+    <div id="waiter-active-banner" class="hidden p-3.5 rounded-2xl bg-amber-50 border border-amber-200 text-amber-900 text-xs items-center gap-3 shadow-sm animate-pop-in">
+      <div class="w-8 h-8 rounded-xl bg-amber-100 flex items-center justify-center shrink-0 text-amber-700">
+        <span class="material-symbols-outlined text-[20px] animate-bell-swing">notifications_active</span>
+      </div>
+      <div class="flex-1 min-w-0">
+        <div class="flex items-center gap-1.5">
+          <strong class="font-headline font-bold text-amber-950 text-xs">Pelayan Sedang Menuju Meja!</strong>
+          <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+        </div>
+        <p class="text-[11px] text-amber-800/90 mt-0.5 truncate">
+          Permintaan "<span id="waiter-active-type">Panggil Pelayan</span>" telah dikonfirmasi ke kasir.
+        </p>
+      </div>
+      <button onclick="dismissWaiterBanner()" class="text-amber-600 hover:text-amber-900 p-1">
+        <span class="material-symbols-outlined text-[16px]">close</span>
+      </button>
+    </div>
+
     <!-- Action Buttons -->
     <div class="space-y-2 pt-2">
-      <button onclick="callWaiter()" class="w-full py-3 rounded-xl bg-white border border-border-subtle text-slate-700 font-headline font-semibold text-xs shadow-sm hover:bg-slate-50 active:scale-98 transition-all flex items-center justify-center gap-1.5">
-        <span class="material-symbols-outlined text-[18px] text-yellow-600">notifications</span>
-        <span>Panggil Pelayan / Bantuan</span>
+      <button onclick="callWaiter()" class="w-full py-3.5 rounded-xl bg-amber-50 border border-amber-200 text-amber-900 font-headline font-bold text-xs shadow-sm hover:bg-amber-100 active:scale-98 transition-all flex items-center justify-center gap-2">
+        <span class="material-symbols-outlined text-[19px] text-amber-600 animate-bounce">notifications_active</span>
+        <span>Panggil Pelayan / Bantuan Meja</span>
       </button>
 
-      <a id="order-more-btn" href="/" class="w-full py-3 rounded-xl bg-primary text-white font-headline font-bold text-xs shadow-md active:scale-98 transition-all flex items-center justify-center gap-1.5">
+      <a id="order-more-btn" href="/" class="w-full py-3.5 rounded-xl bg-primary text-white font-headline font-bold text-xs shadow-md active:scale-98 transition-all flex items-center justify-center gap-1.5">
         <span class="material-symbols-outlined text-[18px]">add_circle</span>
         <span>Pesan Menu Tambahan</span>
       </a>
     </div>
 
   </main>
+
+  <!-- Panggil Pelayan & Bantuan Modal (Bottom Sheet with Animations) -->
+  <div id="waiter-modal" class="fixed inset-0 z-50 bg-slate-950/60 backdrop-blur-sm hidden flex-col justify-end transition-opacity">
+    <div class="w-full max-w-md mx-auto bg-surface-card rounded-t-[28px] max-h-[90vh] flex flex-col shadow-2xl animate-[slideUp_0.25s_ease-out]">
+      <!-- Header -->
+      <div class="px-5 py-4 border-b border-border-subtle flex items-center justify-between shrink-0 bg-white rounded-t-[28px]">
+        <div class="flex items-center gap-2.5">
+          <div class="w-9 h-9 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center shadow-xs">
+            <span class="material-symbols-outlined text-[20px] animate-pulse">room_service</span>
+          </div>
+          <div>
+            <div class="flex items-center gap-2">
+              <h3 class="font-headline font-bold text-base text-on-surface leading-tight">Panggil Pelayan & Bantuan</h3>
+              <span id="waiter-modal-table-badge" class="px-2 py-0.5 rounded-full bg-blue-100 text-primary font-bold text-[11px]">Meja 04</span>
+            </div>
+            <span class="text-[11px] text-text-muted">Staf siap membantu kebutuhan mejamu</span>
+          </div>
+        </div>
+        <button type="button" onclick="closeWaiterModal()" class="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-slate-500 hover:text-slate-800 transition-colors">
+          <span class="material-symbols-outlined text-[18px]">close</span>
+        </button>
+      </div>
+
+      <!-- Modal Body -->
+      <div class="p-4 overflow-y-auto space-y-4 flex-1 bg-slate-50/50">
+
+        <!-- Animated Calling State Card -->
+        <div id="waiter-anim-card" class="bg-gradient-to-br from-amber-500 via-amber-600 to-yellow-600 text-white rounded-2xl p-5 shadow-lg relative overflow-hidden text-center transition-all">
+          <div class="absolute -right-6 -bottom-6 w-32 h-32 rounded-full bg-white/10 blur-xl pointer-events-none"></div>
+
+          <!-- Swinging Bell Animation with Concentric Rings -->
+          <div class="relative w-20 h-20 mx-auto mb-3 flex items-center justify-center">
+            <div class="absolute inset-0 rounded-full bg-white/20 animate-pulse-ring"></div>
+            <div class="absolute inset-2 rounded-full bg-white/30 animate-pulse-ring" style="animation-delay: 0.5s;"></div>
+            <div class="w-16 h-16 rounded-2xl bg-white/20 backdrop-blur-md flex items-center justify-center shadow-inner z-10">
+              <span id="waiter-bell-icon" class="material-symbols-outlined text-[36px] text-yellow-100 animate-bell-swing">notifications_active</span>
+            </div>
+          </div>
+
+          <div class="space-y-1 relative z-10">
+            <div class="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-white/20 backdrop-blur-md text-white font-headline font-bold text-[11px] mb-1">
+              <span class="w-2 h-2 rounded-full bg-emerald-300 animate-pulse"></span>
+              <span id="waiter-anim-status-pill">Panggilan Terkirim</span>
+            </div>
+            <h4 id="waiter-anim-title" class="font-headline font-extrabold text-lg text-white">
+              Pelayan Segera Datang! 🛎️
+            </h4>
+            <p id="waiter-anim-desc" class="text-xs text-yellow-100/90 max-w-xs mx-auto">
+              Notifikasi telah diterima oleh kasir & barista DORE. Staf sedang berjalan menuju <span class="font-bold underline" id="waiter-anim-table-text">Meja 04</span>.
+            </p>
+          </div>
+
+          <!-- Arrival ETA Badge -->
+          <div class="mt-4 pt-3 border-t border-white/20 flex items-center justify-between text-xs text-yellow-100 relative z-10">
+            <span class="flex items-center gap-1">
+              <span class="material-symbols-outlined text-[15px]">timer</span>
+              <span>Estimasi Tiba:</span>
+            </span>
+            <span class="font-headline font-bold text-white bg-white/20 px-2.5 py-0.5 rounded-full">&lt; 1 Menit</span>
+          </div>
+        </div>
+
+        <!-- Quick Service Options Grid -->
+        <div class="space-y-2">
+          <span class="text-[11px] font-bold text-text-muted uppercase tracking-wider block">Pilih Bantuan Spesifik</span>
+          
+          <div class="grid grid-cols-2 gap-2.5">
+            <!-- Option 1: Panggil Pelayan -->
+            <button type="button" onclick="sendWaiterRequest('Panggil Pelayan')" class="service-opt-btn p-3.5 bg-white border-2 border-primary rounded-2xl flex flex-col justify-between text-left active:scale-[0.97] transition-all shadow-xs group">
+              <div class="w-10 h-10 rounded-xl bg-blue-50 text-primary flex items-center justify-center mb-2.5 group-hover:scale-105 transition-transform">
+                <span class="material-symbols-outlined text-[22px]">notifications_active</span>
+              </div>
+              <div>
+                <span class="font-headline font-bold text-xs text-on-surface block leading-tight">Panggil Pelayan</span>
+                <span class="text-[10px] text-text-muted mt-0.5 block">Staf datang ke meja</span>
+              </div>
+            </button>
+
+            <!-- Option 2: Minta Tagihan / Bill -->
+            <button type="button" onclick="sendWaiterRequest('Minta Tagihan / Bill')" class="service-opt-btn p-3.5 bg-white border border-border-subtle hover:border-amber-400 rounded-2xl flex flex-col justify-between text-left active:scale-[0.97] transition-all shadow-xs group">
+              <div class="w-10 h-10 rounded-xl bg-amber-50 text-amber-700 flex items-center justify-center mb-2.5 group-hover:scale-105 transition-transform">
+                <span class="material-symbols-outlined text-[22px]">receipt_long</span>
+              </div>
+              <div>
+                <span class="font-headline font-bold text-xs text-on-surface block leading-tight">Minta Tagihan</span>
+                <span class="text-[10px] text-text-muted mt-0.5 block">Cetak bill ke meja</span>
+              </div>
+            </button>
+
+            <!-- Option 3: Alat Makan / Sedotan -->
+            <button type="button" onclick="sendWaiterRequest('Alat Makan / Sedotan')" class="service-opt-btn p-3.5 bg-white border border-border-subtle hover:border-purple-400 rounded-2xl flex flex-col justify-between text-left active:scale-[0.97] transition-all shadow-xs group">
+              <div class="w-10 h-10 rounded-xl bg-purple-50 text-purple-700 flex items-center justify-center mb-2.5 group-hover:scale-105 transition-transform">
+                <span class="material-symbols-outlined text-[22px]">restaurant</span>
+              </div>
+              <div>
+                <span class="font-headline font-bold text-xs text-on-surface block leading-tight">Sendok / Sedotan</span>
+                <span class="text-[10px] text-text-muted mt-0.5 block">Minta tissue / cutlery</span>
+              </div>
+            </button>
+
+            <!-- Option 4: Air Putih / Es -->
+            <button type="button" onclick="sendWaiterRequest('Air Putih / Es')" class="service-opt-btn p-3.5 bg-white border border-border-subtle hover:border-sky-400 rounded-2xl flex flex-col justify-between text-left active:scale-[0.97] transition-all shadow-xs group">
+              <div class="w-10 h-10 rounded-xl bg-sky-50 text-sky-700 flex items-center justify-center mb-2.5 group-hover:scale-105 transition-transform">
+                <span class="material-symbols-outlined text-[22px]">water_drop</span>
+              </div>
+              <div>
+                <span class="font-headline font-bold text-xs text-on-surface block leading-tight">Air Putih / Es</span>
+                <span class="text-[10px] text-text-muted mt-0.5 block">Refill air atau es batu</span>
+              </div>
+            </button>
+          </div>
+        </div>
+
+        <!-- WiFi Info Box -->
+        <div class="bg-white rounded-2xl border border-border-subtle p-3.5 shadow-xs">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-2">
+              <div class="w-8 h-8 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center">
+                <span class="material-symbols-outlined text-[18px]">wifi</span>
+              </div>
+              <div>
+                <span class="font-headline font-bold text-xs text-on-surface block">WiFi Tamu DORE</span>
+                <span class="text-[10px] text-text-muted">SSID: <strong>DORE_Guest</strong></span>
+              </div>
+            </div>
+            <button type="button" onclick="copyWifiTracker()" id="btn-copy-wifi-tracker" class="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 rounded-lg text-slate-700 font-headline font-bold text-[11px] flex items-center gap-1 transition-all active:scale-95">
+              <span class="material-symbols-outlined text-[14px]">content_copy</span>
+              <span id="copy-wifi-tracker-label">Salin Sandi</span>
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Footer Button -->
+      <div class="p-4 border-t border-border-subtle bg-white shrink-0">
+        <button type="button" onclick="closeWaiterModal()" class="w-full py-3 rounded-2xl bg-slate-100 text-slate-700 hover:bg-slate-200 font-headline font-bold text-xs active:scale-98 transition-all">
+          Selesai & Tutup
+        </button>
+      </div>
+
+    </div>
+  </div>
 
   <script>
     const urlParams = new URLSearchParams(window.location.search);
@@ -330,8 +525,120 @@
       `).join('');
     }
 
+    // Audio Synthesizer for pleasant cafe bell chime
+    function playChimeSound() {
+      try {
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        const now = audioCtx.currentTime;
+        
+        // Note 1: D5 (587.33 Hz)
+        const osc1 = audioCtx.createOscillator();
+        const gain1 = audioCtx.createGain();
+        osc1.type = 'sine';
+        osc1.frequency.setValueAtTime(587.33, now);
+        gain1.gain.setValueAtTime(0.25, now);
+        gain1.gain.exponentialRampToValueAtTime(0.001, now + 0.5);
+        osc1.connect(gain1);
+        gain1.connect(audioCtx.destination);
+        osc1.start(now);
+        osc1.stop(now + 0.5);
+
+        // Note 2: A5 (880 Hz) - Chime resonance
+        const osc2 = audioCtx.createOscillator();
+        const gain2 = audioCtx.createGain();
+        osc2.type = 'sine';
+        osc2.frequency.setValueAtTime(880, now + 0.16);
+        gain2.gain.setValueAtTime(0.3, now + 0.16);
+        gain2.gain.exponentialRampToValueAtTime(0.001, now + 0.8);
+        osc2.connect(gain2);
+        gain2.connect(audioCtx.destination);
+        osc2.start(now + 0.16);
+        osc2.stop(now + 0.8);
+      } catch (e) {
+        // AudioContext error or blocked
+      }
+    }
+
     function callWaiter() {
-      alert(`🔔 Pelayan telah diberitahu untuk mendatangi Meja ${currentOrder ? currentOrder.table : ''}. Harap tunggu sebentar!`);
+      const table = currentOrder ? currentOrder.table : '04';
+      document.getElementById('waiter-modal-table-badge').innerText = 'Meja ' + table;
+      document.getElementById('waiter-anim-table-text').innerText = 'Meja ' + table;
+      
+      const modal = document.getElementById('waiter-modal');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+
+      // Auto trigger default waiter call with sound and animation
+      sendWaiterRequest('Panggil Pelayan');
+    }
+
+    function closeWaiterModal() {
+      const modal = document.getElementById('waiter-modal');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+
+    async function sendWaiterRequest(serviceType) {
+      const table = currentOrder ? currentOrder.table : '04';
+
+      // Play soft bell chime
+      playChimeSound();
+
+      // Animate card with re-triggered swing
+      const bell = document.getElementById('waiter-bell-icon');
+      bell.classList.remove('animate-bell-swing');
+      void bell.offsetWidth; // re-trigger animation
+      bell.classList.add('animate-bell-swing');
+
+      // Update card texts
+      document.getElementById('waiter-anim-status-pill').innerText = 'Panggilan Terkirim';
+      document.getElementById('waiter-anim-title').innerText = `${serviceType} Terkirim! 🛎️`;
+      document.getElementById('waiter-anim-desc').innerHTML = `
+        Notifikasi telah diterima oleh kasir & barista DORE.<br/>
+        Staf sedang menuju <strong class="underline">Meja ${table}</strong> untuk kebutuhan: <strong>${serviceType}</strong>.
+      `;
+
+      // Update and show active banner on main page
+      document.getElementById('waiter-active-type').innerText = serviceType;
+      const banner = document.getElementById('waiter-active-banner');
+      banner.classList.remove('hidden');
+      banner.classList.add('flex');
+
+      // Send to backend SSE broadcaster
+      try {
+        await fetch('/api/call-waiter', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            table: table,
+            serviceType: serviceType
+          })
+        });
+      } catch (e) {
+        console.warn('Call waiter error:', e);
+      }
+    }
+
+    function dismissWaiterBanner() {
+      const banner = document.getElementById('waiter-active-banner');
+      banner.classList.add('hidden');
+      banner.classList.remove('flex');
+    }
+
+    function copyWifiTracker() {
+      const pass = 'dorecoffee2026';
+      navigator.clipboard.writeText(pass).then(() => {
+        const btn = document.getElementById('btn-copy-wifi-tracker');
+        const label = document.getElementById('copy-wifi-tracker-label');
+        btn.className = 'px-3 py-1.5 bg-emerald-50 border border-emerald-300 rounded-lg text-emerald-800 font-headline font-bold text-[11px] flex items-center gap-1 transition-all';
+        label.innerText = 'Tersalin! ✓';
+        setTimeout(() => {
+          btn.className = 'px-3 py-1.5 bg-slate-100 hover:bg-slate-200 rounded-lg text-slate-700 font-headline font-bold text-[11px] flex items-center gap-1 transition-all active:scale-95';
+          label.innerText = 'Salin Sandi';
+        }, 2500);
+      }).catch(() => {
+        alert('Password WiFi: dorecoffee2026');
+      });
     }
 
     // Initial Fetch & Auto Poll every 3 seconds
