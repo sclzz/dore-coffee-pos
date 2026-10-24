@@ -498,7 +498,7 @@
     {
       "number": "02",
       "name": "Meja 02",
-      "status": "occupied"
+      "status": "available"
     },
     {
       "number": "03",
@@ -513,7 +513,7 @@
     {
       "number": "05",
       "name": "Meja 05",
-      "status": "occupied"
+      "status": "available"
     },
     {
       "number": "06",
@@ -553,6 +553,67 @@
   ],
   "orders": [
     {
+      "id": "DOR-117",
+      "table": "04",
+      "customerName": "eko",
+      "orderType": "Dine In",
+      "items": [
+        {
+          "productId": 2,
+          "name": "Honey Americano",
+          "price": 22000,
+          "quantity": 1,
+          "temperature": "Ice",
+          "sugar": "Less Sugar (50%)",
+          "addons": [
+            "Extra Espresso Shot (+5k)"
+          ],
+          "notes": "",
+          "subtotal": 27000
+        }
+      ],
+      "subtotal": 27000,
+      "tax": 2700,
+      "total": 29700,
+      "specialInstructions": "",
+      "status": "completed",
+      "paymentStatus": "paid",
+      "paymentMethod": "Cash",
+      "createdAt": "2026-10-24T09:08:27.564Z",
+      "timeString": "16:08 WIB",
+      "amountPaid": 29700,
+      "change": 0,
+      "paidAt": "2026-10-24T09:26:11.989Z"
+    },
+    {
+      "id": "DOR-116",
+      "table": "04",
+      "customerName": "BARU",
+      "orderType": "Dine In",
+      "items": [
+        {
+          "productId": 1,
+          "name": "Americano",
+          "price": 15000,
+          "quantity": 1,
+          "temperature": "Ice",
+          "sugar": "Normal (100%)",
+          "addons": [],
+          "notes": "",
+          "subtotal": 15000
+        }
+      ],
+      "subtotal": 15000,
+      "tax": 1500,
+      "total": 16500,
+      "specialInstructions": "",
+      "status": "completed",
+      "paymentStatus": "paid",
+      "paymentMethod": "QRIS",
+      "createdAt": "2026-10-24T09:05:58.654Z",
+      "timeString": "16:05 WIB"
+    },
+    {
       "id": "DOR-115",
       "table": "04",
       "customerName": "BARU",
@@ -574,7 +635,7 @@
       "tax": 1500,
       "total": 16500,
       "specialInstructions": "",
-      "status": "ready",
+      "status": "completed",
       "paymentStatus": "paid",
       "paymentMethod": "QRIS",
       "createdAt": "2026-10-24T08:58:38.674Z",
@@ -604,7 +665,7 @@
       "tax": 2000,
       "total": 22000,
       "specialInstructions": "",
-      "status": "ready",
+      "status": "completed",
       "paymentStatus": "paid",
       "paymentMethod": "QRIS",
       "createdAt": "2026-10-24T08:57:39.086Z",
@@ -632,11 +693,14 @@
       "tax": 1500,
       "total": 16500,
       "specialInstructions": "",
-      "status": "ready",
-      "paymentStatus": "unpaid",
+      "status": "completed",
+      "paymentStatus": "paid",
       "paymentMethod": "Cash",
       "createdAt": "2026-10-24T08:53:02.496Z",
-      "timeString": "15:53 WIB"
+      "timeString": "15:53 WIB",
+      "amountPaid": 16500,
+      "change": 0,
+      "paidAt": "2026-10-24T09:07:05.157Z"
     },
     {
       "id": "DOR-112",
@@ -660,7 +724,7 @@
       "tax": 2300,
       "total": 25300,
       "specialInstructions": "",
-      "status": "ready",
+      "status": "completed",
       "paymentStatus": "paid",
       "paymentMethod": "QRIS",
       "createdAt": "2026-10-24T08:49:51.007Z",
@@ -688,7 +752,7 @@
       "tax": 2200,
       "total": 24200,
       "specialInstructions": "",
-      "status": "ready",
+      "status": "completed",
       "paymentStatus": "paid",
       "paymentMethod": "QRIS",
       "createdAt": "2026-10-24T08:48:42.777Z",
@@ -716,7 +780,7 @@
       "tax": 1500,
       "total": 16500,
       "specialInstructions": "",
-      "status": "ready",
+      "status": "completed",
       "paymentStatus": "paid",
       "paymentMethod": "QRIS",
       "createdAt": "2026-10-24T08:41:07.413Z",
@@ -746,7 +810,7 @@
       "tax": 2700,
       "total": 29700,
       "specialInstructions": "",
-      "status": "ready",
+      "status": "completed",
       "paymentStatus": "paid",
       "paymentMethod": "QRIS",
       "createdAt": "2026-10-24T08:33:46.440Z",
@@ -776,7 +840,7 @@
       "tax": 5600,
       "total": 61600,
       "specialInstructions": "Tolong antarkan minuman dulu ya",
-      "status": "processing",
+      "status": "completed",
       "paymentStatus": "paid",
       "paymentMethod": "QRIS",
       "createdAt": "2026-10-24T08:31:51.153Z",
@@ -803,11 +867,14 @@
       "subtotal": 15000,
       "tax": 0,
       "total": 15000,
-      "status": "processing",
-      "paymentStatus": "unpaid",
+      "status": "completed",
+      "paymentStatus": "paid",
       "paymentMethod": "Cash",
       "createdAt": "2026-10-24T08:23:29.138Z",
-      "timeString": "15:23 WIB"
+      "timeString": "15:23 WIB",
+      "amountPaid": 15000,
+      "change": 0,
+      "paidAt": "2026-10-24T09:07:28.935Z"
     },
     {
       "id": "DOR-106",
@@ -832,11 +899,14 @@
       "subtotal": 20000,
       "tax": 0,
       "total": 20000,
-      "status": "ready",
-      "paymentStatus": "unpaid",
-      "paymentMethod": "Cash",
+      "status": "completed",
+      "paymentStatus": "paid",
+      "paymentMethod": "QRIS Kasir",
       "createdAt": "2026-10-24T07:46:17.137Z",
-      "timeString": "14:46 WIB"
+      "timeString": "14:46 WIB",
+      "amountPaid": 20000,
+      "change": 0,
+      "paidAt": "2026-10-24T09:07:33.112Z"
     },
     {
       "id": "DOR-105",
@@ -941,11 +1011,14 @@
       "subtotal": 15000,
       "tax": 0,
       "total": 15000,
-      "status": "processing",
-      "paymentStatus": "unpaid",
-      "paymentMethod": "Cash",
+      "status": "completed",
+      "paymentStatus": "paid",
+      "paymentMethod": "QRIS Kasir",
       "createdAt": "2026-10-24T07:37:06.121Z",
-      "timeString": "14:37 WIB"
+      "timeString": "14:37 WIB",
+      "amountPaid": 15000,
+      "change": 0,
+      "paidAt": "2026-10-24T09:07:37.916Z"
     },
     {
       "id": "DOR-104",
@@ -1019,7 +1092,7 @@
       "subtotal": 67000,
       "tax": 0,
       "total": 67000,
-      "status": "ready",
+      "status": "completed",
       "paymentStatus": "paid",
       "paymentMethod": "QRIS",
       "createdAt": "2026-10-24T14:20:00.000Z",
