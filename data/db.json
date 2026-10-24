@@ -553,6 +553,90 @@
   ],
   "orders": [
     {
+      "id": "DOR-113",
+      "table": "04",
+      "customerName": "eko",
+      "orderType": "Dine In",
+      "items": [
+        {
+          "productId": 1,
+          "name": "Americano",
+          "price": 15000,
+          "quantity": 1,
+          "temperature": "Ice",
+          "sugar": "No Sugar (0%)",
+          "addons": [],
+          "notes": "",
+          "subtotal": 15000
+        }
+      ],
+      "subtotal": 15000,
+      "tax": 1500,
+      "total": 16500,
+      "specialInstructions": "",
+      "status": "ready",
+      "paymentStatus": "unpaid",
+      "paymentMethod": "Cash",
+      "createdAt": "2026-10-24T08:53:02.496Z",
+      "timeString": "15:53 WIB"
+    },
+    {
+      "id": "DOR-112",
+      "table": "04",
+      "customerName": "eko",
+      "orderType": "Dine In",
+      "items": [
+        {
+          "productId": 6,
+          "name": "Kopi Susu Aren",
+          "price": 23000,
+          "quantity": 1,
+          "temperature": "Ice",
+          "sugar": "Normal (100%)",
+          "addons": [],
+          "notes": "",
+          "subtotal": 23000
+        }
+      ],
+      "subtotal": 23000,
+      "tax": 2300,
+      "total": 25300,
+      "specialInstructions": "",
+      "status": "ready",
+      "paymentStatus": "paid",
+      "paymentMethod": "QRIS",
+      "createdAt": "2026-10-24T08:49:51.007Z",
+      "timeString": "15:49 WIB"
+    },
+    {
+      "id": "DOR-111",
+      "table": "04",
+      "customerName": "WOWOK",
+      "orderType": "Dine In",
+      "items": [
+        {
+          "productId": 2,
+          "name": "Honey Americano",
+          "price": 22000,
+          "quantity": 1,
+          "temperature": "Ice",
+          "sugar": "Normal (100%)",
+          "addons": [],
+          "notes": "",
+          "subtotal": 22000
+        }
+      ],
+      "subtotal": 22000,
+      "tax": 2200,
+      "total": 24200,
+      "specialInstructions": "",
+      "status": "ready",
+      "paymentStatus": "paid",
+      "paymentMethod": "QRIS",
+      "createdAt": "2026-10-24T08:48:42.777Z",
+      "timeString": "15:48 WIB"
+    },
+    {
       "id": "DOR-110",
       "table": "04",
       "customerName": "Selo",

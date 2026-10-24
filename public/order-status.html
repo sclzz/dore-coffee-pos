@@ -179,9 +179,16 @@
         <h3 class="font-headline font-bold text-xs uppercase tracking-wider text-text-muted">
           Rincian Pesanan
         </h3>
-        <span id="order-pay-status-badge" class="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-slate-100 text-slate-700">
-          -
-        </span>
+        <div class="flex items-center gap-2">
+          <!-- Struk Digital Pill Button matching user screenshot -->
+          <button type="button" id="btn-show-receipt" onclick="openDigitalReceiptModal()" class="hidden px-2.5 py-1 rounded-xl bg-blue-50/80 hover:bg-blue-100 text-primary font-headline font-bold text-xs border border-blue-200 shadow-xs items-center gap-1.5 transition-all active:scale-95" title="Lihat Struk Digital Pembayaran">
+            <span class="material-symbols-outlined text-[16px]">receipt_long</span>
+            <span>Struk</span>
+          </button>
+          <span id="order-pay-status-badge" class="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-slate-100 text-slate-700">
+            -
+          </span>
+        </div>
       </div>
 
       <div class="space-y-3 divide-y divide-slate-100" id="order-items-list">
@@ -232,6 +239,12 @@
 
     <!-- Action Buttons -->
     <div class="space-y-2 pt-2">
+      <!-- Digital Receipt Button (Directly visible if order is paid via QRIS) -->
+      <button type="button" id="btn-bottom-receipt" onclick="openDigitalReceiptModal()" class="hidden w-full py-3.5 rounded-xl bg-blue-50/80 border border-blue-200 text-primary font-headline font-bold text-xs shadow-sm hover:bg-blue-100 active:scale-98 transition-all items-center justify-center gap-2">
+        <span class="material-symbols-outlined text-[19px]">receipt_long</span>
+        <span>Lihat Struk Digital Pembayaran</span>
+      </button>
+
       <button onclick="callWaiter()" class="w-full py-3.5 rounded-xl bg-amber-50 border border-amber-200 text-amber-900 font-headline font-bold text-xs shadow-sm hover:bg-amber-100 active:scale-98 transition-all flex items-center justify-center gap-2">
         <span class="material-symbols-outlined text-[19px] text-amber-600 animate-bounce">notifications_active</span>
         <span>Panggil Pelayan / Bantuan Meja</span>
@@ -244,6 +257,84 @@
     </div>
 
   </main>
+
+  <!-- Modal Struk Digital Pelanggan (QRIS Instan) -->
+  <div id="digital-receipt-modal" class="fixed inset-0 z-50 bg-slate-950/60 backdrop-blur-sm hidden items-center justify-center p-4 transition-opacity">
+    <div class="w-full max-w-sm bg-white rounded-3xl p-6 shadow-2xl relative animate-[popIn_0.3s_cubic-bezier(0.175,0.885,0.32,1.275)] max-h-[92vh] flex flex-col">
+      
+      <!-- Close button on top right -->
+      <button type="button" onclick="closeDigitalReceiptModal()" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-slate-400 hover:text-slate-700 transition-colors">
+        <span class="material-symbols-outlined text-[18px]">close</span>
+      </button>
+
+      <!-- Scrollable receipt content -->
+      <div class="overflow-y-auto pr-1 flex-1 space-y-4">
+        
+        <!-- Header Receipt -->
+        <div class="text-center pt-2">
+          <h2 class="font-headline font-extrabold text-xl text-primary tracking-tight">DORE COFFEE & PASTRY</h2>
+          <p class="text-xs text-text-muted mt-0.5">Artisan Espresso Bar & Bakery • <span id="rec-dig-table" class="font-bold text-slate-700">Meja 04</span></p>
+          <div class="font-mono text-[11px] text-slate-500 mt-2 flex items-center justify-center gap-2">
+            <span>No. Order: <strong id="rec-dig-id" class="text-slate-800">#DOR-7927</strong></span>
+            <span>•</span>
+            <span id="rec-dig-time">Baru saja</span>
+          </div>
+        </div>
+
+        <!-- Dashed Divider -->
+        <div class="border-b border-dashed border-slate-300"></div>
+
+        <!-- Items Ordered List -->
+        <div id="rec-dig-items" class="space-y-3 text-xs">
+          <!-- Injected by JS -->
+        </div>
+
+        <!-- Dashed Divider -->
+        <div class="border-b border-dashed border-slate-300"></div>
+
+        <!-- Subtotal & Tax Calculation -->
+        <div class="space-y-1.5 text-xs text-slate-600">
+          <div class="flex justify-between items-center">
+            <span>Subtotal</span>
+            <span id="rec-dig-subtotal" class="font-semibold text-slate-800">Rp 0</span>
+          </div>
+          <div class="flex justify-between items-center">
+            <span>PB1 Restoran (10%)</span>
+            <span id="rec-dig-tax" class="font-semibold text-slate-800">Rp 0</span>
+          </div>
+        </div>
+
+        <!-- Solid Divider -->
+        <div class="border-b border-slate-200"></div>
+
+        <!-- Total & Payment Method -->
+        <div class="space-y-2">
+          <div class="flex justify-between items-center">
+            <span class="font-headline font-extrabold text-sm text-slate-900 tracking-wide">TOTAL</span>
+            <span id="rec-dig-total" class="font-headline font-extrabold text-lg text-primary">Rp 0</span>
+          </div>
+          <div class="flex justify-between items-center text-xs text-slate-600">
+            <span>Metode Bayar</span>
+            <span id="rec-dig-method" class="font-bold text-slate-800 uppercase tracking-wider">QRIS</span>
+          </div>
+        </div>
+
+        <!-- Footer Thank You Note -->
+        <div class="text-center pt-2 pb-1">
+          <p class="text-xs text-slate-400 italic">Terima kasih telah berkunjung ke DORE Coffee!</p>
+        </div>
+
+      </div>
+
+      <!-- Action Button -->
+      <div class="pt-3 border-t border-slate-100 mt-2 shrink-0">
+        <button type="button" onclick="closeDigitalReceiptModal()" class="w-full py-3 rounded-2xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-headline font-bold text-xs active:scale-98 transition-all">
+          Tutup Struk
+        </button>
+      </div>
+
+    </div>
+  </div>
 
   <!-- Panggil Pelayan & Bantuan Modal (Bottom Sheet with Animations) -->
   <div id="waiter-modal" class="fixed inset-0 z-50 bg-slate-950/60 backdrop-blur-sm hidden flex-col justify-end transition-opacity">
@@ -392,6 +483,7 @@
     const urlParams = new URLSearchParams(window.location.search);
     const orderId = urlParams.get('id');
     let currentOrder = null;
+    let hasAutoOpenedReceipt = false;
 
     function formatRupiah(num) {
       return 'Rp ' + Number(num).toLocaleString('id-ID');
@@ -410,6 +502,14 @@
         const order = await res.json();
         currentOrder = order;
         renderOrder(order);
+
+        // Auto open digital receipt if redirected from QRIS payment
+        if ((urlParams.get('receipt') === '1' || urlParams.get('showReceipt') === '1') && !hasAutoOpenedReceipt) {
+          hasAutoOpenedReceipt = true;
+          setTimeout(() => {
+            openDigitalReceiptModal();
+          }, 350);
+        }
       } catch (err) {
         console.error('Error fetching order:', err);
       }
@@ -429,14 +529,25 @@
       document.getElementById('order-tax-amount').innerText = formatRupiah(tax);
       document.getElementById('order-total-amount').innerText = formatRupiah(total);
 
-      // Payment Badge
+      // Payment Badge & Digital Receipt Buttons
       const payBadge = document.getElementById('order-pay-status-badge');
+      const btnShowReceipt = document.getElementById('btn-show-receipt');
+      const btnBottomReceipt = document.getElementById('btn-bottom-receipt');
+
       if (order.paymentStatus === 'paid') {
         payBadge.className = 'px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-100 text-emerald-800';
         payBadge.innerText = `LUNAS (${order.paymentMethod || 'QRIS'})`;
+        btnShowReceipt.classList.remove('hidden');
+        btnShowReceipt.classList.add('flex');
+        btnBottomReceipt.classList.remove('hidden');
+        btnBottomReceipt.classList.add('flex');
       } else {
         payBadge.className = 'px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-amber-100 text-amber-800';
         payBadge.innerText = `BAYAR DI KASIR (${order.paymentMethod || 'CASH'})`;
+        btnShowReceipt.classList.add('hidden');
+        btnShowReceipt.classList.remove('flex');
+        btnBottomReceipt.classList.add('hidden');
+        btnBottomReceipt.classList.remove('flex');
       }
 
       // Special Instructions
@@ -623,6 +734,51 @@
       const banner = document.getElementById('waiter-active-banner');
       banner.classList.add('hidden');
       banner.classList.remove('flex');
+    }
+
+    function openDigitalReceiptModal() {
+      if (!currentOrder) return;
+      document.getElementById('rec-dig-table').innerText = 'Meja ' + currentOrder.table;
+      document.getElementById('rec-dig-id').innerText = '#' + currentOrder.id;
+      document.getElementById('rec-dig-time').innerText = currentOrder.timeString || 'Baru saja';
+
+      const subtotal = currentOrder.subtotal || (currentOrder.total ? Math.round(currentOrder.total / 1.1) : 0);
+      const tax = currentOrder.tax !== undefined ? currentOrder.tax : Math.round(subtotal * 0.10);
+      const total = currentOrder.total || (subtotal + tax);
+
+      document.getElementById('rec-dig-subtotal').innerText = formatRupiah(subtotal);
+      document.getElementById('rec-dig-tax').innerText = formatRupiah(tax);
+      document.getElementById('rec-dig-total').innerText = formatRupiah(total);
+      document.getElementById('rec-dig-method').innerText = currentOrder.paymentMethod || 'QRIS';
+
+      const itemsContainer = document.getElementById('rec-dig-items');
+      itemsContainer.innerHTML = (currentOrder.items || []).map(i => {
+        const modifiers = [];
+        if (i.temperature && i.temperature !== '-') modifiers.push(i.temperature === 'Ice' ? 'Ice' : 'Hot');
+        if (i.sugar && i.sugar !== '-') modifiers.push(i.sugar);
+        if (i.addons && i.addons.length) modifiers.push(i.addons.join(', '));
+        const modText = modifiers.join(' ') || (i.notes ? `"${i.notes}"` : '');
+
+        return `
+          <div>
+            <div class="flex justify-between items-start font-headline font-bold text-slate-800 text-xs">
+              <span>${i.quantity}x ${i.name}</span>
+              <span>${formatRupiah(i.subtotal)}</span>
+            </div>
+            ${modText ? `<p class="text-[11px] text-slate-500 mt-0.5 leading-tight">${modText}</p>` : ''}
+          </div>
+        `;
+      }).join('');
+
+      const modal = document.getElementById('digital-receipt-modal');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function closeDigitalReceiptModal() {
+      const modal = document.getElementById('digital-receipt-modal');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
     }
 
     function copyWifiTracker() {

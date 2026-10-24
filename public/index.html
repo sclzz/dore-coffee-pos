@@ -1470,7 +1470,7 @@
         // Allow 2.2 seconds for celebration animation before redirecting
         setTimeout(() => {
           closeQrisModal();
-          window.location.href = `/order-status.html?id=${createdOrder.id}`;
+          window.location.href = `/order-status.html?id=${createdOrder.id}&receipt=1`;
         }, 2200);
 
       } catch (err) {
