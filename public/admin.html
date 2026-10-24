@@ -41,10 +41,57 @@
   <style>
     body { font-family: 'Inter', sans-serif; }
     h1, h2, h3, h4, .font-headline { font-family: 'Plus Jakarta Sans', sans-serif; }
+
     @media print {
-      body * { visibility: hidden; }
-      #printable-receipt, #printable-receipt * { visibility: visible; }
-      #printable-receipt { position: absolute; left: 0; top: 0; width: 100%; }
+      @page {
+        size: 58mm auto;
+        margin: 0;
+      }
+      /* Hide all UI elements when printing receipt */
+      body.printing-receipt > *:not(#printable-receipt) {
+        display: none !important;
+      }
+      body.printing-receipt {
+        background: #fff !important;
+        color: #000 !important;
+        margin: 0 !important;
+        padding: 0 !important;
+      }
+      body.printing-receipt #printable-receipt {
+        display: block !important;
+        visibility: visible !important;
+        position: static !important;
+        margin: 0 auto !important;
+        width: 58mm !important;
+        max-width: 58mm !important;
+        padding: 8px 4px !important;
+        box-sizing: border-box !important;
+        background: #fff !important;
+        color: #000 !important;
+        font-family: 'Courier New', Courier, monospace !important;
+        font-size: 11px !important;
+        line-height: 1.35 !important;
+      }
+      body.printing-receipt #printable-receipt * {
+        visibility: visible !important;
+        color: #000 !important;
+      }
+
+      /* Print table QR cards mode (when NOT printing receipt) */
+      body:not(.printing-receipt) aside,
+      body:not(.printing-receipt) header,
+      body:not(.printing-receipt) #view-pos,
+      body:not(.printing-receipt) #view-menu,
+      body:not(.printing-receipt) #view-reports,
+      body:not(.printing-receipt) #payment-modal,
+      body:not(.printing-receipt) #printable-receipt,
+      body:not(.printing-receipt) #admin-toast-container {
+        display: none !important;
+      }
+      body:not(.printing-receipt) #view-tables {
+        display: block !important;
+        width: 100% !important;
+      }
     }
   </style>
 </head>
@@ -436,32 +483,32 @@
   </div>
 
   <!-- PRINTABLE THERMAL RECEIPT CONTAINER (Hidden until print) -->
-  <div id="printable-receipt" class="hidden text-black font-mono text-[12px] p-4 max-w-[280px] bg-white">
-    <div class="text-center pb-2 border-b border-black">
-      <h2 class="font-bold text-base">DORE COFFEE & PASTRY</h2>
-      <p class="text-[10px]">Jl. Kopi Harapan No. 42, Jakarta</p>
-      <p class="text-[10px]">Telp: 0812-3456-7890</p>
+  <div id="printable-receipt" class="hidden text-black font-mono text-[12px] p-4 max-w-[280px] bg-white" style="color: #000; background: #fff; width: 280px;">
+    <div style="text-align: center; padding-bottom: 8px; border-bottom: 1px dashed #000;">
+      <h2 style="font-weight: bold; font-size: 14px; margin: 0;">DORE COFFEE & PASTRY</h2>
+      <p style="font-size: 10px; margin: 2px 0 0 0;">Jl. Kopi Harapan No. 42, Jakarta</p>
+      <p style="font-size: 10px; margin: 2px 0 0 0;">Telp: 0812-3456-7890</p>
     </div>
-    <div class="py-2 border-b border-black text-[10px] space-y-0.5">
-      <div class="flex justify-between"><span>No Nota :</span><span id="rec-id">DOR-104</span></div>
-      <div class="flex justify-between"><span>Meja    :</span><span id="rec-table">04</span></div>
-      <div class="flex justify-between"><span>Kasir   :</span><span id="rec-cashier">Siti</span></div>
-      <div class="flex justify-between"><span>Waktu   :</span><span id="rec-time">14:30 WIB</span></div>
+    <div style="padding: 6px 0; border-bottom: 1px dashed #000; font-size: 10px; line-height: 1.4;">
+      <div style="display: flex; justify-content: space-between;"><span>No Nota :</span><span id="rec-id">DOR-104</span></div>
+      <div style="display: flex; justify-content: space-between;"><span>Meja    :</span><span id="rec-table">04</span></div>
+      <div style="display: flex; justify-content: space-between;"><span>Kasir   :</span><span id="rec-cashier">Siti</span></div>
+      <div style="display: flex; justify-content: space-between;"><span>Waktu   :</span><span id="rec-time">14:30 WIB</span></div>
     </div>
-    <div class="py-2 border-b border-black space-y-1" id="rec-items">
+    <div style="padding: 6px 0; border-bottom: 1px dashed #000;" id="rec-items">
       <!-- Items -->
     </div>
-    <div class="py-2 border-b border-black space-y-0.5">
-      <div class="flex justify-between"><span>Subtotal :</span><span id="rec-subtotal">Rp 0</span></div>
-      <div class="flex justify-between"><span>PB1 (10%):</span><span id="rec-tax">Rp 0</span></div>
-      <div class="flex justify-between font-bold"><span>TOTAL    :</span><span id="rec-total">Rp 44.000</span></div>
-      <div class="flex justify-between"><span>Metode   :</span><span id="rec-method">Cash</span></div>
-      <div class="flex justify-between"><span>Bayar    :</span><span id="rec-paid">Rp 50.000</span></div>
-      <div class="flex justify-between"><span>Kembali  :</span><span id="rec-change">Rp 6.000</span></div>
+    <div style="padding: 6px 0; border-bottom: 1px dashed #000; font-size: 11px; line-height: 1.4;">
+      <div style="display: flex; justify-content: space-between;"><span>Subtotal :</span><span id="rec-subtotal">Rp 0</span></div>
+      <div style="display: flex; justify-content: space-between;"><span>PB1 (10%):</span><span id="rec-tax">Rp 0</span></div>
+      <div style="display: flex; justify-content: space-between; font-weight: bold; font-size: 12px; margin-top: 2px;"><span>TOTAL    :</span><span id="rec-total">Rp 44.000</span></div>
+      <div style="display: flex; justify-content: space-between; margin-top: 2px;"><span>Metode   :</span><span id="rec-method">Cash</span></div>
+      <div style="display: flex; justify-content: space-between;"><span>Bayar    :</span><span id="rec-paid">Rp 50.000</span></div>
+      <div style="display: flex; justify-content: space-between;"><span>Kembali  :</span><span id="rec-change">Rp 6.000</span></div>
     </div>
-    <div class="text-center pt-3 text-[10px]">
-      <p>Terima Kasih Atas Kunjungan Anda!</p>
-      <p>Follow IG: @dore.coffee</p>
+    <div style="text-align: center; padding-top: 8px; font-size: 10px;">
+      <p style="margin: 0;">Terima Kasih Atas Kunjungan Anda!</p>
+      <p style="margin: 2px 0 0 0;">Follow IG: @dore.coffee</p>
     </div>
   </div>
 
@@ -984,6 +1031,21 @@
       document.getElementById('pay-change').innerText = formatRupiah(change);
     }
 
+    function executePrintReceipt() {
+      const rec = document.getElementById('printable-receipt');
+      if (!rec) return;
+      rec.classList.remove('hidden');
+      document.body.classList.add('printing-receipt');
+
+      setTimeout(() => {
+        window.print();
+        setTimeout(() => {
+          rec.classList.add('hidden');
+          document.body.classList.remove('printing-receipt');
+        }, 500);
+      }, 150);
+    }
+
     async function confirmPaymentAndPrint() {
       if (!activePayOrder) return;
 
@@ -991,7 +1053,7 @@
       if (activePayOrder.paymentStatus === 'paid' || String(activePayOrder.paymentMethod || '').toUpperCase().includes('QRIS')) {
         prepareReceiptData(activePayOrder, activePayOrder.total);
         closePaymentModal();
-        window.print();
+        executePrintReceipt();
         return;
       }
 
@@ -1014,7 +1076,7 @@
         // Trigger Receipt Print
         prepareReceiptData(activePayOrder, amountPaid);
         closePaymentModal();
-        window.print();
+        executePrintReceipt();
         showAdminToast(`Pembayaran #${activePayOrder.id} berhasil diselesaikan!`, 'emerald');
       } catch (err) {
         alert('Gagal memproses pembayaran: ' + err.message);
@@ -1034,14 +1096,14 @@
       const order = orders.find(o => o.id === orderId);
       if (!order) return;
       prepareReceiptData(order, order.total);
-      window.print();
+      executePrintReceipt();
     }
 
     function prepareReceiptData(order, amountPaid) {
       document.getElementById('rec-id').innerText = order.id;
-      document.getElementById('rec-table').innerText = order.table;
-      document.getElementById('rec-cashier').innerText = 'Siti';
-      document.getElementById('rec-time').innerText = order.timeString || 'WIB';
+      document.getElementById('rec-table').innerText = order.table === '00' || order.table === 'Take Away' ? 'Take Away' : order.table;
+      document.getElementById('rec-cashier').innerText = 'Siti (Kasir)';
+      document.getElementById('rec-time').innerText = order.timeString || (new Date().toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' }) + ' WIB');
 
       const subtotal = order.subtotal || (order.total ? Math.round(order.total / 1.1) : 0);
       const tax = order.tax !== undefined ? order.tax : Math.round(subtotal * 0.10);
@@ -1050,16 +1112,21 @@
       document.getElementById('rec-subtotal').innerText = formatRupiah(subtotal);
       document.getElementById('rec-tax').innerText = formatRupiah(tax);
       document.getElementById('rec-total').innerText = formatRupiah(total);
-      document.getElementById('rec-method').innerText = order.paymentMethod || 'Cash';
+      document.getElementById('rec-method').innerText = order.paymentMethod || (selectedPayMethod === 'cash' ? 'Cash' : 'QRIS');
       document.getElementById('rec-paid').innerText = formatRupiah(amountPaid);
       document.getElementById('rec-change').innerText = formatRupiah(Math.max(0, amountPaid - total));
 
       const itemsEl = document.getElementById('rec-items');
       itemsEl.innerHTML = (order.items || []).map(i => `
-        <div class="flex justify-between">
+        <div style="display: flex; justify-content: space-between; margin-bottom: 3px; font-size: 11px;">
           <span>${i.name} x${i.quantity}</span>
-          <span>${formatRupiah(i.subtotal)}</span>
+          <span style="font-weight: bold;">${formatRupiah(i.subtotal)}</span>
         </div>
+        ${(i.temperature && i.temperature !== '-' || i.sugar && i.sugar !== '-') ? `
+          <div style="font-size: 9px; color: #555; margin-left: 6px; margin-bottom: 2px;">
+            ${i.temperature !== '-' ? i.temperature : ''} ${i.sugar !== '-' ? '• ' + i.sugar : ''}
+          </div>
+        ` : ''}
       `).join('');
     }
 
