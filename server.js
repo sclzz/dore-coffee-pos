@@ -14,7 +14,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 // Database helper functions
 function readDb() {
   try {
-    const raw = fs.readFileSync(DB_FILE, 'utf8');
+    let raw = fs.readFileSync(DB_FILE, 'utf8');
+    raw = raw.replace(/^\uFEFF/, '');
     return JSON.parse(raw);
   } catch (err) {
     console.error('Error reading DB:', err);
