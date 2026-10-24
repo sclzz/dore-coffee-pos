@@ -1,997 +1,1083 @@
-{
-  "settings": {
-    "storeName": "DORE Coffee & Pastry",
-    "tagline": "Artisanal Coffee & Delightful Kitchen",
-    "address": "Jl. Kopi Harapan No. 42, Jakarta",
-    "phone": "0812-3456-7890",
-    "taxPercent": 0,
-    "servicePercent": 0
-  },
-  "admin": {
-    "username": "admin",
-    "password": "password123",
-    "name": "Siti (Kasir DORE)",
-    "shift": "Shift Pagi"
-  },
-  "categories": [
-    {
-      "id": "all",
-      "name": "Semua",
-      "icon": "restaurant_menu"
-    },
-    {
-      "id": "coffee",
-      "name": "Coffee",
-      "icon": "local_cafe"
-    },
-    {
-      "id": "matcha",
-      "name": "Matcha",
-      "icon": "eco"
-    },
-    {
-      "id": "non-coffee",
-      "name": "Non Coffee",
-      "icon": "local_bar"
-    },
-    {
-      "id": "tea",
-      "name": "Tea",
-      "icon": "emoji_food_beverage"
-    },
-    {
-      "id": "snack",
-      "name": "Snack",
-      "icon": "bakery_dining"
-    },
-    {
-      "id": "food",
-      "name": "Food",
-      "icon": "dinner_dining"
-    },
-    {
-      "id": "additional",
-      "name": "Additional",
-      "icon": "add_circle_outline"
-    }
-  ],
-  "products": [
-    {
-      "id": 1,
-      "category": "coffee",
-      "name": "Americano",
-      "price": 15000,
-      "description": "Espresso ganda murni dengan air murni, aroma bold & segar.",
-      "badge": "Best Seller",
-      "isDrink": true,
-      "image": "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=400&auto=format&fit=crop&q=80"
-    },
-    {
-      "id": 2,
-      "category": "coffee",
-      "name": "Honey Americano",
-      "price": 22000,
-      "description": "Americano dengan sentuhan madu bunga liar alami.",
-      "badge": "Special",
-      "isDrink": true,
-      "image": "https://images.unsplash.com/photo-1517701604599-bb29b565090c?w=400&auto=format&fit=crop&q=80"
-    },
-    {
-      "id": 3,
-      "category": "coffee",
-      "name": "Cranberrycano",
-      "price": 21000,
-      "description": "Kombinasi asam manis jus cranberry segar dan espresso.",
-      "badge": "Fresh",
-      "isDrink": true,
-      "image": "https://images.unsplash.com/photo-1556881286-fc6915169721?w=400&auto=format&fit=crop&q=80"
-    },
-    {
-      "id": 4,
-      "category": "coffee",
-      "name": "Orange Americano",
-      "price": 23000,
-      "description": "Espresso dingin dipadu ekstrak sari jeruk segar aromatik.",
-      "badge": "Populer",
-      "isDrink": true,
-      "image": "https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?w=400&auto=format&fit=crop&q=80"
-    },
-    {
-      "id": 5,
-      "category": "coffee",
-      "name": "Doremilk Coffee",
-      "price": 20000,
-      "description": "Racikan kopi susu khas DORE dengan kelembutan susu pilihan.",
-      "badge": "Signature",
-      "isDrink": true,
-      "image": "https://images.unsplash.com/photo-1572442388796-11668a67e53d?w=400&auto=format&fit=crop&q=80"
-    },
-    {
-      "id": 6,
-      "category": "coffee",
-      "name": "Kopi Susu Aren",
-      "price": 23000,
-      "description": "Espresso ganda, susu segar creamy, dan lelehan gula aren murni.",
-      "badge": "Favorit",
-      "isDrink": true,
-      "image": "https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=400&auto=format&fit=crop&q=80"
-    },
-    {
-      "id": 7,
-      "category": "coffee",
-      "name": "Kopi Susu Pandan",
-      "price": 23000,
-      "description": "Kopi susu nikmat beraroma ekstrak daun pandan wangi.",
-      "badge": "",
-      "isDrink": true,
-      "image": "https://images.unsplash.com/photo-1588195538326-c5b1e9f80a1b?w=400&auto=format&fit=crop&q=80"
-    },
-    {
-      "id": 8,
-      "category": "coffee",
-      "name": "Hazelnut",
-      "price": 23000,
-      "description": "Kopi susu dengan syrup hazelnut panggang aromatik.",
-      "badge": "",
-      "isDrink": true,
-      "image": "https://images.unsplash.com/photo-1534778101976-62847782c213?w=400&auto=format&fit=crop&q=80"
-    },
-    {
-      "id": 9,
-      "category": "coffee",
-      "name": "Salted Caramel",
-      "price": 25000,
-      "description": "Paduan karamel manis gurih dengan garam laut Prancis.",
-      "badge": "Best Seller",
-      "isDrink": true,
-      "image": "https://images.unsplash.com/photo-1582293041079-7814c2f12063?w=400&auto=format&fit=crop&q=80"
-    },
-    {
-      "id": 10,
-      "category": "coffee",
-      "name": "Popcorn Coffee",
-      "price": 25000,
-      "description": "Sensasi rasa mentega jagung bakar manis pada kopi susu.",
-      "badge": "Baru",
-      "isDrink": true,
-      "image": "https://images.unsplash.com/photo-1509785307050-d4066910ec1e?w=400&auto=format&fit=crop&q=80"
-    },
-    {
-      "id": 11,
-      "category": "coffee",
-      "name": "Butterscotch",
-      "price": 25000,
-      "description": "Kopi susu dengan saus butterscotch mewah bercita rasa toffee.",
-      "badge": "",
-      "isDrink": true,
-      "image": "https://images.unsplash.com/photo-1497636577773-f1231844b336?w=400&auto=format&fit=crop&q=80"
-    },
-    {
-      "id": 12,
-      "category": "matcha",
-      "name": "Matcha Latte",
-      "price": 25000,
-      "description": "Bubuk matcha murni Uji Jepang dipadukan dengan susu segar.",
-      "badge": "Favorit",
-      "isDrink": true,
-      "image": "https://images.unsplash.com/photo-1536256263959-770b48d82b0a?w=400&auto=format&fit=crop&q=80"
-    },
-    {
-      "id": 13,
-      "category": "matcha",
-      "name": "Strawberry Matcha",
-      "price": 27000,
-      "description": "Gradasi selai strawberry asli, susu segar, dan matcha pekat.",
-      "badge": "Signature",
-      "isDrink": true,
-      "image": "https://images.unsplash.com/photo-1579954115545-a95591f28bfc?w=400&auto=format&fit=crop&q=80"
-    },
-    {
-      "id": 14,
-      "category": "non-coffee",
-      "name": "Red Velvet",
-      "price": 22000,
-      "description": "Minuman manis gurih beraroma red velvet cake dan cokelat putih.",
-      "badge": "",
-      "isDrink": true,
-      "image": "https://images.unsplash.com/photo-1541658016709-82535e94bc69?w=400&auto=format&fit=crop&q=80"
-    },
-    {
-      "id": 15,
-      "category": "non-coffee",
-      "name": "Chocolate Creamy",
-      "price": 22000,
-      "description": "Cokelat susu kaya rasa, manis pas dan lembut di lidah.",
-      "badge": "",
-      "isDrink": true,
-      "image": "https://images.unsplash.com/photo-1542990253-0d0f5be5f0ed?w=400&auto=format&fit=crop&q=80"
-    },
-    {
-      "id": 16,
-      "category": "non-coffee",
-      "name": "Dark Chocolate",
-      "price": 22000,
-      "description": "Cokelat hitam pekat 70% dengan rasa legit tidak berlebihan.",
-      "badge": "Favorit",
-      "isDrink": true,
-      "image": "https://images.unsplash.com/photo-1511920170033-f8396924c348?w=400&auto=format&fit=crop&q=80"
-    },
-    {
-      "id": 17,
-      "category": "non-coffee",
-      "name": "Korean Strawberry Milk",
-      "price": 23000,
-      "description": "Susu segar dingin berpadu dengan compote strawberry buatan sendiri.",
-      "badge": "Best Seller",
-      "isDrink": true,
-      "image": "https://images.unsplash.com/photo-1553787499-6f9133860278?w=400&auto=format&fit=crop&q=80"
-    },
-    {
-      "id": 18,
-      "category": "tea",
-      "name": "Strawberry Tea",
-      "price": 17000,
-      "description": "Teh hitam segar diseduh dengan potongan sari buah strawberry.",
-      "badge": "",
-      "isDrink": true,
-      "image": "https://images.unsplash.com/photo-1556679343-c7306c1976bc?w=400&auto=format&fit=crop&q=80"
-    },
-    {
-      "id": 19,
-      "category": "tea",
-      "name": "Lychee Tea",
-      "price": 17000,
-      "description": "Teh leci aromatik dingin lengkap dengan buah leci segar.",
-      "badge": "Favorit",
-      "isDrink": true,
-      "image": "https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?w=400&auto=format&fit=crop&q=80"
-    },
-    {
-      "id": 20,
-      "category": "tea",
-      "name": "Peach Tea",
-      "price": 16000,
-      "description": "Teh manis rasa buah persik matang yang menyejukkan.",
-      "badge": "",
-      "isDrink": true,
-      "image": "https://images.unsplash.com/photo-1499638673689-79a0b5115d87?w=400&auto=format&fit=crop&q=80"
-    },
-    {
-      "id": 21,
-      "category": "tea",
-      "name": "Lemon Tea",
-      "price": 16000,
-      "description": "Teh perasan jeruk lemon asli kaya vitamin C dan menyegarkan.",
-      "badge": "",
-      "isDrink": true,
-      "image": "https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?w=400&auto=format&fit=crop&q=80"
-    },
-    {
-      "id": 22,
-      "category": "tea",
-      "name": "Teh Tarik Malaysia",
-      "price": 16000,
-      "description": "Teh tarik otentik dengan busa melimpah dan aroma khas rempah.",
-      "badge": "Klasik",
-      "isDrink": true,
-      "image": "https://images.unsplash.com/photo-1576092768241-dec231879fc3?w=400&auto=format&fit=crop&q=80"
-    },
-    {
-      "id": 23,
-      "category": "snack",
-      "name": "Roti Bakar Kaya",
-      "price": 10000,
-      "description": "Roti bakar renyah dengan isian selai srikaya harum pandan.",
-      "badge": "Favorit",
-      "isDrink": false,
-      "image": "https://images.unsplash.com/photo-1509440159596-0249088772ff?w=400&auto=format&fit=crop&q=80"
-    },
-    {
-      "id": 24,
-      "category": "snack",
-      "name": "Roti Bakar Richeese",
-      "price": 15000,
-      "description": "Roti panggang mentega dengan limpahan saus keju gurih khas.",
-      "badge": "",
-      "isDrink": false,
-      "image": "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400&auto=format&fit=crop&q=80"
-    },
-    {
-      "id": 25,
-      "category": "snack",
-      "name": "Mantou",
-      "price": 15000,
-      "description": "Roti kukus / goreng lembut keemasan disajikan dengan susu kental.",
-      "badge": "",
-      "isDrink": false,
-      "image": "https://images.unsplash.com/photo-1563245372-f21724e3856d?w=400&auto=format&fit=crop&q=80"
-    },
-    {
-      "id": 26,
-      "category": "snack",
-      "name": "Kentang Goreng",
-      "price": 16000,
-      "description": "Shoestring french fries gurih renyah dengan saus cocolan.",
-      "badge": "Best Seller",
-      "isDrink": false,
-      "image": "https://images.unsplash.com/photo-1576107232684-1279f3908594?w=400&auto=format&fit=crop&q=80"
-    },
-    {
-      "id": 27,
-      "category": "snack",
-      "name": "Sosis / Nugget",
-      "price": 16000,
-      "description": "Pilihan sosis sapi panggang atau chicken nugget krispi.",
-      "badge": "",
-      "isDrink": false,
-      "image": "https://images.unsplash.com/photo-1562967914-608f82629710?w=400&auto=format&fit=crop&q=80"
-    },
-    {
-      "id": 28,
-      "category": "snack",
-      "name": "Special Mix Platter",
-      "price": 37000,
-      "description": "Porsi komplit: Kentang, Sosis, Nugget, Onion Ring, & Chicken Wing.",
-      "badge": "Signature",
-      "isDrink": false,
-      "image": "https://images.unsplash.com/photo-1541592106381-b31e9677c0e5?w=400&auto=format&fit=crop&q=80"
-    },
-    {
-      "id": 29,
-      "category": "food",
-      "name": "Ayam Sambal Terasi",
-      "price": 25000,
-      "description": "Ayam goreng bumbu ungkep empuk dengan sambal terasi ulek segar.",
-      "badge": "Pedas",
-      "isDrink": false,
-      "image": "https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?w=400&auto=format&fit=crop&q=80"
-    },
-    {
-      "id": 30,
-      "category": "food",
-      "name": "Ayam Saos Padang",
-      "price": 26000,
-      "description": "Potongan ayam berbumbu saus padang gurih, pedas, dan kental.",
-      "badge": "Favorit",
-      "isDrink": false,
-      "image": "https://images.unsplash.com/photo-1598515214211-89d3c73ae83b?w=400&auto=format&fit=crop&q=80"
-    },
-    {
-      "id": 31,
-      "category": "food",
-      "name": "Nugget Chicken Curry",
-      "price": 26000,
-      "description": "Nugget ayam disiram kuah kari jepang aromatik kaya rempah.",
-      "badge": "",
-      "isDrink": false,
-      "image": "https://images.unsplash.com/photo-1562967914-608f82629710?w=400&auto=format&fit=crop&q=80"
-    },
-    {
-      "id": 32,
-      "category": "food",
-      "name": "Nasi Goreng Telur",
-      "price": 23000,
-      "description": "Nasi goreng racikan kecap manis spesial dengan telur mata sapi.",
-      "badge": "Klasik",
-      "isDrink": false,
-      "image": "https://images.unsplash.com/photo-1603133872878-684f208fb84b?w=400&auto=format&fit=crop&q=80"
-    },
-    {
-      "id": 33,
-      "category": "food",
-      "name": "Nasi Goreng Ayam",
-      "price": 25000,
-      "description": "Nasi goreng spesial dengan suwiran ayam gurih dan kerupuk.",
-      "badge": "Best Seller",
-      "isDrink": false,
-      "image": "https://images.unsplash.com/photo-1603133872878-684f208fb84b?w=400&auto=format&fit=crop&q=80"
-    },
-    {
-      "id": 34,
-      "category": "food",
-      "name": "Indomie Goreng",
-      "price": 15000,
-      "description": "Indomie goreng favorit disajikan hangat dengan taburan bawang goreng.",
-      "badge": "",
-      "isDrink": false,
-      "image": "https://images.unsplash.com/photo-1612929633738-8fe44f7ec841?w=400&auto=format&fit=crop&q=80"
-    },
-    {
-      "id": 35,
-      "category": "food",
-      "name": "Indomie Rebus",
-      "price": 15000,
-      "description": "Indomie rebus kuah kari/ayam bawang gurih nikmat dengan sawi.",
-      "badge": "",
-      "isDrink": false,
-      "image": "https://images.unsplash.com/photo-1569718212165-3a8278d5f624?w=400&auto=format&fit=crop&q=80"
-    },
-    {
-      "id": 36,
-      "category": "additional",
-      "name": "Es Kosong",
-      "price": 2000,
-      "description": "Segelas es batu bening dingin.",
-      "badge": "",
-      "isDrink": true,
-      "image": "https://images.unsplash.com/photo-1517256064527-09c73fc73e38?w=400&auto=format&fit=crop&q=80"
-    },
-    {
-      "id": 37,
-      "category": "additional",
-      "name": "Espresso Shot",
-      "price": 5000,
-      "description": "Ekstra 1 shot espresso crema tebal.",
-      "badge": "",
-      "isDrink": true,
-      "image": "https://images.unsplash.com/photo-1510591509098-f4fdc6d0ff04?w=400&auto=format&fit=crop&q=80"
-    },
-    {
-      "id": 38,
-      "category": "additional",
-      "name": "Extra Syrup",
-      "price": 5000,
-      "description": "Pilihan syrup tambahan (Vanilla / Caramel / Hazelnut).",
-      "badge": "",
-      "isDrink": false,
-      "image": "https://images.unsplash.com/photo-1509785307050-d4066910ec1e?w=400&auto=format&fit=crop&q=80"
-    },
-    {
-      "id": 39,
-      "category": "additional",
-      "name": "Air Mineral",
-      "price": 5000,
-      "description": "Air mineral kemasan 600ml dingin / biasa.",
-      "badge": "",
-      "isDrink": true,
-      "image": "https://images.unsplash.com/photo-1548839140-29a749e1cf4d?w=400&auto=format&fit=crop&q=80"
-    },
-    {
-      "id": 40,
-      "category": "additional",
-      "name": "Nasi Putih",
-      "price": 5000,
-      "description": "Seporsi nasi putih pulen hangat.",
-      "badge": "",
-      "isDrink": false,
-      "image": "https://images.unsplash.com/photo-1516684732162-798a0062be99?w=400&auto=format&fit=crop&q=80"
-    },
-    {
-      "id": 41,
-      "category": "additional",
-      "name": "Telur",
-      "price": 5000,
-      "description": "Tambahan telur ceplok atau dadar.",
-      "badge": "",
-      "isDrink": false,
-      "image": "https://images.unsplash.com/photo-1525351484163-7529414344d8?w=400&auto=format&fit=crop&q=80"
-    }
-  ],
-  "addons": [
-    {
-      "id": "esp",
-      "name": "Espresso Shot",
-      "price": 5000
-    },
-    {
-      "id": "syr",
-      "name": "Extra Syrup",
-      "price": 5000
-    },
-    {
-      "id": "egg",
-      "name": "Telur Tambahan",
-      "price": 5000
-    },
-    {
-      "id": "rice",
-      "name": "Nasi Putih",
-      "price": 5000
-    }
-  ],
-  "tables": [
-    {
-      "number": "01",
-      "name": "Meja 01",
-      "status": "available"
-    },
-    {
-      "number": "02",
-      "name": "Meja 02",
-      "status": "occupied"
-    },
-    {
-      "number": "03",
-      "name": "Meja 03",
-      "status": "available"
-    },
-    {
-      "number": "04",
-      "name": "Meja 04",
-      "status": "occupied"
-    },
-    {
-      "number": "05",
-      "name": "Meja 05",
-      "status": "occupied"
-    },
-    {
-      "number": "06",
-      "name": "Meja 06",
-      "status": "available"
-    },
-    {
-      "number": "07",
-      "name": "Meja 07",
-      "status": "available"
-    },
-    {
-      "number": "08",
-      "name": "Meja 08",
-      "status": "available"
-    },
-    {
-      "number": "09",
-      "name": "Meja 09",
-      "status": "available"
-    },
-    {
-      "number": "10",
-      "name": "Meja 10",
-      "status": "available"
-    },
-    {
-      "number": "11",
-      "name": "Meja 11",
-      "status": "available"
-    },
-    {
-      "number": "12",
-      "name": "Meja 12",
-      "status": "available"
-    }
-  ],
-  "orders": [
-    {
-      "id": "DOR-113",
-      "table": "04",
-      "customerName": "eko",
-      "orderType": "Dine In",
-      "items": [
-        {
-          "productId": 1,
-          "name": "Americano",
-          "price": 15000,
-          "quantity": 1,
-          "temperature": "Ice",
-          "sugar": "No Sugar (0%)",
-          "addons": [],
-          "notes": "",
-          "subtotal": 15000
-        }
-      ],
-      "subtotal": 15000,
-      "tax": 1500,
-      "total": 16500,
-      "specialInstructions": "",
-      "status": "ready",
-      "paymentStatus": "unpaid",
-      "paymentMethod": "Cash",
-      "createdAt": "2026-10-24T08:53:02.496Z",
-      "timeString": "15:53 WIB"
-    },
-    {
-      "id": "DOR-112",
-      "table": "04",
-      "customerName": "eko",
-      "orderType": "Dine In",
-      "items": [
-        {
-          "productId": 6,
-          "name": "Kopi Susu Aren",
-          "price": 23000,
-          "quantity": 1,
-          "temperature": "Ice",
-          "sugar": "Normal (100%)",
-          "addons": [],
-          "notes": "",
-          "subtotal": 23000
-        }
-      ],
-      "subtotal": 23000,
-      "tax": 2300,
-      "total": 25300,
-      "specialInstructions": "",
-      "status": "ready",
-      "paymentStatus": "paid",
-      "paymentMethod": "QRIS",
-      "createdAt": "2026-10-24T08:49:51.007Z",
-      "timeString": "15:49 WIB"
-    },
-    {
-      "id": "DOR-111",
-      "table": "04",
-      "customerName": "WOWOK",
-      "orderType": "Dine In",
-      "items": [
-        {
-          "productId": 2,
-          "name": "Honey Americano",
-          "price": 22000,
-          "quantity": 1,
-          "temperature": "Ice",
-          "sugar": "Normal (100%)",
-          "addons": [],
-          "notes": "",
-          "subtotal": 22000
-        }
-      ],
-      "subtotal": 22000,
-      "tax": 2200,
-      "total": 24200,
-      "specialInstructions": "",
-      "status": "ready",
-      "paymentStatus": "paid",
-      "paymentMethod": "QRIS",
-      "createdAt": "2026-10-24T08:48:42.777Z",
-      "timeString": "15:48 WIB"
-    },
-    {
-      "id": "DOR-110",
-      "table": "04",
-      "customerName": "Selo",
-      "orderType": "Dine In",
-      "items": [
-        {
-          "productId": 1,
-          "name": "Americano",
-          "price": 15000,
-          "quantity": 1,
-          "temperature": "Ice",
-          "sugar": "No Sugar (0%)",
-          "addons": [],
-          "notes": "",
-          "subtotal": 15000
-        }
-      ],
-      "subtotal": 15000,
-      "tax": 1500,
-      "total": 16500,
-      "specialInstructions": "",
-      "status": "ready",
-      "paymentStatus": "paid",
-      "paymentMethod": "QRIS",
-      "createdAt": "2026-10-24T08:41:07.413Z",
-      "timeString": "15:41 WIB"
-    },
-    {
-      "id": "DOR-109",
-      "table": "04",
-      "customerName": "joko",
-      "orderType": "Dine In",
-      "items": [
-        {
-          "productId": 2,
-          "name": "Honey Americano",
-          "price": 22000,
-          "quantity": 1,
-          "temperature": "Ice",
-          "sugar": "Normal (100%)",
-          "addons": [
-            "Extra Espresso Shot (+5k)"
-          ],
-          "notes": "",
-          "subtotal": 27000
-        }
-      ],
-      "subtotal": 27000,
-      "tax": 2700,
-      "total": 29700,
-      "specialInstructions": "",
-      "status": "ready",
-      "paymentStatus": "paid",
-      "paymentMethod": "QRIS",
-      "createdAt": "2026-10-24T08:33:46.440Z",
-      "timeString": "15:33 WIB"
-    },
-    {
-      "id": "DOR-108",
-      "table": "04",
-      "customerName": "Budi Santoso",
-      "orderType": "Dine In",
-      "items": [
-        {
-          "productId": 1,
-          "name": "Kopi Susu Aren",
-          "price": 23000,
-          "quantity": 2,
-          "temperature": "Ice",
-          "sugar": "Less Sugar (50%)",
-          "addons": [
-            "Extra Espresso Shot (+5k)"
-          ],
-          "notes": "",
-          "subtotal": 56000
-        }
-      ],
-      "subtotal": 56000,
-      "tax": 5600,
-      "total": 61600,
-      "specialInstructions": "Tolong antarkan minuman dulu ya",
-      "status": "processing",
-      "paymentStatus": "paid",
-      "paymentMethod": "QRIS",
-      "createdAt": "2026-10-24T08:31:51.153Z",
-      "timeString": "15:31 WIB"
-    },
-    {
-      "id": "DOR-107",
-      "table": "04",
-      "customerName": "woko",
-      "orderType": "Dine In",
-      "items": [
-        {
-          "productId": 1,
-          "name": "Americano",
-          "price": 15000,
-          "quantity": 1,
-          "temperature": "Ice",
-          "sugar": "No Sugar (0%)",
-          "addons": [],
-          "notes": "",
-          "subtotal": 15000
-        }
-      ],
-      "subtotal": 15000,
-      "tax": 0,
-      "total": 15000,
-      "status": "processing",
-      "paymentStatus": "unpaid",
-      "paymentMethod": "Cash",
-      "createdAt": "2026-10-24T08:23:29.138Z",
-      "timeString": "15:23 WIB"
-    },
-    {
-      "id": "DOR-106",
-      "table": "04",
-      "customerName": "eko",
-      "orderType": "Dine In",
-      "items": [
-        {
-          "productId": 1,
-          "name": "Americano",
-          "price": 15000,
-          "quantity": 1,
-          "temperature": "Ice",
-          "sugar": "Normal Sugar (100%)",
-          "addons": [
-            "Extra Syrup (+5k)"
-          ],
-          "notes": "",
-          "subtotal": 20000
-        }
-      ],
-      "subtotal": 20000,
-      "tax": 0,
-      "total": 20000,
-      "status": "ready",
-      "paymentStatus": "unpaid",
-      "paymentMethod": "Cash",
-      "createdAt": "2026-10-24T07:46:17.137Z",
-      "timeString": "14:46 WIB"
-    },
-    {
-      "id": "DOR-105",
-      "table": "00",
-      "customerName": "Tamu Walk-in",
-      "orderType": "Take Away",
-      "items": [
-        {
-          "productId": 41,
-          "name": "Telur",
-          "price": 5000,
-          "quantity": 1,
-          "temperature": "-",
-          "sugar": "-",
-          "addons": [],
-          "notes": "",
-          "subtotal": 5000
-        },
-        {
-          "productId": 38,
-          "name": "Extra Syrup",
-          "price": 5000,
-          "quantity": 1,
-          "temperature": "-",
-          "sugar": "-",
-          "addons": [],
-          "notes": "",
-          "subtotal": 5000
-        },
-        {
-          "productId": 37,
-          "name": "Espresso Shot",
-          "price": 5000,
-          "quantity": 1,
-          "temperature": "Ice",
-          "sugar": "Normal Sugar (100%)",
-          "addons": [],
-          "notes": "",
-          "subtotal": 5000
-        }
-      ],
-      "subtotal": 15000,
-      "tax": 0,
-      "total": 15000,
-      "status": "completed",
-      "paymentStatus": "paid",
-      "paymentMethod": "QRIS",
-      "createdAt": "2026-10-24T07:44:29.963Z",
-      "timeString": "14:44 WIB",
-      "amountPaid": 15000,
-      "change": 0,
-      "paidAt": "2026-10-24T07:44:31.835Z"
-    },
-    {
-      "id": "DOR-104",
-      "table": "04",
-      "customerName": "eko",
-      "orderType": "Dine In",
-      "items": [
-        {
-          "productId": 1,
-          "name": "Americano",
-          "price": 15000,
-          "quantity": 1,
-          "temperature": "Ice",
-          "sugar": "Normal Sugar (100%)",
-          "addons": [],
-          "notes": "",
-          "subtotal": 15000
-        }
-      ],
-      "subtotal": 15000,
-      "tax": 0,
-      "total": 15000,
-      "status": "completed",
-      "paymentStatus": "paid",
-      "paymentMethod": "QRIS",
-      "createdAt": "2026-10-24T07:41:15.138Z",
-      "timeString": "14:41 WIB",
-      "amountPaid": 15000,
-      "change": 0,
-      "paidAt": "2026-10-24T07:44:16.582Z"
-    },
-    {
-      "id": "DOR-103",
-      "table": "05",
-      "customerName": "Budi",
-      "orderType": "Dine In",
-      "items": [
-        {
-          "productId": 1,
-          "name": "Americano",
-          "price": 15000,
-          "quantity": 1,
-          "temperature": "Ice",
-          "sugar": "Less Sugar (50%)",
-          "addons": [],
-          "notes": "",
-          "subtotal": 15000
-        }
-      ],
-      "subtotal": 15000,
-      "tax": 0,
-      "total": 15000,
-      "status": "processing",
-      "paymentStatus": "unpaid",
-      "paymentMethod": "Cash",
-      "createdAt": "2026-10-24T07:37:06.121Z",
-      "timeString": "14:37 WIB"
-    },
-    {
-      "id": "DOR-104",
-      "table": "04",
-      "customerName": "Arya",
-      "orderType": "Dine In",
-      "items": [
-        {
-          "productId": 6,
-          "name": "Kopi Susu Aren",
-          "price": 23000,
-          "quantity": 1,
-          "temperature": "Ice",
-          "sugar": "Less Sugar (50%)",
-          "addons": [
-            "Espresso Shot (+5k)"
-          ],
-          "notes": "Sedotan kertas ya kak",
-          "subtotal": 28000
-        },
-        {
-          "productId": 26,
-          "name": "Kentang Goreng",
-          "price": 16000,
-          "quantity": 1,
-          "temperature": "-",
-          "sugar": "-",
-          "addons": [],
-          "notes": "Saus sambal dipisah",
-          "subtotal": 16000
-        }
-      ],
-      "subtotal": 44000,
-      "tax": 0,
-      "total": 44000,
-      "status": "processing",
-      "paymentStatus": "unpaid",
-      "paymentMethod": "Cash",
-      "createdAt": "2026-10-24T14:15:00.000Z",
-      "timeString": "14:15 WIB"
-    },
-    {
-      "id": "DOR-102",
-      "table": "02",
-      "customerName": "Dimas",
-      "orderType": "Dine In",
-      "items": [
-        {
-          "productId": 1,
-          "name": "Americano",
-          "price": 15000,
-          "quantity": 2,
-          "temperature": "Ice",
-          "sugar": "No Sugar (0%)",
-          "addons": [],
-          "notes": "",
-          "subtotal": 30000
-        },
-        {
-          "productId": 28,
-          "name": "Special Mix Platter",
-          "price": 37000,
-          "quantity": 1,
-          "temperature": "-",
-          "sugar": "-",
-          "addons": [],
-          "notes": "Mayonnaise ekstra",
-          "subtotal": 37000
-        }
-      ],
-      "subtotal": 67000,
-      "tax": 0,
-      "total": 67000,
-      "status": "ready",
-      "paymentStatus": "unpaid",
-      "paymentMethod": "QRIS",
-      "createdAt": "2026-10-24T14:20:00.000Z",
-      "timeString": "14:20 WIB"
-    }
-  ],
-  "feedback": [
-    {
-      "id": 1792831122815,
-      "table": "04",
-      "customerName": "lama",
-      "rating": 5,
-      "message": "hyama (via WhatsApp)",
-      "createdAt": "2026-10-24T08:38:42.815Z"
-    },
-    {
-      "id": 1792828585757,
-      "table": "04",
-      "customerName": "lama",
-      "rating": 5,
-      "message": "lamaaaa",
-      "createdAt": "2026-10-24T07:56:25.757Z"
-    },
-    {
-      "id": 1792828525122,
-      "table": "04",
-      "customerName": "Arya",
-      "rating": 5,
-      "message": "Kopinya enak banget dan tempatnya cozy!",
-      "createdAt": "2026-10-24T07:55:25.122Z"
-    }
-  ]
+﻿{
+    "settings":  {
+                     "storeName":  "DORE Coffee \u0026 Pastry",
+                     "tagline":  "Artisanal Coffee \u0026 Delightful Kitchen",
+                     "address":  "Jl. Kopi Harapan No. 42, Jakarta",
+                     "phone":  "0812-3456-7890",
+                     "taxPercent":  0,
+                     "servicePercent":  0
+                 },
+    "admin":  {
+                  "username":  "admin",
+                  "password":  "password123",
+                  "name":  "Siti (Kasir DORE)",
+                  "shift":  "Shift Pagi"
+              },
+    "categories":  [
+                       {
+                           "id":  "all",
+                           "name":  "Semua",
+                           "icon":  "restaurant_menu"
+                       },
+                       {
+                           "id":  "coffee",
+                           "name":  "Coffee",
+                           "icon":  "local_cafe"
+                       },
+                       {
+                           "id":  "matcha",
+                           "name":  "Matcha",
+                           "icon":  "eco"
+                       },
+                       {
+                           "id":  "non-coffee",
+                           "name":  "Non Coffee",
+                           "icon":  "local_bar"
+                       },
+                       {
+                           "id":  "tea",
+                           "name":  "Tea",
+                           "icon":  "emoji_food_beverage"
+                       },
+                       {
+                           "id":  "snack",
+                           "name":  "Snack",
+                           "icon":  "bakery_dining"
+                       },
+                       {
+                           "id":  "food",
+                           "name":  "Food",
+                           "icon":  "dinner_dining"
+                       },
+                       {
+                           "id":  "additional",
+                           "name":  "Additional",
+                           "icon":  "add_circle_outline"
+                       }
+                   ],
+    "products":  [
+                     {
+                         "id":  1,
+                         "category":  "coffee",
+                         "name":  "Americano",
+                         "price":  15000,
+                         "description":  "Espresso ganda murni dengan air murni, aroma bold \u0026 segar.",
+                         "badge":  "Best Seller",
+                         "isDrink":  true,
+                         "image":  "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=400\u0026auto=format\u0026fit=crop\u0026q=80"
+                     },
+                     {
+                         "id":  2,
+                         "category":  "coffee",
+                         "name":  "Honey Americano",
+                         "price":  22000,
+                         "description":  "Americano dengan sentuhan madu bunga liar alami.",
+                         "badge":  "Special",
+                         "isDrink":  true,
+                         "image":  "https://images.unsplash.com/photo-1517701604599-bb29b565090c?w=400\u0026auto=format\u0026fit=crop\u0026q=80"
+                     },
+                     {
+                         "id":  3,
+                         "category":  "coffee",
+                         "name":  "Cranberrycano",
+                         "price":  21000,
+                         "description":  "Kombinasi asam manis jus cranberry segar dan espresso.",
+                         "badge":  "Fresh",
+                         "isDrink":  true,
+                         "image":  "https://images.unsplash.com/photo-1556881286-fc6915169721?w=400\u0026auto=format\u0026fit=crop\u0026q=80"
+                     },
+                     {
+                         "id":  4,
+                         "category":  "coffee",
+                         "name":  "Orange Americano",
+                         "price":  23000,
+                         "description":  "Espresso dingin dipadu ekstrak sari jeruk segar aromatik.",
+                         "badge":  "Populer",
+                         "isDrink":  true,
+                         "image":  "https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?w=400\u0026auto=format\u0026fit=crop\u0026q=80"
+                     },
+                     {
+                         "id":  5,
+                         "category":  "coffee",
+                         "name":  "Doremilk Coffee",
+                         "price":  20000,
+                         "description":  "Racikan kopi susu khas DORE dengan kelembutan susu pilihan.",
+                         "badge":  "Signature",
+                         "isDrink":  true,
+                         "image":  "https://images.unsplash.com/photo-1572442388796-11668a67e53d?w=400\u0026auto=format\u0026fit=crop\u0026q=80"
+                     },
+                     {
+                         "id":  6,
+                         "category":  "coffee",
+                         "name":  "Kopi Susu Aren",
+                         "price":  23000,
+                         "description":  "Espresso ganda, susu segar creamy, dan lelehan gula aren murni.",
+                         "badge":  "Favorit",
+                         "isDrink":  true,
+                         "image":  "https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=400\u0026auto=format\u0026fit=crop\u0026q=80"
+                     },
+                     {
+                         "id":  7,
+                         "category":  "coffee",
+                         "name":  "Kopi Susu Pandan",
+                         "price":  23000,
+                         "description":  "Kopi susu nikmat beraroma ekstrak daun pandan wangi.",
+                         "badge":  "",
+                         "isDrink":  true,
+                         "image":  "https://images.unsplash.com/photo-1588195538326-c5b1e9f80a1b?w=400\u0026auto=format\u0026fit=crop\u0026q=80"
+                     },
+                     {
+                         "id":  8,
+                         "category":  "coffee",
+                         "name":  "Hazelnut",
+                         "price":  23000,
+                         "description":  "Kopi susu dengan syrup hazelnut panggang aromatik.",
+                         "badge":  "",
+                         "isDrink":  true,
+                         "image":  "https://images.unsplash.com/photo-1534778101976-62847782c213?w=400\u0026auto=format\u0026fit=crop\u0026q=80"
+                     },
+                     {
+                         "id":  9,
+                         "category":  "coffee",
+                         "name":  "Salted Caramel",
+                         "price":  25000,
+                         "description":  "Paduan karamel manis gurih dengan garam laut Prancis.",
+                         "badge":  "Best Seller",
+                         "isDrink":  true,
+                         "image":  "https://images.unsplash.com/photo-1582293041079-7814c2f12063?w=400\u0026auto=format\u0026fit=crop\u0026q=80"
+                     },
+                     {
+                         "id":  10,
+                         "category":  "coffee",
+                         "name":  "Popcorn Coffee",
+                         "price":  25000,
+                         "description":  "Sensasi rasa mentega jagung bakar manis pada kopi susu.",
+                         "badge":  "Baru",
+                         "isDrink":  true,
+                         "image":  "https://images.unsplash.com/photo-1509785307050-d4066910ec1e?w=400\u0026auto=format\u0026fit=crop\u0026q=80"
+                     },
+                     {
+                         "id":  11,
+                         "category":  "coffee",
+                         "name":  "Butterscotch",
+                         "price":  25000,
+                         "description":  "Kopi susu dengan saus butterscotch mewah bercita rasa toffee.",
+                         "badge":  "",
+                         "isDrink":  true,
+                         "image":  "https://images.unsplash.com/photo-1497636577773-f1231844b336?w=400\u0026auto=format\u0026fit=crop\u0026q=80"
+                     },
+                     {
+                         "id":  12,
+                         "category":  "matcha",
+                         "name":  "Matcha Latte",
+                         "price":  25000,
+                         "description":  "Bubuk matcha murni Uji Jepang dipadukan dengan susu segar.",
+                         "badge":  "Favorit",
+                         "isDrink":  true,
+                         "image":  "https://images.unsplash.com/photo-1536256263959-770b48d82b0a?w=400\u0026auto=format\u0026fit=crop\u0026q=80"
+                     },
+                     {
+                         "id":  13,
+                         "category":  "matcha",
+                         "name":  "Strawberry Matcha",
+                         "price":  27000,
+                         "description":  "Gradasi selai strawberry asli, susu segar, dan matcha pekat.",
+                         "badge":  "Signature",
+                         "isDrink":  true,
+                         "image":  "https://images.unsplash.com/photo-1579954115545-a95591f28bfc?w=400\u0026auto=format\u0026fit=crop\u0026q=80"
+                     },
+                     {
+                         "id":  14,
+                         "category":  "non-coffee",
+                         "name":  "Red Velvet",
+                         "price":  22000,
+                         "description":  "Minuman manis gurih beraroma red velvet cake dan cokelat putih.",
+                         "badge":  "",
+                         "isDrink":  true,
+                         "image":  "https://images.unsplash.com/photo-1541658016709-82535e94bc69?w=400\u0026auto=format\u0026fit=crop\u0026q=80"
+                     },
+                     {
+                         "id":  15,
+                         "category":  "non-coffee",
+                         "name":  "Chocolate Creamy",
+                         "price":  22000,
+                         "description":  "Cokelat susu kaya rasa, manis pas dan lembut di lidah.",
+                         "badge":  "",
+                         "isDrink":  true,
+                         "image":  "https://images.unsplash.com/photo-1542990253-0d0f5be5f0ed?w=400\u0026auto=format\u0026fit=crop\u0026q=80"
+                     },
+                     {
+                         "id":  16,
+                         "category":  "non-coffee",
+                         "name":  "Dark Chocolate",
+                         "price":  22000,
+                         "description":  "Cokelat hitam pekat 70% dengan rasa legit tidak berlebihan.",
+                         "badge":  "Favorit",
+                         "isDrink":  true,
+                         "image":  "https://images.unsplash.com/photo-1511920170033-f8396924c348?w=400\u0026auto=format\u0026fit=crop\u0026q=80"
+                     },
+                     {
+                         "id":  17,
+                         "category":  "non-coffee",
+                         "name":  "Korean Strawberry Milk",
+                         "price":  23000,
+                         "description":  "Susu segar dingin berpadu dengan compote strawberry buatan sendiri.",
+                         "badge":  "Best Seller",
+                         "isDrink":  true,
+                         "image":  "https://images.unsplash.com/photo-1553787499-6f9133860278?w=400\u0026auto=format\u0026fit=crop\u0026q=80"
+                     },
+                     {
+                         "id":  18,
+                         "category":  "tea",
+                         "name":  "Strawberry Tea",
+                         "price":  17000,
+                         "description":  "Teh hitam segar diseduh dengan potongan sari buah strawberry.",
+                         "badge":  "",
+                         "isDrink":  true,
+                         "image":  "https://images.unsplash.com/photo-1556679343-c7306c1976bc?w=400\u0026auto=format\u0026fit=crop\u0026q=80"
+                     },
+                     {
+                         "id":  19,
+                         "category":  "tea",
+                         "name":  "Lychee Tea",
+                         "price":  17000,
+                         "description":  "Teh leci aromatik dingin lengkap dengan buah leci segar.",
+                         "badge":  "Favorit",
+                         "isDrink":  true,
+                         "image":  "https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?w=400\u0026auto=format\u0026fit=crop\u0026q=80"
+                     },
+                     {
+                         "id":  20,
+                         "category":  "tea",
+                         "name":  "Peach Tea",
+                         "price":  16000,
+                         "description":  "Teh manis rasa buah persik matang yang menyejukkan.",
+                         "badge":  "",
+                         "isDrink":  true,
+                         "image":  "https://images.unsplash.com/photo-1499638673689-79a0b5115d87?w=400\u0026auto=format\u0026fit=crop\u0026q=80"
+                     },
+                     {
+                         "id":  21,
+                         "category":  "tea",
+                         "name":  "Lemon Tea",
+                         "price":  16000,
+                         "description":  "Teh perasan jeruk lemon asli kaya vitamin C dan menyegarkan.",
+                         "badge":  "",
+                         "isDrink":  true,
+                         "image":  "https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?w=400\u0026auto=format\u0026fit=crop\u0026q=80"
+                     },
+                     {
+                         "id":  22,
+                         "category":  "tea",
+                         "name":  "Teh Tarik Malaysia",
+                         "price":  16000,
+                         "description":  "Teh tarik otentik dengan busa melimpah dan aroma khas rempah.",
+                         "badge":  "Klasik",
+                         "isDrink":  true,
+                         "image":  "https://images.unsplash.com/photo-1576092768241-dec231879fc3?w=400\u0026auto=format\u0026fit=crop\u0026q=80"
+                     },
+                     {
+                         "id":  23,
+                         "category":  "snack",
+                         "name":  "Roti Bakar Kaya",
+                         "price":  10000,
+                         "description":  "Roti bakar renyah dengan isian selai srikaya harum pandan.",
+                         "badge":  "Favorit",
+                         "isDrink":  false,
+                         "image":  "https://images.unsplash.com/photo-1509440159596-0249088772ff?w=400\u0026auto=format\u0026fit=crop\u0026q=80"
+                     },
+                     {
+                         "id":  24,
+                         "category":  "snack",
+                         "name":  "Roti Bakar Richeese",
+                         "price":  15000,
+                         "description":  "Roti panggang mentega dengan limpahan saus keju gurih khas.",
+                         "badge":  "",
+                         "isDrink":  false,
+                         "image":  "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400\u0026auto=format\u0026fit=crop\u0026q=80"
+                     },
+                     {
+                         "id":  25,
+                         "category":  "snack",
+                         "name":  "Mantou",
+                         "price":  15000,
+                         "description":  "Roti kukus / goreng lembut keemasan disajikan dengan susu kental.",
+                         "badge":  "",
+                         "isDrink":  false,
+                         "image":  "https://images.unsplash.com/photo-1563245372-f21724e3856d?w=400\u0026auto=format\u0026fit=crop\u0026q=80"
+                     },
+                     {
+                         "id":  26,
+                         "category":  "snack",
+                         "name":  "Kentang Goreng",
+                         "price":  16000,
+                         "description":  "Shoestring french fries gurih renyah dengan saus cocolan.",
+                         "badge":  "Best Seller",
+                         "isDrink":  false,
+                         "image":  "https://images.unsplash.com/photo-1576107232684-1279f3908594?w=400\u0026auto=format\u0026fit=crop\u0026q=80"
+                     },
+                     {
+                         "id":  27,
+                         "category":  "snack",
+                         "name":  "Sosis / Nugget",
+                         "price":  16000,
+                         "description":  "Pilihan sosis sapi panggang atau chicken nugget krispi.",
+                         "badge":  "",
+                         "isDrink":  false,
+                         "image":  "https://images.unsplash.com/photo-1562967914-608f82629710?w=400\u0026auto=format\u0026fit=crop\u0026q=80"
+                     },
+                     {
+                         "id":  28,
+                         "category":  "snack",
+                         "name":  "Special Mix Platter",
+                         "price":  37000,
+                         "description":  "Porsi komplit: Kentang, Sosis, Nugget, Onion Ring, \u0026 Chicken Wing.",
+                         "badge":  "Signature",
+                         "isDrink":  false,
+                         "image":  "https://images.unsplash.com/photo-1541592106381-b31e9677c0e5?w=400\u0026auto=format\u0026fit=crop\u0026q=80"
+                     },
+                     {
+                         "id":  29,
+                         "category":  "food",
+                         "name":  "Ayam Sambal Terasi",
+                         "price":  25000,
+                         "description":  "Ayam goreng bumbu ungkep empuk dengan sambal terasi ulek segar.",
+                         "badge":  "Pedas",
+                         "isDrink":  false,
+                         "image":  "https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?w=400\u0026auto=format\u0026fit=crop\u0026q=80"
+                     },
+                     {
+                         "id":  30,
+                         "category":  "food",
+                         "name":  "Ayam Saos Padang",
+                         "price":  26000,
+                         "description":  "Potongan ayam berbumbu saus padang gurih, pedas, dan kental.",
+                         "badge":  "Favorit",
+                         "isDrink":  false,
+                         "image":  "https://images.unsplash.com/photo-1598515214211-89d3c73ae83b?w=400\u0026auto=format\u0026fit=crop\u0026q=80"
+                     },
+                     {
+                         "id":  31,
+                         "category":  "food",
+                         "name":  "Nugget Chicken Curry",
+                         "price":  26000,
+                         "description":  "Nugget ayam disiram kuah kari jepang aromatik kaya rempah.",
+                         "badge":  "",
+                         "isDrink":  false,
+                         "image":  "https://images.unsplash.com/photo-1562967914-608f82629710?w=400\u0026auto=format\u0026fit=crop\u0026q=80"
+                     },
+                     {
+                         "id":  32,
+                         "category":  "food",
+                         "name":  "Nasi Goreng Telur",
+                         "price":  23000,
+                         "description":  "Nasi goreng racikan kecap manis spesial dengan telur mata sapi.",
+                         "badge":  "Klasik",
+                         "isDrink":  false,
+                         "image":  "https://images.unsplash.com/photo-1603133872878-684f208fb84b?w=400\u0026auto=format\u0026fit=crop\u0026q=80"
+                     },
+                     {
+                         "id":  33,
+                         "category":  "food",
+                         "name":  "Nasi Goreng Ayam",
+                         "price":  25000,
+                         "description":  "Nasi goreng spesial dengan suwiran ayam gurih dan kerupuk.",
+                         "badge":  "Best Seller",
+                         "isDrink":  false,
+                         "image":  "https://images.unsplash.com/photo-1603133872878-684f208fb84b?w=400\u0026auto=format\u0026fit=crop\u0026q=80"
+                     },
+                     {
+                         "id":  34,
+                         "category":  "food",
+                         "name":  "Indomie Goreng",
+                         "price":  15000,
+                         "description":  "Indomie goreng favorit disajikan hangat dengan taburan bawang goreng.",
+                         "badge":  "",
+                         "isDrink":  false,
+                         "image":  "https://images.unsplash.com/photo-1612929633738-8fe44f7ec841?w=400\u0026auto=format\u0026fit=crop\u0026q=80"
+                     },
+                     {
+                         "id":  35,
+                         "category":  "food",
+                         "name":  "Indomie Rebus",
+                         "price":  15000,
+                         "description":  "Indomie rebus kuah kari/ayam bawang gurih nikmat dengan sawi.",
+                         "badge":  "",
+                         "isDrink":  false,
+                         "image":  "https://images.unsplash.com/photo-1569718212165-3a8278d5f624?w=400\u0026auto=format\u0026fit=crop\u0026q=80"
+                     },
+                     {
+                         "id":  36,
+                         "category":  "additional",
+                         "name":  "Es Kosong",
+                         "price":  2000,
+                         "description":  "Segelas es batu bening dingin.",
+                         "badge":  "",
+                         "isDrink":  true,
+                         "image":  "https://images.unsplash.com/photo-1517256064527-09c73fc73e38?w=400\u0026auto=format\u0026fit=crop\u0026q=80"
+                     },
+                     {
+                         "id":  37,
+                         "category":  "additional",
+                         "name":  "Espresso Shot",
+                         "price":  5000,
+                         "description":  "Ekstra 1 shot espresso crema tebal.",
+                         "badge":  "",
+                         "isDrink":  true,
+                         "image":  "https://images.unsplash.com/photo-1510591509098-f4fdc6d0ff04?w=400\u0026auto=format\u0026fit=crop\u0026q=80"
+                     },
+                     {
+                         "id":  38,
+                         "category":  "additional",
+                         "name":  "Extra Syrup",
+                         "price":  5000,
+                         "description":  "Pilihan syrup tambahan (Vanilla / Caramel / Hazelnut).",
+                         "badge":  "",
+                         "isDrink":  false,
+                         "image":  "https://images.unsplash.com/photo-1509785307050-d4066910ec1e?w=400\u0026auto=format\u0026fit=crop\u0026q=80"
+                     },
+                     {
+                         "id":  39,
+                         "category":  "additional",
+                         "name":  "Air Mineral",
+                         "price":  5000,
+                         "description":  "Air mineral kemasan 600ml dingin / biasa.",
+                         "badge":  "",
+                         "isDrink":  true,
+                         "image":  "https://images.unsplash.com/photo-1548839140-29a749e1cf4d?w=400\u0026auto=format\u0026fit=crop\u0026q=80"
+                     },
+                     {
+                         "id":  40,
+                         "category":  "additional",
+                         "name":  "Nasi Putih",
+                         "price":  5000,
+                         "description":  "Seporsi nasi putih pulen hangat.",
+                         "badge":  "",
+                         "isDrink":  false,
+                         "image":  "https://images.unsplash.com/photo-1516684732162-798a0062be99?w=400\u0026auto=format\u0026fit=crop\u0026q=80"
+                     },
+                     {
+                         "id":  41,
+                         "category":  "additional",
+                         "name":  "Telur",
+                         "price":  5000,
+                         "description":  "Tambahan telur ceplok atau dadar.",
+                         "badge":  "",
+                         "isDrink":  false,
+                         "image":  "https://images.unsplash.com/photo-1525351484163-7529414344d8?w=400\u0026auto=format\u0026fit=crop\u0026q=80"
+                     }
+                 ],
+    "addons":  [
+                   {
+                       "id":  "esp",
+                       "name":  "Espresso Shot",
+                       "price":  5000
+                   },
+                   {
+                       "id":  "syr",
+                       "name":  "Extra Syrup",
+                       "price":  5000
+                   },
+                   {
+                       "id":  "egg",
+                       "name":  "Telur Tambahan",
+                       "price":  5000
+                   },
+                   {
+                       "id":  "rice",
+                       "name":  "Nasi Putih",
+                       "price":  5000
+                   }
+               ],
+    "tables":  [
+                   {
+                       "number":  "01",
+                       "name":  "Meja 01",
+                       "status":  "available"
+                   },
+                   {
+                       "number":  "02",
+                       "name":  "Meja 02",
+                       "status":  "occupied"
+                   },
+                   {
+                       "number":  "03",
+                       "name":  "Meja 03",
+                       "status":  "available"
+                   },
+                   {
+                       "number":  "04",
+                       "name":  "Meja 04",
+                       "status":  "occupied"
+                   },
+                   {
+                       "number":  "05",
+                       "name":  "Meja 05",
+                       "status":  "occupied"
+                   },
+                   {
+                       "number":  "06",
+                       "name":  "Meja 06",
+                       "status":  "available"
+                   },
+                   {
+                       "number":  "07",
+                       "name":  "Meja 07",
+                       "status":  "available"
+                   },
+                   {
+                       "number":  "08",
+                       "name":  "Meja 08",
+                       "status":  "available"
+                   },
+                   {
+                       "number":  "09",
+                       "name":  "Meja 09",
+                       "status":  "available"
+                   },
+                   {
+                       "number":  "10",
+                       "name":  "Meja 10",
+                       "status":  "available"
+                   },
+                   {
+                       "number":  "11",
+                       "name":  "Meja 11",
+                       "status":  "available"
+                   },
+                   {
+                       "number":  "12",
+                       "name":  "Meja 12",
+                       "status":  "available"
+                   }
+               ],
+    "orders":  [
+                   {
+                       "id":  "DOR-115",
+                       "table":  "04",
+                       "customerName":  "BARU",
+                       "orderType":  "Dine In",
+                       "items":  [
+                                     {
+                                         "productId":  1,
+                                         "name":  "Americano",
+                                         "price":  15000,
+                                         "quantity":  1,
+                                         "temperature":  "Ice",
+                                         "sugar":  "No Sugar (0%)",
+                                         "addons":  [
+
+                                                    ],
+                                         "notes":  "",
+                                         "subtotal":  15000
+                                     }
+                                 ],
+                       "subtotal":  15000,
+                       "tax":  1500,
+                       "total":  16500,
+                       "specialInstructions":  "",
+                       "status":  "ready",
+                       "paymentStatus":  "paid",
+                       "paymentMethod":  "QRIS",
+                       "createdAt":  "2026-10-24T08:58:38.674Z",
+                       "timeString":  "15:58 WIB"
+                   },
+                   {
+                       "id":  "DOR-114",
+                       "table":  "04",
+                       "customerName":  "WOWOK",
+                       "orderType":  "Dine In",
+                       "items":  [
+                                     {
+                                         "productId":  1,
+                                         "name":  "Americano",
+                                         "price":  15000,
+                                         "quantity":  1,
+                                         "temperature":  "Ice",
+                                         "sugar":  "No Sugar (0%)",
+                                         "addons":  [
+                                                        "Extra Espresso Shot (+5k)"
+                                                    ],
+                                         "notes":  "",
+                                         "subtotal":  20000
+                                     }
+                                 ],
+                       "subtotal":  20000,
+                       "tax":  2000,
+                       "total":  22000,
+                       "specialInstructions":  "",
+                       "status":  "ready",
+                       "paymentStatus":  "paid",
+                       "paymentMethod":  "QRIS",
+                       "createdAt":  "2026-10-24T08:57:39.086Z",
+                       "timeString":  "15:57 WIB"
+                   },
+                   {
+                       "id":  "DOR-113",
+                       "table":  "04",
+                       "customerName":  "eko",
+                       "orderType":  "Dine In",
+                       "items":  [
+                                     {
+                                         "productId":  1,
+                                         "name":  "Americano",
+                                         "price":  15000,
+                                         "quantity":  1,
+                                         "temperature":  "Ice",
+                                         "sugar":  "No Sugar (0%)",
+                                         "addons":  [
+
+                                                    ],
+                                         "notes":  "",
+                                         "subtotal":  15000
+                                     }
+                                 ],
+                       "subtotal":  15000,
+                       "tax":  1500,
+                       "total":  16500,
+                       "specialInstructions":  "",
+                       "status":  "ready",
+                       "paymentStatus":  "unpaid",
+                       "paymentMethod":  "Cash",
+                       "createdAt":  "2026-10-24T08:53:02.496Z",
+                       "timeString":  "15:53 WIB"
+                   },
+                   {
+                       "id":  "DOR-112",
+                       "table":  "04",
+                       "customerName":  "eko",
+                       "orderType":  "Dine In",
+                       "items":  [
+                                     {
+                                         "productId":  6,
+                                         "name":  "Kopi Susu Aren",
+                                         "price":  23000,
+                                         "quantity":  1,
+                                         "temperature":  "Ice",
+                                         "sugar":  "Normal (100%)",
+                                         "addons":  [
+
+                                                    ],
+                                         "notes":  "",
+                                         "subtotal":  23000
+                                     }
+                                 ],
+                       "subtotal":  23000,
+                       "tax":  2300,
+                       "total":  25300,
+                       "specialInstructions":  "",
+                       "status":  "ready",
+                       "paymentStatus":  "paid",
+                       "paymentMethod":  "QRIS",
+                       "createdAt":  "2026-10-24T08:49:51.007Z",
+                       "timeString":  "15:49 WIB"
+                   },
+                   {
+                       "id":  "DOR-111",
+                       "table":  "04",
+                       "customerName":  "WOWOK",
+                       "orderType":  "Dine In",
+                       "items":  [
+                                     {
+                                         "productId":  2,
+                                         "name":  "Honey Americano",
+                                         "price":  22000,
+                                         "quantity":  1,
+                                         "temperature":  "Ice",
+                                         "sugar":  "Normal (100%)",
+                                         "addons":  [
+
+                                                    ],
+                                         "notes":  "",
+                                         "subtotal":  22000
+                                     }
+                                 ],
+                       "subtotal":  22000,
+                       "tax":  2200,
+                       "total":  24200,
+                       "specialInstructions":  "",
+                       "status":  "ready",
+                       "paymentStatus":  "paid",
+                       "paymentMethod":  "QRIS",
+                       "createdAt":  "2026-10-24T08:48:42.777Z",
+                       "timeString":  "15:48 WIB"
+                   },
+                   {
+                       "id":  "DOR-110",
+                       "table":  "04",
+                       "customerName":  "Selo",
+                       "orderType":  "Dine In",
+                       "items":  [
+                                     {
+                                         "productId":  1,
+                                         "name":  "Americano",
+                                         "price":  15000,
+                                         "quantity":  1,
+                                         "temperature":  "Ice",
+                                         "sugar":  "No Sugar (0%)",
+                                         "addons":  [
+
+                                                    ],
+                                         "notes":  "",
+                                         "subtotal":  15000
+                                     }
+                                 ],
+                       "subtotal":  15000,
+                       "tax":  1500,
+                       "total":  16500,
+                       "specialInstructions":  "",
+                       "status":  "ready",
+                       "paymentStatus":  "paid",
+                       "paymentMethod":  "QRIS",
+                       "createdAt":  "2026-10-24T08:41:07.413Z",
+                       "timeString":  "15:41 WIB"
+                   },
+                   {
+                       "id":  "DOR-109",
+                       "table":  "04",
+                       "customerName":  "joko",
+                       "orderType":  "Dine In",
+                       "items":  [
+                                     {
+                                         "productId":  2,
+                                         "name":  "Honey Americano",
+                                         "price":  22000,
+                                         "quantity":  1,
+                                         "temperature":  "Ice",
+                                         "sugar":  "Normal (100%)",
+                                         "addons":  [
+                                                        "Extra Espresso Shot (+5k)"
+                                                    ],
+                                         "notes":  "",
+                                         "subtotal":  27000
+                                     }
+                                 ],
+                       "subtotal":  27000,
+                       "tax":  2700,
+                       "total":  29700,
+                       "specialInstructions":  "",
+                       "status":  "ready",
+                       "paymentStatus":  "paid",
+                       "paymentMethod":  "QRIS",
+                       "createdAt":  "2026-10-24T08:33:46.440Z",
+                       "timeString":  "15:33 WIB"
+                   },
+                   {
+                       "id":  "DOR-108",
+                       "table":  "04",
+                       "customerName":  "Budi Santoso",
+                       "orderType":  "Dine In",
+                       "items":  [
+                                     {
+                                         "productId":  1,
+                                         "name":  "Kopi Susu Aren",
+                                         "price":  23000,
+                                         "quantity":  2,
+                                         "temperature":  "Ice",
+                                         "sugar":  "Less Sugar (50%)",
+                                         "addons":  [
+                                                        "Extra Espresso Shot (+5k)"
+                                                    ],
+                                         "notes":  "",
+                                         "subtotal":  56000
+                                     }
+                                 ],
+                       "subtotal":  56000,
+                       "tax":  5600,
+                       "total":  61600,
+                       "specialInstructions":  "Tolong antarkan minuman dulu ya",
+                       "status":  "processing",
+                       "paymentStatus":  "paid",
+                       "paymentMethod":  "QRIS",
+                       "createdAt":  "2026-10-24T08:31:51.153Z",
+                       "timeString":  "15:31 WIB"
+                   },
+                   {
+                       "id":  "DOR-107",
+                       "table":  "04",
+                       "customerName":  "woko",
+                       "orderType":  "Dine In",
+                       "items":  [
+                                     {
+                                         "productId":  1,
+                                         "name":  "Americano",
+                                         "price":  15000,
+                                         "quantity":  1,
+                                         "temperature":  "Ice",
+                                         "sugar":  "No Sugar (0%)",
+                                         "addons":  [
+
+                                                    ],
+                                         "notes":  "",
+                                         "subtotal":  15000
+                                     }
+                                 ],
+                       "subtotal":  15000,
+                       "tax":  0,
+                       "total":  15000,
+                       "status":  "processing",
+                       "paymentStatus":  "unpaid",
+                       "paymentMethod":  "Cash",
+                       "createdAt":  "2026-10-24T08:23:29.138Z",
+                       "timeString":  "15:23 WIB"
+                   },
+                   {
+                       "id":  "DOR-106",
+                       "table":  "04",
+                       "customerName":  "eko",
+                       "orderType":  "Dine In",
+                       "items":  [
+                                     {
+                                         "productId":  1,
+                                         "name":  "Americano",
+                                         "price":  15000,
+                                         "quantity":  1,
+                                         "temperature":  "Ice",
+                                         "sugar":  "Normal Sugar (100%)",
+                                         "addons":  [
+                                                        "Extra Syrup (+5k)"
+                                                    ],
+                                         "notes":  "",
+                                         "subtotal":  20000
+                                     }
+                                 ],
+                       "subtotal":  20000,
+                       "tax":  0,
+                       "total":  20000,
+                       "status":  "ready",
+                       "paymentStatus":  "unpaid",
+                       "paymentMethod":  "Cash",
+                       "createdAt":  "2026-10-24T07:46:17.137Z",
+                       "timeString":  "14:46 WIB"
+                   },
+                   {
+                       "id":  "DOR-105",
+                       "table":  "00",
+                       "customerName":  "Tamu Walk-in",
+                       "orderType":  "Take Away",
+                       "items":  [
+                                     {
+                                         "productId":  41,
+                                         "name":  "Telur",
+                                         "price":  5000,
+                                         "quantity":  1,
+                                         "temperature":  "-",
+                                         "sugar":  "-",
+                                         "addons":  [
+
+                                                    ],
+                                         "notes":  "",
+                                         "subtotal":  5000
+                                     },
+                                     {
+                                         "productId":  38,
+                                         "name":  "Extra Syrup",
+                                         "price":  5000,
+                                         "quantity":  1,
+                                         "temperature":  "-",
+                                         "sugar":  "-",
+                                         "addons":  [
+
+                                                    ],
+                                         "notes":  "",
+                                         "subtotal":  5000
+                                     },
+                                     {
+                                         "productId":  37,
+                                         "name":  "Espresso Shot",
+                                         "price":  5000,
+                                         "quantity":  1,
+                                         "temperature":  "Ice",
+                                         "sugar":  "Normal Sugar (100%)",
+                                         "addons":  [
+
+                                                    ],
+                                         "notes":  "",
+                                         "subtotal":  5000
+                                     }
+                                 ],
+                       "subtotal":  15000,
+                       "tax":  0,
+                       "total":  15000,
+                       "status":  "completed",
+                       "paymentStatus":  "paid",
+                       "paymentMethod":  "QRIS",
+                       "createdAt":  "2026-10-24T07:44:29.963Z",
+                       "timeString":  "14:44 WIB",
+                       "amountPaid":  15000,
+                       "change":  0,
+                       "paidAt":  "2026-10-24T07:44:31.835Z"
+                   },
+                   {
+                       "id":  "DOR-104",
+                       "table":  "04",
+                       "customerName":  "eko",
+                       "orderType":  "Dine In",
+                       "items":  [
+                                     {
+                                         "productId":  1,
+                                         "name":  "Americano",
+                                         "price":  15000,
+                                         "quantity":  1,
+                                         "temperature":  "Ice",
+                                         "sugar":  "Normal Sugar (100%)",
+                                         "addons":  [
+
+                                                    ],
+                                         "notes":  "",
+                                         "subtotal":  15000
+                                     }
+                                 ],
+                       "subtotal":  15000,
+                       "tax":  0,
+                       "total":  15000,
+                       "status":  "completed",
+                       "paymentStatus":  "paid",
+                       "paymentMethod":  "QRIS",
+                       "createdAt":  "2026-10-24T07:41:15.138Z",
+                       "timeString":  "14:41 WIB",
+                       "amountPaid":  15000,
+                       "change":  0,
+                       "paidAt":  "2026-10-24T07:44:16.582Z"
+                   },
+                   {
+                       "id":  "DOR-103",
+                       "table":  "05",
+                       "customerName":  "Budi",
+                       "orderType":  "Dine In",
+                       "items":  [
+                                     {
+                                         "productId":  1,
+                                         "name":  "Americano",
+                                         "price":  15000,
+                                         "quantity":  1,
+                                         "temperature":  "Ice",
+                                         "sugar":  "Less Sugar (50%)",
+                                         "addons":  [
+
+                                                    ],
+                                         "notes":  "",
+                                         "subtotal":  15000
+                                     }
+                                 ],
+                       "subtotal":  15000,
+                       "tax":  0,
+                       "total":  15000,
+                       "status":  "processing",
+                       "paymentStatus":  "unpaid",
+                       "paymentMethod":  "Cash",
+                       "createdAt":  "2026-10-24T07:37:06.121Z",
+                       "timeString":  "14:37 WIB"
+                   },
+                   {
+                       "id":  "DOR-104",
+                       "table":  "04",
+                       "customerName":  "Arya",
+                       "orderType":  "Dine In",
+                       "items":  [
+                                     {
+                                         "productId":  6,
+                                         "name":  "Kopi Susu Aren",
+                                         "price":  23000,
+                                         "quantity":  1,
+                                         "temperature":  "Ice",
+                                         "sugar":  "Less Sugar (50%)",
+                                         "addons":  [
+                                                        "Espresso Shot (+5k)"
+                                                    ],
+                                         "notes":  "Sedotan kertas ya kak",
+                                         "subtotal":  28000
+                                     },
+                                     {
+                                         "productId":  26,
+                                         "name":  "Kentang Goreng",
+                                         "price":  16000,
+                                         "quantity":  1,
+                                         "temperature":  "-",
+                                         "sugar":  "-",
+                                         "addons":  [
+
+                                                    ],
+                                         "notes":  "Saus sambal dipisah",
+                                         "subtotal":  16000
+                                     }
+                                 ],
+                       "subtotal":  44000,
+                       "tax":  0,
+                       "total":  44000,
+                       "status":  "processing",
+                       "paymentStatus":  "unpaid",
+                       "paymentMethod":  "Cash",
+                       "createdAt":  "2026-10-24T14:15:00.000Z",
+                       "timeString":  "14:15 WIB"
+                   },
+                   {
+                       "id":  "DOR-102",
+                       "table":  "02",
+                       "customerName":  "Dimas",
+                       "orderType":  "Dine In",
+                       "items":  [
+                                     {
+                                         "productId":  1,
+                                         "name":  "Americano",
+                                         "price":  15000,
+                                         "quantity":  2,
+                                         "temperature":  "Ice",
+                                         "sugar":  "No Sugar (0%)",
+                                         "addons":  [
+
+                                                    ],
+                                         "notes":  "",
+                                         "subtotal":  30000
+                                     },
+                                     {
+                                         "productId":  28,
+                                         "name":  "Special Mix Platter",
+                                         "price":  37000,
+                                         "quantity":  1,
+                                         "temperature":  "-",
+                                         "sugar":  "-",
+                                         "addons":  [
+
+                                                    ],
+                                         "notes":  "Mayonnaise ekstra",
+                                         "subtotal":  37000
+                                     }
+                                 ],
+                       "subtotal":  67000,
+                       "tax":  0,
+                       "total":  67000,
+                       "status":  "ready",
+                       "paymentStatus":  "paid",
+                       "paymentMethod":  "QRIS",
+                       "createdAt":  "2026-10-24T14:20:00.000Z",
+                       "timeString":  "14:20 WIB"
+                   }
+               ],
+    "feedback":  [
+                     {
+                         "id":  1792831122815,
+                         "table":  "04",
+                         "customerName":  "lama",
+                         "rating":  5,
+                         "message":  "hyama (via WhatsApp)",
+                         "createdAt":  "2026-10-24T08:38:42.815Z"
+                     },
+                     {
+                         "id":  1792828585757,
+                         "table":  "04",
+                         "customerName":  "lama",
+                         "rating":  5,
+                         "message":  "lamaaaa",
+                         "createdAt":  "2026-10-24T07:56:25.757Z"
+                     },
+                     {
+                         "id":  1792828525122,
+                         "table":  "04",
+                         "customerName":  "Arya",
+                         "rating":  5,
+                         "message":  "Kopinya enak banget dan tempatnya cozy!",
+                         "createdAt":  "2026-10-24T07:55:25.122Z"
+                     }
+                 ]
 }

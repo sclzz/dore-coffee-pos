@@ -631,8 +631,8 @@
           statusBadgeLabel = 'Siap Saji';
         }
 
-        const isPaid = order.paymentStatus === 'paid';
-        const isQrisInstan = isPaid && (String(order.paymentMethod || '').toUpperCase() === 'QRIS');
+        const isQrisInstan = String(order.paymentMethod || '').toUpperCase().includes('QRIS');
+        const isPaid = order.paymentStatus === 'paid' || isQrisInstan;
 
         let payBadgeHtml = '';
         if (isPaid) {
@@ -914,7 +914,7 @@
       document.getElementById('pay-customer').innerText = `${targetOrder.table === '00' ? 'Take Away' : 'Meja ' + targetOrder.table} • ${targetOrder.customerName}`;
       document.getElementById('pay-total-bill').innerText = formatRupiah(targetOrder.total);
       
-      const isAlreadyPaid = targetOrder.paymentStatus === 'paid';
+      const isAlreadyPaid = targetOrder.paymentStatus === 'paid' || String(targetOrder.paymentMethod || '').toUpperCase().includes('QRIS');
       const paidNotice = document.getElementById('pay-already-paid-notice');
       const unpaidSec = document.getElementById('pay-unpaid-section');
       const btnConfirmLabel = document.getElementById('btn-confirm-pay-label');
@@ -988,7 +988,7 @@
       if (!activePayOrder) return;
 
       // Case 1: Already paid via QRIS on customer's phone
-      if (activePayOrder.paymentStatus === 'paid') {
+      if (activePayOrder.paymentStatus === 'paid' || String(activePayOrder.paymentMethod || '').toUpperCase().includes('QRIS')) {
         prepareReceiptData(activePayOrder, activePayOrder.total);
         closePaymentModal();
         window.print();

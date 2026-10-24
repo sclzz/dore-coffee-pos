@@ -154,7 +154,7 @@ app.post('/api/orders', (req, res) => {
     total: total,
     specialInstructions: req.body.specialInstructions || '',
     status: 'pending', // pending -> processing -> ready -> completed
-    paymentStatus: req.body.paymentStatus || (paymentMethod === 'QRIS' ? 'paid' : 'unpaid'),
+    paymentStatus: String(paymentMethod || '').toUpperCase().includes('QRIS') ? 'paid' : (req.body.paymentStatus || 'unpaid'),
     paymentMethod: paymentMethod || 'Cash',
     createdAt: now.toISOString(),
     timeString: timeString,
