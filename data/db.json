@@ -553,6 +553,34 @@
   ],
   "orders": [
     {
+      "id": "DOR-110",
+      "table": "04",
+      "customerName": "Selo",
+      "orderType": "Dine In",
+      "items": [
+        {
+          "productId": 1,
+          "name": "Americano",
+          "price": 15000,
+          "quantity": 1,
+          "temperature": "Ice",
+          "sugar": "No Sugar (0%)",
+          "addons": [],
+          "notes": "",
+          "subtotal": 15000
+        }
+      ],
+      "subtotal": 15000,
+      "tax": 1500,
+      "total": 16500,
+      "specialInstructions": "",
+      "status": "ready",
+      "paymentStatus": "paid",
+      "paymentMethod": "QRIS",
+      "createdAt": "2026-10-24T08:41:07.413Z",
+      "timeString": "15:41 WIB"
+    },
+    {
       "id": "DOR-109",
       "table": "04",
       "customerName": "joko",
@@ -606,7 +634,7 @@
       "tax": 5600,
       "total": 61600,
       "specialInstructions": "Tolong antarkan minuman dulu ya",
-      "status": "pending",
+      "status": "processing",
       "paymentStatus": "paid",
       "paymentMethod": "QRIS",
       "createdAt": "2026-10-24T08:31:51.153Z",
@@ -633,7 +661,7 @@
       "subtotal": 15000,
       "tax": 0,
       "total": 15000,
-      "status": "pending",
+      "status": "processing",
       "paymentStatus": "unpaid",
       "paymentMethod": "Cash",
       "createdAt": "2026-10-24T08:23:29.138Z",
