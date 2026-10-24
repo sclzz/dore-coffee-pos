@@ -139,6 +139,10 @@ app.post('/api/orders', (req, res) => {
     };
   });
 
+  // Calculate Restaurant Tax PB1 (10%)
+  const tax = Math.round(subtotal * 0.10);
+  const total = subtotal + tax;
+
   const newOrder = {
     id: orderId,
     table: table ? String(table).padStart(2, '0') : '00',
@@ -146,10 +150,11 @@ app.post('/api/orders', (req, res) => {
     orderType: orderType || 'Dine In',
     items: processedItems,
     subtotal: subtotal,
-    tax: 0,
-    total: subtotal,
+    tax: tax,
+    total: total,
+    specialInstructions: req.body.specialInstructions || '',
     status: 'pending', // pending -> processing -> ready -> completed
-    paymentStatus: 'unpaid',
+    paymentStatus: req.body.paymentStatus || (paymentMethod === 'QRIS' ? 'paid' : 'unpaid'),
     paymentMethod: paymentMethod || 'Cash',
     createdAt: now.toISOString(),
     timeString: timeString,

@@ -430,10 +430,12 @@
       <!-- Items -->
     </div>
     <div class="py-2 border-b border-black space-y-0.5">
-      <div class="flex justify-between font-bold"><span>TOTAL :</span><span id="rec-total">Rp 44.000</span></div>
-      <div class="flex justify-between"><span>Metode :</span><span id="rec-method">Cash</span></div>
-      <div class="flex justify-between"><span>Bayar  :</span><span id="rec-paid">Rp 50.000</span></div>
-      <div class="flex justify-between"><span>Kembali:</span><span id="rec-change">Rp 6.000</span></div>
+      <div class="flex justify-between"><span>Subtotal :</span><span id="rec-subtotal">Rp 0</span></div>
+      <div class="flex justify-between"><span>PB1 (10%):</span><span id="rec-tax">Rp 0</span></div>
+      <div class="flex justify-between font-bold"><span>TOTAL    :</span><span id="rec-total">Rp 44.000</span></div>
+      <div class="flex justify-between"><span>Metode   :</span><span id="rec-method">Cash</span></div>
+      <div class="flex justify-between"><span>Bayar    :</span><span id="rec-paid">Rp 50.000</span></div>
+      <div class="flex justify-between"><span>Kembali  :</span><span id="rec-change">Rp 6.000</span></div>
     </div>
     <div class="text-center pt-3 text-[10px]">
       <p>Terima Kasih Atas Kunjungan Anda!</p>
@@ -920,10 +922,17 @@
       document.getElementById('rec-table').innerText = order.table;
       document.getElementById('rec-cashier').innerText = 'Siti';
       document.getElementById('rec-time').innerText = order.timeString || 'WIB';
-      document.getElementById('rec-total').innerText = formatRupiah(order.total);
+
+      const subtotal = order.subtotal || (order.total ? Math.round(order.total / 1.1) : 0);
+      const tax = order.tax !== undefined ? order.tax : Math.round(subtotal * 0.10);
+      const total = order.total || (subtotal + tax);
+
+      document.getElementById('rec-subtotal').innerText = formatRupiah(subtotal);
+      document.getElementById('rec-tax').innerText = formatRupiah(tax);
+      document.getElementById('rec-total').innerText = formatRupiah(total);
       document.getElementById('rec-method').innerText = order.paymentMethod || 'Cash';
       document.getElementById('rec-paid').innerText = formatRupiah(amountPaid);
-      document.getElementById('rec-change').innerText = formatRupiah(Math.max(0, amountPaid - order.total));
+      document.getElementById('rec-change').innerText = formatRupiah(Math.max(0, amountPaid - total));
 
       const itemsEl = document.getElementById('rec-items');
       itemsEl.innerHTML = (order.items || []).map(i => `

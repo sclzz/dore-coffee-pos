@@ -553,6 +553,63 @@
   ],
   "orders": [
     {
+      "id": "DOR-108",
+      "table": "04",
+      "customerName": "Budi Santoso",
+      "orderType": "Dine In",
+      "items": [
+        {
+          "productId": 1,
+          "name": "Kopi Susu Aren",
+          "price": 23000,
+          "quantity": 2,
+          "temperature": "Ice",
+          "sugar": "Less Sugar (50%)",
+          "addons": [
+            "Extra Espresso Shot (+5k)"
+          ],
+          "notes": "",
+          "subtotal": 56000
+        }
+      ],
+      "subtotal": 56000,
+      "tax": 5600,
+      "total": 61600,
+      "specialInstructions": "Tolong antarkan minuman dulu ya",
+      "status": "pending",
+      "paymentStatus": "paid",
+      "paymentMethod": "QRIS",
+      "createdAt": "2026-10-24T08:31:51.153Z",
+      "timeString": "15:31 WIB"
+    },
+    {
+      "id": "DOR-107",
+      "table": "04",
+      "customerName": "woko",
+      "orderType": "Dine In",
+      "items": [
+        {
+          "productId": 1,
+          "name": "Americano",
+          "price": 15000,
+          "quantity": 1,
+          "temperature": "Ice",
+          "sugar": "No Sugar (0%)",
+          "addons": [],
+          "notes": "",
+          "subtotal": 15000
+        }
+      ],
+      "subtotal": 15000,
+      "tax": 0,
+      "total": 15000,
+      "status": "pending",
+      "paymentStatus": "unpaid",
+      "paymentMethod": "Cash",
+      "createdAt": "2026-10-24T08:23:29.138Z",
+      "timeString": "15:23 WIB"
+    },
+    {
       "id": "DOR-106",
       "table": "04",
       "customerName": "eko",
